@@ -70,7 +70,7 @@ public class ApplicationController {
                @NotNull @Parameter(description = "Статус документа") String documentStatus,
                @RequestParam(value = "status", required = false)
                @NotNull @Parameter(description = "Статус заявки") String applicationStatus) {
-              ApplicationSearchParameters parameters = new ApplicationSearchParameters(addressId, startDatePeriod
+              ApplicationSearchParametersDto parameters = new ApplicationSearchParametersDto(addressId, startDatePeriod
                                                                                      , endDatePeriod, surveyObject
                                                                                      , objectTypeId, employeeId
                                                                                      , documentNumber, applicationStatus

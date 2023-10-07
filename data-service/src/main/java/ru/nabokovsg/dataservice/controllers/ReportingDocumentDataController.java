@@ -13,7 +13,7 @@ import ru.nabokovsg.dataservice.dto.reportingDocumentData.DocumentDataDto;
 import ru.nabokovsg.dataservice.dto.reportingDocumentData.DrawingDataDto;
 import ru.nabokovsg.dataservice.dto.reportingDocumentData.ReportingDocumentDataDto;
 import ru.nabokovsg.dataservice.dto.reportingDocumentData.UpdateReportingDocumentDataDto;
-import ru.nabokovsg.dataservice.models.ReportingDocumentDataSearchParameters;
+import ru.nabokovsg.dataservice.dto.reportingDocumentData.ReportingDocumentDataSearchParametersDto;
 import ru.nabokovsg.dataservice.services.ReportingDocumentDataService;
 import java.time.LocalDate;
 import java.util.List;
@@ -58,7 +58,7 @@ public class ReportingDocumentDataController {
             @RequestParam(value = "drawingStatus", required = false)
             @Parameter(description = "Статус чертежа") String drawingStatus) {
         return ResponseEntity.ok().body(service.getAll(
-                new ReportingDocumentDataSearchParameters(surveyObjectId, startPeriod,
+                new ReportingDocumentDataSearchParametersDto(surveyObjectId, startPeriod,
                                                           endPeriod, transferDate,
                                                           employeeDocumentId, employeeDrawingId,
                                                            documentStatus, drawingStatus)));
