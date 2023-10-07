@@ -5,7 +5,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.nabokovsg.dataservice.dto.norms.NewNormsDto;
-import ru.nabokovsg.dataservice.dto.norms.NormSearchParameters;
+import ru.nabokovsg.dataservice.dto.norms.NormSearchParametersDto;
 import ru.nabokovsg.dataservice.dto.norms.UpdateNormsDto;
 import ru.nabokovsg.dataservice.dto.objectsTypeData.ObjectsTypeNormsDataDto;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
@@ -98,7 +98,7 @@ public class NormsServiceImpl implements NormsService {
                                 .collect(Collectors.toMap(SubElement::getId, s -> s));
     }
 
-    private Norm getByPredicate(NormSearchParameters parameters) {
+    private Norm getByPredicate(NormSearchParametersDto parameters) {
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         if (parameters.getElementId() != null) {
             booleanBuilder.and(QNorm.norm.element.id.eq(parameters.getElementId()));
