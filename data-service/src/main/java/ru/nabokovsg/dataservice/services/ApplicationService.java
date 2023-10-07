@@ -12,5 +12,5 @@ public interface ApplicationService {
 
     ApplicationDto get(Long id);
 
-   List<ApplicationDto> getAll(ApplicationSearchParameters parameters);
+   List<ApplicationDto> getAll(ApplicationSearchParametersDto parameters);
 }

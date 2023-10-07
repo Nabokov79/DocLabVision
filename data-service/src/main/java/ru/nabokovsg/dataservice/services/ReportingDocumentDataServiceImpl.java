@@ -5,10 +5,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.nabokovsg.dataservice.dto.reportingDocumentData.DocumentDataDto;
-import ru.nabokovsg.dataservice.dto.reportingDocumentData.DrawingDataDto;
-import ru.nabokovsg.dataservice.dto.reportingDocumentData.UpdateReportingDocumentDataDto;
-import ru.nabokovsg.dataservice.dto.reportingDocumentData.ReportingDocumentDataDto;
+import ru.nabokovsg.dataservice.dto.reportingDocumentData.*;
 import ru.nabokovsg.dataservice.exceptions.BadRequestException;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
 import ru.nabokovsg.dataservice.mappers.ReportingDocumentDataMapper;
@@ -87,7 +84,7 @@ public class ReportingDocumentDataServiceImpl implements ReportingDocumentDataSe
     }
 
     @Override
-    public List<ReportingDocumentDataDto> getAll(ReportingDocumentDataSearchParameters parameters) {
+    public List<ReportingDocumentDataDto> getAll(ReportingDocumentDataSearchParametersDto parameters) {
         List<ReportingDocumentData> data = getByPredicate(parameters);
         if (data.isEmpty()) {
             return mapper.mapToReportingDocumentDataDto(repository.findAll());
@@ -153,7 +150,7 @@ public class ReportingDocumentDataServiceImpl implements ReportingDocumentDataSe
             throw new NotFoundException(String.format("ReportingDocumentData with ids= %s not found", ids));
         }
     }
-    private List<ReportingDocumentData> getByPredicate(ReportingDocumentDataSearchParameters parameters) {
+    private List<ReportingDocumentData> getByPredicate(ReportingDocumentDataSearchParametersDto parameters) {
         LocalDate now = LocalDate.now();
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         if(parameters.getSurveyObjectId() != null) {

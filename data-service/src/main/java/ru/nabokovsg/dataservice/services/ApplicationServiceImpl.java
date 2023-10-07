@@ -92,7 +92,7 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     @Override
-    public List<ApplicationDto> getAll(ApplicationSearchParameters parameters) {
+    public List<ApplicationDto> getAll(ApplicationSearchParametersDto parameters) {
         return mapper.mapToApplicationsDto(getPredicate(parameters).fetch());
     }
 
@@ -127,7 +127,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         return application;
     }
 
-    private JPAQuery<Application> getPredicate(ApplicationSearchParameters parameters) {
+    private JPAQuery<Application> getPredicate(ApplicationSearchParametersDto parameters) {
         LocalDate now = LocalDate.now();
         BooleanBuilder booleanBuilder = new BooleanBuilder();
         if(parameters.getAddressId() != null) {

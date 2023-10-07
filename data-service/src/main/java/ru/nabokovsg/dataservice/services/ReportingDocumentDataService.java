@@ -6,7 +6,7 @@ import ru.nabokovsg.dataservice.dto.reportingDocumentData.ReportingDocumentDataD
 import ru.nabokovsg.dataservice.dto.reportingDocumentData.UpdateReportingDocumentDataDto;
 import ru.nabokovsg.dataservice.models.Application;
 import ru.nabokovsg.dataservice.models.ReportingDocumentData;
-import ru.nabokovsg.dataservice.models.ReportingDocumentDataSearchParameters;
+import ru.nabokovsg.dataservice.dto.reportingDocumentData.ReportingDocumentDataSearchParametersDto;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public interface ReportingDocumentDataService {
 
     List<ReportingDocumentDataDto> update(List<UpdateReportingDocumentDataDto> dataDto);
 
-    List<ReportingDocumentDataDto> getAll(ReportingDocumentDataSearchParameters parameters);
+    List<ReportingDocumentDataDto> getAll(ReportingDocumentDataSearchParametersDto parameters);
 
     ReportingDocumentData getById(Long id);
 
