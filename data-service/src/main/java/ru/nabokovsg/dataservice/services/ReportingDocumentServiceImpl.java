@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import ru.nabokovsg.dataservice.dto.reportingDocument.NewReportingDocumentDto;
 import ru.nabokovsg.dataservice.dto.reportingDocument.ReportingDocumentDto;
 import ru.nabokovsg.dataservice.dto.reportingDocument.UpdateReportingDocumentDto;
+import ru.nabokovsg.dataservice.exceptions.BadRequestException;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
 import ru.nabokovsg.dataservice.mappers.ReportingDocumentMapper;
+import ru.nabokovsg.dataservice.models.DocumentType;
 import ru.nabokovsg.dataservice.models.ReportingDocument;
 import ru.nabokovsg.dataservice.repository.ReportingDocumentRepository;
 
@@ -25,7 +27,18 @@ public class ReportingDocumentServiceImpl implements ReportingDocumentService {
     @Override
     public List<ReportingDocumentDto> save(List<NewReportingDocumentDto> reportingDocumentDto) {
         return mapper.mapToReportingDocumentDto(
-                repository.saveAll(mapper.mapFromNewReportingDocument(reportingDocumentDto))
+                reportingDocumentDto.stream()
+                        .map(d -> {
+                                    ReportingDocument document = mapper.mapFromNewReportingDocument(d);
+                                    document.setDocumentType(
+                                    DocumentType.from(d.getDocumentType()).orElseThrow(
+                                            () -> new BadRequestException("Unknown documentType: " + d.getDocumentType()
+                                            )
+                                         )
+                                    );
+                                    return document;
+                                })
+                        .toList()
         );
     }
 
@@ -33,7 +46,18 @@ public class ReportingDocumentServiceImpl implements ReportingDocumentService {
     public List<ReportingDocumentDto> update(List<UpdateReportingDocumentDto> reportingDocumentDto) {
         validateIds(reportingDocumentDto.stream().map(UpdateReportingDocumentDto::getId).toList());
         return mapper.mapToReportingDocumentDto(
-                repository.saveAll(mapper.mapFromUpdateReportingDocument(reportingDocumentDto))
+                reportingDocumentDto.stream()
+                        .map(d -> {
+                            ReportingDocument document = mapper.mapFromUpdateReportingDocument(d);
+                            document.setDocumentType(
+                                    DocumentType.from(d.getDocumentType()).orElseThrow(
+                                            () -> new BadRequestException("Unknown documentType: " + d.getDocumentType()
+                                            )
+                                    )
+                            );
+                            return document;
+                        })
+                        .toList()
         );
     }
 
