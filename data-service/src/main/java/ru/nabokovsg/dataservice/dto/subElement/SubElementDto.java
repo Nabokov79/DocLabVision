@@ -4,9 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import ru.nabokovsg.dataservice.dto.place.PlaceDto;
-
-import java.util.List;
 
 @Setter
 @Getter
@@ -16,8 +13,8 @@ public class SubElementDto {
 
     @Schema(description = "Индентификатор")
     private Long id;
+    @Schema(description = "Порядковый номер подэлемента")
+    private Integer ordinalNumberSubElement;
     @Schema(description = "Название подэлемента")
     private String subElementName;
-    @Schema(description = "Участок подэлемента")
-    private List<PlaceDto> places;
 }
