@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.validation.constraints.NotBlank;
 
 @Setter
@@ -15,10 +14,13 @@ import javax.validation.constraints.NotBlank;
 @Schema(description = "Данные типа документа")
 public class NewReportingDocumentDto {
 
-    @Schema(description = "тип документа")
+    @Schema(description = "Название документа")
     @NotBlank(message = "reporting document should not be blank")
     private String document;
     @Schema(description = "заголовок документа")
     @NotBlank(message = "reporting document title should not be blank")
     private String documentTitle;
+    @Schema(description = "Тип документа")
+    @NotBlank(message = "reporting document type should not be blank")
+    private String documentType;
 }
