@@ -22,4 +22,6 @@ public class ReportingDocument {
     private String document;
     @Column(name = "document_title")
     private String documentTitle;
+    @Column(name = "document_type")
+    private DocumentType documentType;
 }
