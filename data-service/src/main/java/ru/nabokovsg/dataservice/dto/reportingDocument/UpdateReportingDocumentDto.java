@@ -25,4 +25,7 @@ public class UpdateReportingDocumentDto {
     @Schema(description = "заголовок документа")
     @NotBlank(message = "reporting document title should not be blank")
     private String documentTitle;
+    @Schema(description = "Тип документа")
+    @NotBlank(message = "reporting document type should not be blank")
+    private String documentType;
 }
