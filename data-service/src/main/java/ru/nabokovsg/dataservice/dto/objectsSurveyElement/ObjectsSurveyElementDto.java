@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import ru.nabokovsg.dataservice.dto.element.ShortElementDto;
-import ru.nabokovsg.dataservice.dto.subElement.ShortSubElementDto;
+import ru.nabokovsg.dataservice.dto.subElement.SubElementDto;
 
 @Setter
 @Getter
@@ -16,7 +16,7 @@ public class ObjectsSurveyElementDto {
     @Schema(description = "Краткие сведения об элементе объекта обследования")
     private ShortElementDto element;
     @Schema(description = "Краткие сведения о подэлементе элемента объекта обследования")
-    private ShortSubElementDto subElement;
+    private SubElementDto subElement;
     @Schema(description = "Толщина элемента объекта обследования")
     private Float thickness;
     @Schema(description = "Минимальный диаметр элемента объекта обследования")
