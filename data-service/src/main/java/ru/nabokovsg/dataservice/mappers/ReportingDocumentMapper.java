@@ -11,9 +11,9 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ReportingDocumentMapper {
 
-    List<ReportingDocument> mapFromNewReportingDocument(List<NewReportingDocumentDto> reportingDocumentDto);
+    ReportingDocument mapFromNewReportingDocument(NewReportingDocumentDto reportingDocumentDto);
 
-    List<ReportingDocument> mapFromUpdateReportingDocument(List<UpdateReportingDocumentDto> reportingDocumentDto);
+    ReportingDocument mapFromUpdateReportingDocument(UpdateReportingDocumentDto reportingDocumentDto);
 
     List<ReportingDocumentDto> mapToReportingDocumentDto(List<ReportingDocument> reportingDocument);
 }
