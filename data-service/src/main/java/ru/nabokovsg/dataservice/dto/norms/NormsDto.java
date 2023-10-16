@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import ru.nabokovsg.dataservice.dto.element.ShortElementDto;
-import ru.nabokovsg.dataservice.dto.subElement.ShortSubElementDto;
+import ru.nabokovsg.dataservice.dto.subElement.SubElementDto;
 
 @Setter
 @Getter
@@ -17,7 +17,7 @@ public class NormsDto {
     @Schema(description = "Элемент объекта")
     private ShortElementDto element;
     @Schema(description = "Подэлемент элемента объекта")
-    private ShortSubElementDto subElement;
+    private SubElementDto subElement;
     @Schema(description = "Предельно-минимальное допустимое значение в процентах от номинальной толщины элемента")
     private Float minInPercent;
     @Schema(description = "Предельно-минимальное допустимое значение в миллиметрах")
