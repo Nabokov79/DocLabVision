@@ -24,4 +24,8 @@ public class Documentation {
     private String number;
     @Column(name = "title", nullable = false)
     private String title;
+    @Column(name = "methodological_document")
+    private Boolean methodologicalDocument;
+    @Column(name = "regulatory_document")
+    private Boolean regulatoryDocument;
 }
