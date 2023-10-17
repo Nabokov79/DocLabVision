@@ -13,8 +13,6 @@ public class SubElementDto {
 
     @Schema(description = "Индентификатор")
     private Long id;
-    @Schema(description = "Порядковый номер подэлемента")
-    private Integer ordinalNumberSubElement;
     @Schema(description = "Название подэлемента")
     private String subElementName;
 }
