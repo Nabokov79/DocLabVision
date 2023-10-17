@@ -27,7 +27,7 @@ public class ReportingDocumentServiceImpl implements ReportingDocumentService {
     @Override
     public List<ReportingDocumentDto> save(List<NewReportingDocumentDto> reportingDocumentDto) {
         return mapper.mapToReportingDocumentDto(
-                reportingDocumentDto.stream()
+                repository.saveAll(reportingDocumentDto.stream()
                         .map(d -> {
                                     ReportingDocument document = mapper.mapFromNewReportingDocument(d);
                                     document.setDocumentType(
@@ -39,14 +39,14 @@ public class ReportingDocumentServiceImpl implements ReportingDocumentService {
                                     return document;
                                 })
                         .toList()
-        );
+        ));
     }
 
     @Override
     public List<ReportingDocumentDto> update(List<UpdateReportingDocumentDto> reportingDocumentDto) {
         validateIds(reportingDocumentDto.stream().map(UpdateReportingDocumentDto::getId).toList());
         return mapper.mapToReportingDocumentDto(
-                reportingDocumentDto.stream()
+                repository.saveAll(reportingDocumentDto.stream()
                         .map(d -> {
                             ReportingDocument document = mapper.mapFromUpdateReportingDocument(d);
                             document.setDocumentType(
@@ -58,7 +58,7 @@ public class ReportingDocumentServiceImpl implements ReportingDocumentService {
                             return document;
                         })
                         .toList()
-        );
+        ));
     }
 
     @Override
