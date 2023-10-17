@@ -27,16 +27,15 @@ public class SubElementServiceImpl implements SubElementService {
                                                                                .toList())
                                                       .stream()
                                                       .collect(Collectors.toMap(SubElement::getSubElementName, s -> s));
-
         if (!subElementsDb.isEmpty()) {
             subElementsDto = subElementsDto.stream().filter(s -> !subElementsDb.containsKey(s.getSubElementName())).toList();
         }
         if (subElementsDto.isEmpty()) {
             return subElementsDb.values().stream().toList();
         } else {
-            List<SubElement> subElements = repository.saveAll(subElementsDto.stream()
-                                                                            .map(mapper::mapToNewSubElement)
-                                                                            .toList());
+            List<SubElement> subElements =  repository.saveAll(subElementsDto.stream()
+                                                         .map(mapper::mapToNewSubElement)
+                                                         .toList());
             subElements.addAll(subElementsDb.values());
             return subElements;
         }

@@ -15,7 +15,6 @@ import java.util.List;
 @Schema(description = "Данные нового элемента объекта")
 public class NewElementDto {
 
-
     @Schema(description = "Название элемента")
     @NotBlank(message = "element name should not be blank")
     private String elementName;

@@ -18,15 +18,12 @@ public class SubElement {
     private long id;
     @Column(name = "sub_element_name")
     private String subElementName;
-    @Column(name = "ordinal_number_sub_element")
-    private Integer ordinalNumberSubElement;
 
     @Override
     public String toString() {
         return "SubElement{" +
                 "id=" + id +
                 ", subElementName='" + subElementName + '\'' +
-                ", ordinalNumberSubElement=" + ordinalNumberSubElement +
                 '}';
     }
 
@@ -35,11 +32,11 @@ public class SubElement {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SubElement that = (SubElement) o;
-        return id == that.id && Objects.equals(subElementName, that.subElementName) && Objects.equals(ordinalNumberSubElement, that.ordinalNumberSubElement);
+        return id == that.id && Objects.equals(subElementName, that.subElementName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, subElementName, ordinalNumberSubElement);
+        return Objects.hash(id, subElementName);
     }
 }

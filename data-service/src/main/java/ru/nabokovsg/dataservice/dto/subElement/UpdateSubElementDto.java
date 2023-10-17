@@ -20,10 +20,6 @@ public class UpdateSubElementDto {
     @NotNull(message = "id should not be blank")
     @Positive(message = "id can only be positive")
     private Long id;
-    @Schema(description = "Порядковый номер подэлемента")
-    @NotNull(message = "ordinalNumberSubElement should not be blank")
-    @Positive(message = "ordinalNumberSubElement can only be positive")
-    private Integer ordinalNumberSubElement;
     @Schema(description = "Название подэлемента")
     @NotBlank(message = "sum element name should not be blank")
     private String subElementName;
