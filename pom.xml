@@ -6,6 +6,7 @@
 
     <modules>
         <module>data-service</module>
+        <module>templ-service</module>
     </modules>
 
     <parent>
