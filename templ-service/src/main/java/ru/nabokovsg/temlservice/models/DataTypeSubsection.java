@@ -1,0 +1,12 @@
+package ru.nabokovsg.temlservice.models;
+
+public enum DataTypeSubsection {
+
+    REGULATORY_DOCUMENT,
+    METHODOLOGICAL_DOCUMENT,
+    ALL_DOCUMENT,
+    PASSPORT_DATA_OBJECT,
+    LABORATORY_CERTIFICATION,
+    EMPLOYEE_CERTIFICATION,
+    MEANS_CONTROL_MEASUREMENT
+}
