@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name =  "conclusion_templates")
+@Table(name =  "conclusions_templates")
 public class ConclusionTemplate {
 
     @Id

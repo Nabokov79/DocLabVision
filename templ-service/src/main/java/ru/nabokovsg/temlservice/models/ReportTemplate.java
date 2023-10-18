@@ -10,7 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "reports_templates")
+@Table(name = "report_templates")
 public class ReportTemplate {
 
     @Id
@@ -25,14 +25,14 @@ public class ReportTemplate {
     private String documentTitle;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "reports_templates_table_subsection_templates",
-            joinColumns = {@JoinColumn(name = "reports_template_id")},
-            inverseJoinColumns = {@JoinColumn(name = "subsection_template_id")})
+            name = "report_templates_section_templates",
+            joinColumns = {@JoinColumn(name = "report_template_id")},
+            inverseJoinColumns = {@JoinColumn(name = "section_template_id")})
     @ToString.Exclude
-    private List<SubsectionTemplate> subsectionTemplates;
+    private List<SectionTemplate> sectionTemplates;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "report_templates_table_appendices",
+            name = "report_templates_appendices",
             joinColumns = {@JoinColumn(name = "report_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "appendices_id")})
     @ToString.Exclude

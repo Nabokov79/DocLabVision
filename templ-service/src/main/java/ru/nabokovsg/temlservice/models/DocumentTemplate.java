@@ -18,9 +18,9 @@ public class DocumentTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "objectsType_id")
+    @Column(name = "objects_type_id")
     private Long objectsTypeId;
-    @Column(name = "reportingDocument_id")
+    @Column(name = "reporting_document_id")
     private Long reportingDocumentId;
     @OneToOne
     @JoinColumn(name = "report_template_id", referencedColumnName = "id")

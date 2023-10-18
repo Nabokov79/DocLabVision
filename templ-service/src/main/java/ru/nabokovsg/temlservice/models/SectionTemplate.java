@@ -22,7 +22,7 @@ public class SectionTemplate {
     private String sectionName;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "section_templates_subsections_templates",
+            name = "section_templates_subsection_templates",
             joinColumns = {@JoinColumn(name = "section_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "subsections_template_id")})
     @ToString.Exclude
@@ -43,8 +43,8 @@ public class SectionTemplate {
     private List<Recommendation> recommendations;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "protocol_templates_table_appendices",
-            joinColumns = {@JoinColumn(name = "protocol_template_id")},
+            name = "section_templates_appendices",
+            joinColumns = {@JoinColumn(name = "section_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "appendices_id")})
     @ToString.Exclude
     private List<Appendices> appendices;

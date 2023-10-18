@@ -22,16 +22,16 @@ public class ReportProtocolTemplate {
     private String protocolName;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "report_protocol_templates_subsections_templates",
+            name = "report_protocol_templates_subsection_templates",
             joinColumns = {@JoinColumn(name = "report_protocol_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "subsections_template_id")})
     @ToString.Exclude
     private List<SubsectionTemplate> subsectionsTemplate;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "report_protocol_templates_header_templates",
+            name = "report_protocol_templates_table_header_templates",
             joinColumns = {@JoinColumn(name = "report_protocol_template_id")},
-            inverseJoinColumns = {@JoinColumn(name = "header_template_id")})
+            inverseJoinColumns = {@JoinColumn(name = "table_header_template_id")})
     @ToString.Exclude
     private List<TableHeaderTemplate> tablesHeaderTemplate;
     @OneToOne

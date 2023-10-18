@@ -21,7 +21,7 @@ public class ProtocolTemplate {
     private PageTitle leftTitle;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "protocol_templates_table_subsections_templates",
+            name = "protocol_templates_subsection_templates",
             joinColumns = {@JoinColumn(name = "protocol_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "subsections_template_id")})
     @ToString.Exclude
@@ -30,12 +30,12 @@ public class ProtocolTemplate {
     @JoinTable(
             name = "protocol_templates_table_header_templates",
             joinColumns = {@JoinColumn(name = "protocol_template_id")},
-            inverseJoinColumns = {@JoinColumn(name = "header_template_id")})
+            inverseJoinColumns = {@JoinColumn(name = "table_header_template_id")})
     @ToString.Exclude
     private List<TableHeaderTemplate> tablesHeaderTemplate;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "protocol_templates_table_appendices",
+            name = "protocol_templates_appendices",
             joinColumns = {@JoinColumn(name = "protocol_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "appendices_id")})
     @ToString.Exclude
