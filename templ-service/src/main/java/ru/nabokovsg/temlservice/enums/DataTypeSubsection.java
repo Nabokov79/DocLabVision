@@ -1,4 +1,4 @@
-package ru.nabokovsg.temlservice.models;
+package ru.nabokovsg.temlservice.enums;
 
 public enum DataTypeSubsection {
 
