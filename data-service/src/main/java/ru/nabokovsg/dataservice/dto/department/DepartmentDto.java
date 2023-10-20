@@ -4,13 +4,10 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import ru.nabokovsg.dataservice.dto.branch.BranchDto;
+import ru.nabokovsg.dataservice.dto.building.BuildingDto;
+import ru.nabokovsg.dataservice.dto.license.LicenseDto;
 import ru.nabokovsg.dataservice.dto.requisites.RequisitesDto;
-import ru.nabokovsg.dataservice.models.Building;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import java.util.Set;
+import java.util.List;
 
 @Setter
 @Getter
@@ -27,11 +24,9 @@ public class DepartmentDto {
     @Schema(description = "Номер подразделения филиала организации")
     private Integer departmentNumber;
     @Schema(description = "Котельная, ЦТП")
-    private Set<Building> buildings;
+    private List<BuildingDto> buildings;
+    @Schema(description = "Лицензия, аттестация")
+    private List<LicenseDto> licenses;
     @Schema(description = "Реквизиты подразделения филиала организации")
     private RequisitesDto requisites;
-    @Schema(description = "Филиал организации")
-    @NotNull(message = "branch id should not be blank")
-    @Positive(message = "branch id must be positive")
-    private BranchDto branch;
 }
