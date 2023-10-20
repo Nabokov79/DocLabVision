@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.nabokovsg.temlservice.enums.DocumentType;
 
 import javax.persistence.*;
 
@@ -19,31 +18,22 @@ public class PageTitle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "document_type")
-    @Enumerated(EnumType.STRING)
-    private DocumentType documentType;
-    @Column(name = "organization_id")
-    private Long organizationId;
-    @Column(name = "organization_full_name")
-    private boolean organizationFullName;
+    @Column(name = "organization")
+    private String organization;
     @Column(name = "organization_license")
-    private boolean organizationLicense;
+    private String organizationLicense;
     @Column(name = "requisites_organization")
-    private boolean organizationRequisites;
-    @Column(name = "branch_id")
-    private Long branchId;
-    @Column(name = "branch_full_name")
-    private boolean branchFullName;
+    private String organizationRequisites;
+    @Column(name = "branch")
+    private String branch;
     @Column(name = "branch_requisites")
-    private boolean branchRequisites;
+    private String branchRequisites;
     @Column(name = "license_branch")
-    private boolean licenseBranch;
-    @Column(name = "department_id")
-    private Long departmentId;
-    @Column(name = "department_full_name")
-    private boolean departmentFullName;
+    private String licenseBranch;
+    @Column(name = "department")
+    private String department;
     @Column(name = "department_requisites")
-    private boolean departmentRequisites;
+    private String departmentRequisites;
     @Column(name = "department_license")
-    private boolean departmentLicense;
+    private String departmentLicense;
 }
