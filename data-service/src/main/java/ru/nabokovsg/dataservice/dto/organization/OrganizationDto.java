@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import ru.nabokovsg.dataservice.dto.branch.BranchDto;
+import ru.nabokovsg.dataservice.dto.license.LicenseDto;
 import ru.nabokovsg.dataservice.dto.requisites.RequisitesDto;
 
 import java.util.List;
@@ -23,6 +24,8 @@ public class OrganizationDto {
     private String shortNameOrganization;
     @Schema(description = "Филиалы организации")
     private List<BranchDto> branches;
+    @Schema(description = "Лицензия, аттестация")
+    private List<LicenseDto> licenses;
     @Schema(description = "Реквизиты")
     private RequisitesDto requisites;
 }
