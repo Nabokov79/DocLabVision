@@ -4,8 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import ru.nabokovsg.dataservice.dto.branch.ShortBranchDto;
-import ru.nabokovsg.dataservice.dto.department.ShortDepartmentDto;
 import ru.nabokovsg.dataservice.dto.organization.ShortOrganizationDto;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -22,12 +20,6 @@ public class LicenseDto {
     @NotNull(message = "id should not be blank")
     @Positive(message = "license id can only be positive")
     private Long id;
-    @Schema(description = "Организация")
-    private ShortOrganizationDto organization;
-    @Schema(description = "Филиал организации")
-    private ShortBranchDto branch;
-    @Schema(description = "Структурное подразделение филиала организации")
-    private ShortDepartmentDto department;
     @Schema(description = "Вид документа")
     @NotBlank(message = "document should not be blank")
     private String documentType;
