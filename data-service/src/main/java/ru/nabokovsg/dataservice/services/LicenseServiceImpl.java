@@ -56,10 +56,16 @@ public class LicenseServiceImpl implements LicenseService {
 
     private Licenses set(Licenses license, ObjectsIds ids) {
         DataBuilder builder = factory.getBuilder(List.of(ids), BuilderType.LICENSE);
-        license.setOrganization(builder.getOrganizations().get(ids.getOrganizationId()));
+        if (ids.getOrganizationId() != null) {
+            license.setOrganization(builder.getOrganizations().get(ids.getOrganizationId()));
+        }
         license.setIssuedLicense(builder.getOrganizations().get(ids.getIssuedLicenseId()));
-        license.setBranch(builder.getBranches().get(ids.getBranchId()));
-        license.setDepartment(builder.getDepartments().get(ids.getDepartmentId()));
+        if(ids.getBranchId() != null) {
+            license.setBranch(builder.getBranches().get(ids.getBranchId()));
+        }
+        if (ids.getDepartmentId() != null) {
+            license.setDepartment(builder.getDepartments().get(ids.getDepartmentId()));
+        }
         return license;
     }
 }
