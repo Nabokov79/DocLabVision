@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -36,4 +37,9 @@ public class Department {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "branch_id",  nullable = false)
     private Branch branch;
+    @OneToMany(mappedBy = "department",
+            orphanRemoval = true,
+            cascade = CascadeType.REMOVE,
+            fetch = FetchType.LAZY)
+    private List<Licenses> licenses;
 }

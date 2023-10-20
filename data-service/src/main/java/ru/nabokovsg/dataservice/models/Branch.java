@@ -35,4 +35,9 @@ public class Branch {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id",  nullable = false)
     private Organization organization;
+    @OneToMany(mappedBy = "branch",
+            orphanRemoval = true,
+            cascade = CascadeType.REMOVE,
+            fetch = FetchType.LAZY)
+    private List<Licenses> licenses;
 }
