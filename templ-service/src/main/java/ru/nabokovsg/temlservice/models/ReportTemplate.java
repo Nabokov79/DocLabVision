@@ -16,6 +16,8 @@ public class ReportTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(name = "objects_type_id")
+    private Long objectsTypeId;
     @OneToOne
     @JoinColumn(name = "page_title_id", referencedColumnName = "id")
     private PageTitle pageTitle;
@@ -30,11 +32,4 @@ public class ReportTemplate {
             inverseJoinColumns = {@JoinColumn(name = "section_template_id")})
     @ToString.Exclude
     private List<SectionTemplate> sectionTemplates;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "report_templates_appendices",
-            joinColumns = {@JoinColumn(name = "report_template_id")},
-            inverseJoinColumns = {@JoinColumn(name = "appendices_id")})
-    @ToString.Exclude
-    private List<Appendices> appendices;
 }
