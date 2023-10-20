@@ -20,6 +20,8 @@ public class ReportProtocolTemplate {
     private Integer sequentialProtocolNumber;
     @Column(name = "protocol_name")
     private String protocolName;
+    @Column(name = "protocol_title")
+    private String protocolTitle;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "report_protocol_templates_subsection_templates",
