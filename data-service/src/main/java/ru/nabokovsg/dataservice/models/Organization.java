@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -33,4 +32,9 @@ public class Organization {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "requisites_id", referencedColumnName = "id")
     private Requisites requisites;
+    @OneToMany(mappedBy = "organization",
+               orphanRemoval = true,
+               cascade = CascadeType.REMOVE,
+               fetch = FetchType.LAZY)
+    private List<Licenses> licenses;
 }
