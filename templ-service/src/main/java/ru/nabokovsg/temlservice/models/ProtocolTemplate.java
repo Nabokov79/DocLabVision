@@ -16,9 +16,19 @@ public class ProtocolTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(name = "objects_type_id")
+    private Long objectsTypeId;
+    @Column(name = "reporting_document_id")
+    private Long reportingDocumentId;
+    @Column(name = "sequential_protocol_number")
+    private Integer sequentialProtocolNumber;
+    @Column(name = "protocol_name")
+    private String protocolName;
+    @Column(name = "protocol_title")
+    private String protocolTitle;
     @OneToOne
-    @JoinColumn(name = "left_title_id", referencedColumnName = "id")
-    private PageTitle leftTitle;
+    @JoinColumn(name = "page_header_id", referencedColumnName = "id")
+    private PageTitleTemplate pageHeader;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "protocol_templates_subsection_templates",
@@ -28,16 +38,16 @@ public class ProtocolTemplate {
     private List<SubsectionTemplate> subsectionsTemplate;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "protocol_templates_table_header_templates",
+            name = "protocol_templates_table_templates",
             joinColumns = {@JoinColumn(name = "protocol_template_id")},
-            inverseJoinColumns = {@JoinColumn(name = "table_header_template_id")})
+            inverseJoinColumns = {@JoinColumn(name = "table_template_id")})
     @ToString.Exclude
-    private List<TableHeaderTemplate> tablesHeaderTemplate;
+    private List<TableTemplate> tablesHeaderTemplate;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "protocol_templates_appendices",
             joinColumns = {@JoinColumn(name = "protocol_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "appendices_id")})
     @ToString.Exclude
-    private List<Appendices> appendices;
+    private List<AppendicesTemplates> appendices;
 }

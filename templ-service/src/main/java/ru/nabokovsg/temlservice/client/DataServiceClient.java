@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.nabokovsg.temlservice.dto.client.OrganizationDto;
+import ru.nabokovsg.temlservice.dto.client.ReportingDocumentDto;
 
 import java.util.Objects;
 
@@ -18,5 +19,12 @@ public class DataServiceClient {
                 .uri(uri)
                 .retrieve()
                 .toEntity(OrganizationDto.class).block()).getBody();
+    }
+
+    public ReportingDocumentDto getReportingDocument(String uri){
+        return  Objects.requireNonNull(webClient.get()
+                .uri(uri)
+                .retrieve()
+                .toEntity(ReportingDocumentDto.class).block()).getBody();
     }
 }

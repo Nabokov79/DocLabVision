@@ -31,10 +31,10 @@ public class StringBuilderServiceImpl implements StringBuilderService {
                                                 , address.getStreet()
                                                 , String.valueOf(address.getHouseNumber()));
         if (address.getBuildingNumber() != null) {
-            string = String.join(", ", "корп.", String.valueOf(address.getBuildingNumber()));
+            string = String.join(", ", string, "корп.", String.valueOf(address.getBuildingNumber()));
         }
         if (address.getLetter() != null) {
-            string = String.join(", ", "лит.", address.getLetter());
+            string = String.join(", ", string, "лит.", address.getLetter());
         }
         return string;
     }

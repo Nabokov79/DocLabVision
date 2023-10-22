@@ -4,9 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.nabokovsg.temlservice.client.TemplateClient;
 import ru.nabokovsg.temlservice.dto.client.*;
-import ru.nabokovsg.temlservice.dto.pageTitle.NewPageTitleDto;
-import ru.nabokovsg.temlservice.models.PageTitle;
-import ru.nabokovsg.temlservice.repository.PageTitleRepository;
+import ru.nabokovsg.temlservice.dto.pageTitle.NewPageTitleTemplateDto;
+import ru.nabokovsg.temlservice.dto.pageTitle.PageTitleTemplateDto;
+import ru.nabokovsg.temlservice.exceptions.BadRequestException;
+import ru.nabokovsg.temlservice.mappers.PageTitleTemplateMapper;
+import ru.nabokovsg.temlservice.models.PageTitleTemplate;
+import ru.nabokovsg.temlservice.repository.PageTitleTemplateRepository;
 
 import java.util.Collection;
 import java.util.Map;
@@ -15,15 +18,19 @@ import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
-public class PageTitleServiceImpl implements PageTitleService {
+public class PageTitleTemplateServiceImpl implements PageTitleTemplateService {
 
-    private final PageTitleRepository repository;
+    private final PageTitleTemplateRepository repository;
+    private final PageTitleTemplateMapper mapper;
     private final TemplateClient client;
     private final StringBuilderService stringBuilderService;
+    private final ReportTemplateService reportTemplateService;
+    private final ProtocolTemplateService protocolTemplateService;
 
     @Override
-    public PageTitle save(NewPageTitleDto pageTitleDto) {
+    public PageTitleTemplateDto save(NewPageTitleTemplateDto pageTitleDto) {
         OrganizationDto organization = client.getOrganization(pageTitleDto.getOrganizationId());
+        ReportingDocumentDto reportingDocument = client.getReportingDocument(pageTitleDto.getTemplate().getReportingDocumentId());
         Map<Long, BranchDto> branches = organization.getBranches().stream()
                 .collect(Collectors.toMap(BranchDto::getId, b -> b));
         Map<Long, DepartmentDto> departments = organization.getBranches()
@@ -45,7 +52,9 @@ public class PageTitleServiceImpl implements PageTitleService {
                                 .toList())
                 .flatMap(Collection::stream)
                 .collect(Collectors.toMap(LicenseDto::getId, l -> l));
-        PageTitle pageTitle = new PageTitle();
+        PageTitleTemplate pageTitle = new PageTitleTemplate();
+        pageTitle.setDocumentName(reportingDocument.getDocument().toUpperCase());
+        pageTitle.setDocumentTitle(reportingDocument.getDocumentTitle());
         if (pageTitleDto.isOrganizationFullName()) {
             pageTitle.setOrganization(organization.getOrganization());
         } else {
@@ -68,7 +77,7 @@ public class PageTitleServiceImpl implements PageTitleService {
             pageTitle.setDepartment(departments.get(pageTitleDto.getDepartmentId()).getShortNameDepartment());
         }
         if (pageTitleDto.getDepartmentLicenseId() != null) {
-            pageTitle.setOrganizationLicense(stringBuilderService.licenseToString(licenses.get(pageTitleDto.getDepartmentLicenseId())));
+            pageTitle.setDepartmentLicense(stringBuilderService.licenseToString(licenses.get(pageTitleDto.getDepartmentLicenseId())));
         }
         if (pageTitleDto.isOrganizationRequisites()) {
             pageTitle.setOrganizationRequisites(stringBuilderService.requisitesToString(organization.getRequisites()));
@@ -79,6 +88,16 @@ public class PageTitleServiceImpl implements PageTitleService {
         if (pageTitleDto.isDepartmentRequisites()) {
             pageTitle.setDepartmentRequisites(stringBuilderService.requisitesToString(departments.get(pageTitleDto.getDepartmentId()).getRequisites()));
         }
-        return repository.save(pageTitle);
+        pageTitle = repository.save(pageTitle);
+        switch (reportingDocument.getDocumentType()) {
+            case REPORT ->
+                reportTemplateService.addPageTitleTemplate(pageTitleDto.getTemplate(), pageTitle);
+            case PROTOCOL ->
+                protocolTemplateService.addPageTitleTemplate(pageTitleDto.getTemplate(), pageTitle);
+            default ->
+                    throw new BadRequestException(
+                            String.format("Document=%s type is not supported", reportingDocument.getDocumentType()));
+        }
+        return mapper.mapToPageTitleTemplateDto(pageTitle);
     }
 }

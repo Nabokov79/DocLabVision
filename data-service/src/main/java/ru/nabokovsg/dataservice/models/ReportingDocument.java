@@ -23,5 +23,6 @@ public class ReportingDocument {
     @Column(name = "document_title")
     private String documentTitle;
     @Column(name = "document_type")
+    @Enumerated(EnumType.STRING)
     private DocumentType documentType;
 }

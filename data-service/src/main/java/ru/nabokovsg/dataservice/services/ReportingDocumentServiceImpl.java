@@ -26,8 +26,7 @@ public class ReportingDocumentServiceImpl implements ReportingDocumentService {
 
     @Override
     public List<ReportingDocumentDto> save(List<NewReportingDocumentDto> reportingDocumentDto) {
-        return mapper.mapToReportingDocumentDto(
-                repository.saveAll(reportingDocumentDto.stream()
+        return repository.saveAll(reportingDocumentDto.stream()
                         .map(d -> {
                                     ReportingDocument document = mapper.mapFromNewReportingDocument(d);
                                     document.setDocumentType(
@@ -39,14 +38,13 @@ public class ReportingDocumentServiceImpl implements ReportingDocumentService {
                                     return document;
                                 })
                         .toList()
-        ));
+        ).stream().map(mapper::mapToReportingDocumentDto).toList();
     }
 
     @Override
     public List<ReportingDocumentDto> update(List<UpdateReportingDocumentDto> reportingDocumentDto) {
         validateIds(reportingDocumentDto.stream().map(UpdateReportingDocumentDto::getId).toList());
-        return mapper.mapToReportingDocumentDto(
-                repository.saveAll(reportingDocumentDto.stream()
+        return repository.saveAll(reportingDocumentDto.stream()
                         .map(d -> {
                             ReportingDocument document = mapper.mapFromUpdateReportingDocument(d);
                             document.setDocumentType(
@@ -58,12 +56,19 @@ public class ReportingDocumentServiceImpl implements ReportingDocumentService {
                             return document;
                         })
                         .toList()
-        ));
+        ).stream().map(mapper::mapToReportingDocumentDto).toList();
+    }
+
+    @Override
+    public ReportingDocumentDto get(Long id) {
+        return mapper.mapToReportingDocumentDto(
+                repository.findById(id)
+                          .orElseThrow(() -> new RuntimeException(String.format("ReportingDocument with id=%s", id))));
     }
 
     @Override
     public List<ReportingDocumentDto> getAll() {
-        return mapper.mapToReportingDocumentDto(repository.findAll());
+        return repository.findAll().stream().map(mapper::mapToReportingDocumentDto).toList();
     }
 
     @Override

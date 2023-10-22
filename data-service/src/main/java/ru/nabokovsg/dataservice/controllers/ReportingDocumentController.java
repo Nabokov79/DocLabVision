@@ -13,6 +13,8 @@ import ru.nabokovsg.dataservice.dto.reportingDocument.ReportingDocumentDto;
 import ru.nabokovsg.dataservice.dto.reportingDocument.UpdateReportingDocumentDto;
 import ru.nabokovsg.dataservice.services.ReportingDocumentService;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
@@ -42,6 +44,12 @@ public class ReportingDocumentController {
            @RequestBody
            @Parameter(description = "Типы отчетного документа") List<UpdateReportingDocumentDto> reportingDocumentDto) {
         return ResponseEntity.ok().body(service.update(reportingDocumentDto));
+    }
+
+    @Operation(summary = "Получение данных типов отчетных документов")
+    @GetMapping("/{id}")
+    public ResponseEntity<ReportingDocumentDto> get(@PathVariable @NotNull @Positive Long id) {
+        return ResponseEntity.ok().body(service.get(id));
     }
 
     @Operation(summary = "Получение данных типов отчетных документов")

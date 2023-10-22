@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @Schema(description = "Данные титульного листа отчета, протокола, заключения")
-public class PageTitleDto {
+public class PageTitleTemplateDto {
 
     @Schema(description = "Индентификатор")
     private Long id;
@@ -31,4 +31,8 @@ public class PageTitleDto {
     private String departmentRequisites;
     @Schema(description = "Лицензия подразделения филиала организации")
     private String departmentLicense;
+    @Schema(description = "Название документа")
+    private String documentName;
+    @Schema(description = "Заголовок документа")
+    private String documentTitle;
 }

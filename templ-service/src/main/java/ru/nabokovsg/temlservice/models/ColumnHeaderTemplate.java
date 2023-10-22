@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.nabokovsg.temlservice.enums.ColumnDataType;
 
 import javax.persistence.*;
 
@@ -12,14 +13,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "appendices")
-public class Appendices {
+@Table(name = "columns_headers")
+public class ColumnHeaderTemplate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "sequential_appendices_number")
-    private Integer sequentialAppendicesNumber;
-    @Column(name = "appendices_name")
-    private String appendicesName;
+    @Column(name = "sequential_cell_number")
+    private Integer sequentialCellNumber;
+    @Column(name = "cell_name")
+    private String cellName;
+    private ColumnDataType columnDataType;
 }

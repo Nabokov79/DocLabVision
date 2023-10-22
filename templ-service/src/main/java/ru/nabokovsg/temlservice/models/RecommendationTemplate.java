@@ -12,8 +12,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "recommendations")
-public class Recommendation {
+@Table(name = "recommendations_templates")
+public class RecommendationTemplate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.nabokovsg.temlservice.dto.template.NewTemplateDataDto;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
@@ -13,8 +15,11 @@ import javax.validation.constraints.Positive;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "Данные нового титульного листа отчета, протокола, заключения")
-public class NewPageTitleDto {
+public class NewPageTitleTemplateDto {
 
+    @Schema(description = "Данные шаблона документа(отчет, протокол, заключение")
+    @NotNull(message = "template should not be null")
+    private NewTemplateDataDto template;
     @Schema(description = "Индентификатор организации")
     @NotNull(message = "organization id should not be null")
     @Positive(message = "organization id can only be positive")

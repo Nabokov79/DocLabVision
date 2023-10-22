@@ -1,7 +1,7 @@
 package ru.nabokovsg.temlservice.models;
 
 import lombok.*;
-import ru.nabokovsg.temlservice.enums.DataTypeSubsection;
+import ru.nabokovsg.temlservice.enums.SubsectionDataType;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,9 +17,9 @@ public class SubsectionTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "data_type_subsection")
+    @Column(name = "subsection_data_type")
     @Enumerated(EnumType.STRING)
-    private DataTypeSubsection dataTypeSubsection;
+    private SubsectionDataType subsectionDataType;
     @Column(name = "sequential_subsection_number")
     private double sequentialSubsectionNumber;
     @Column(name = "subsection_name")
@@ -32,8 +32,10 @@ public class SubsectionTemplate {
             joinColumns = {@JoinColumn(name = "subsection_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "recommendation_id")})
     @ToString.Exclude
-    private List<Recommendation> recommendations;
+    private List<RecommendationTemplate> recommendations;
     @OneToOne
     @JoinColumn(name = "conclusions_template_id", referencedColumnName = "id")
     private ConclusionTemplate conclusionsTemplate;
+    @Column(name = "subsection_number")
+    private double subsectionNumber;
 }

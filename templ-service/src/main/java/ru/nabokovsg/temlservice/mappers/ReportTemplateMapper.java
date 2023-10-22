@@ -1,14 +1,14 @@
 package ru.nabokovsg.temlservice.mappers;
 
 import org.mapstruct.Mapper;
-import ru.nabokovsg.temlservice.dto.templates.DocumentTemplateDto;
-import ru.nabokovsg.temlservice.dto.templates.NewTemplateDto;
+import ru.nabokovsg.temlservice.dto.report.ReportTemplateDto;
+import ru.nabokovsg.temlservice.dto.template.NewTemplateDataDto;
 import ru.nabokovsg.temlservice.models.ReportTemplate;
 
 @Mapper(componentModel = "spring")
 public interface ReportTemplateMapper {
 
-    ReportTemplate mapToNewReportTemplateDto(NewTemplateDto reportTemplateDto);
+    ReportTemplate mapToNewReportTemplateDto(NewTemplateDataDto templateDto);
 
-    DocumentTemplateDto mapToDocumentTemplateDto(ReportTemplate reportTemplate);
+    ReportTemplateDto mapToDocumentTemplateDto(ReportTemplate reportTemplate);
 }

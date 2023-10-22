@@ -15,5 +15,5 @@ public interface ReportingDocumentMapper {
 
     ReportingDocument mapFromUpdateReportingDocument(UpdateReportingDocumentDto reportingDocumentDto);
 
-    List<ReportingDocumentDto> mapToReportingDocumentDto(List<ReportingDocument> reportingDocument);
+    ReportingDocumentDto mapToReportingDocumentDto(ReportingDocument reportingDocument);
 }

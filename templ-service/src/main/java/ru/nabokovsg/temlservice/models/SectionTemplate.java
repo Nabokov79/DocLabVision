@@ -40,12 +40,12 @@ public class SectionTemplate {
             joinColumns = {@JoinColumn(name = "section_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "recommendation_id")})
     @ToString.Exclude
-    private List<Recommendation> recommendations;
+    private List<RecommendationTemplate> recommendations;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "section_templates_appendices",
             joinColumns = {@JoinColumn(name = "section_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "appendices_id")})
     @ToString.Exclude
-    private List<Appendices> appendices;
+    private List<AppendicesTemplates> appendices;
 }

@@ -11,8 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "table_header_templates")
-public class TableHeaderTemplate {
+@Table(name = "table_templates")
+public class TableTemplate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +26,9 @@ public class TableHeaderTemplate {
     private String tableName;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "table_header_templates_columns_headers",
-            joinColumns = {@JoinColumn(name = "table_header_template_id")},
+            name = "table_templates_columns_headers_templates",
+            joinColumns = {@JoinColumn(name = "table_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "columns_header_id")})
     @ToString.Exclude
-    private List<ColumnHeader> columnsHeaders;
+    private List<ColumnHeaderTemplate> columnsHeaders;
 }

@@ -8,28 +8,28 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.nabokovsg.temlservice.dto.templates.DocumentTemplateDto;
-import ru.nabokovsg.temlservice.dto.templates.NewTemplateDto;
-import ru.nabokovsg.temlservice.services.TemplateService;
+import ru.nabokovsg.temlservice.dto.report.ReportTemplateDto;
+import ru.nabokovsg.temlservice.dto.template.NewTemplateDataDto;
+import ru.nabokovsg.temlservice.services.ReportTemplateService;
 
 @RestController
 @RequestMapping(
-        value = "/template",
+        value = "/template/report",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 @Validated
 @Tag(name="Шаблон отчета",
         description="API для работы с данными шаблона отчета")
-public class TemplateController {
+public class ReportTemplateController {
 
-    private final TemplateService service;
+    private final ReportTemplateService service;
 
     @Operation(summary = "Добавление нового шаблона документа")
     @PostMapping
-    public ResponseEntity<DocumentTemplateDto> save(@RequestBody
-                                       @Parameter(description = "Данные шаблона отчета, протокола, заключения")
-                                       NewTemplateDto templateDto) {
+    public ResponseEntity<ReportTemplateDto> save(
+                  @RequestBody
+                  @Parameter(description = "Данные шаблона отчета, протокола, заключения") NewTemplateDataDto templateDto) {
         return ResponseEntity.ok().body(service.save(templateDto));
     }
 }

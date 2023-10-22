@@ -12,8 +12,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "page_titles")
-public class PageTitle {
+@Table(name = "page_title_templates")
+public class PageTitleTemplate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +36,8 @@ public class PageTitle {
     private String departmentRequisites;
     @Column(name = "department_license")
     private String departmentLicense;
+    @Column(name = "document_name")
+    private String documentName;
+    @Column(name = "document_title")
+    private String documentTitle;
 }
