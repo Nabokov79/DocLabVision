@@ -17,8 +17,6 @@ public class SubsectionTemplateServiceImpl implements SubsectionTemplateService 
 
     private final SubsectionTemplateRepository repository;
     private final SubsectionTemplateMapper mapper;
-    private final ReportTemplateService reportTemplateService;
-    private final ProtocolTemplateService protocolTemplateService;
 
     @Override
     public SubsectionTemplateDto save(NewSubsectionTemplateDto templateDto) {
@@ -30,16 +28,6 @@ public class SubsectionTemplateServiceImpl implements SubsectionTemplateService 
                 .orElseThrow(
                         () -> new BadRequestException(String.format("Unknown document type=%s",
                                                             templateDto.getTemplate().getDocumentType())));
-        switch (type) {
-            case REPORT ->
-                reportTemplateService.addSubsectionTemplate(templateDto.getTemplate(), template);
-            case PROTOCOL ->
-                 protocolTemplateService.addSubsectionTemplate(templateDto.getTemplate(), template);
-
-            default ->
-               throw new BadRequestException(
-                       String.format("Document=%s type is not supported", templateDto.getTemplate().getDocumentType()));
-        }
         return mapper.mapToSubsectionTemplateDto(template);
     }
 }

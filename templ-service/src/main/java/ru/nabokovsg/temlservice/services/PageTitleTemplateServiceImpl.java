@@ -6,7 +6,6 @@ import ru.nabokovsg.temlservice.client.TemplateClient;
 import ru.nabokovsg.temlservice.dto.client.*;
 import ru.nabokovsg.temlservice.dto.pageTitle.NewPageTitleTemplateDto;
 import ru.nabokovsg.temlservice.dto.pageTitle.PageTitleTemplateDto;
-import ru.nabokovsg.temlservice.exceptions.BadRequestException;
 import ru.nabokovsg.temlservice.mappers.PageTitleTemplateMapper;
 import ru.nabokovsg.temlservice.models.PageTitleTemplate;
 import ru.nabokovsg.temlservice.repository.PageTitleTemplateRepository;
@@ -24,8 +23,6 @@ public class PageTitleTemplateServiceImpl implements PageTitleTemplateService {
     private final PageTitleTemplateMapper mapper;
     private final TemplateClient client;
     private final StringBuilderService stringBuilderService;
-    private final ReportTemplateService reportTemplateService;
-    private final ProtocolTemplateService protocolTemplateService;
 
     @Override
     public PageTitleTemplateDto save(NewPageTitleTemplateDto pageTitleDto) {
@@ -88,16 +85,6 @@ public class PageTitleTemplateServiceImpl implements PageTitleTemplateService {
         if (pageTitleDto.isDepartmentRequisites()) {
             pageTitle.setDepartmentRequisites(stringBuilderService.requisitesToString(departments.get(pageTitleDto.getDepartmentId()).getRequisites()));
         }
-        pageTitle = repository.save(pageTitle);
-        switch (reportingDocument.getDocumentType()) {
-            case REPORT ->
-                reportTemplateService.addPageTitleTemplate(pageTitleDto.getTemplate(), pageTitle);
-            case PROTOCOL ->
-                protocolTemplateService.addPageTitleTemplate(pageTitleDto.getTemplate(), pageTitle);
-            default ->
-                    throw new BadRequestException(
-                            String.format("Document=%s type is not supported", reportingDocument.getDocumentType()));
-        }
-        return mapper.mapToPageTitleTemplateDto(pageTitle);
+        return mapper.mapToPageTitleTemplateDto(repository.save(pageTitle));
     }
 }
