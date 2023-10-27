@@ -6,10 +6,5 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
-@Schema(description = "Данные нового приложения к отчету, протоколу, заключению")
 public class NewAppendicesTemplateDto {
 }

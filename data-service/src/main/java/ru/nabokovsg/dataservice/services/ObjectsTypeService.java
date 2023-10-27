@@ -13,6 +13,10 @@ public interface ObjectsTypeService {
 
     List<ObjectsTypeDto> update(List<UpdateObjectsTypeDto> objectsTypeDto);
 
+    ObjectsTypeDto get(Long id);
+
+    ObjectsType getById(Long id);
+
     List<ObjectsType> getAll(List<Long> ids);
 
     void delete(Long id);

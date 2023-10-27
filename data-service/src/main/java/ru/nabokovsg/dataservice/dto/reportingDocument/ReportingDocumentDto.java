@@ -4,7 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import ru.nabokovsg.dataservice.models.DocumentType;
+import ru.nabokovsg.dataservice.enums.DocumentType;
+import ru.nabokovsg.dataservice.enums.ProtocolType;
 
 @Setter
 @Getter
@@ -20,4 +21,6 @@ public class ReportingDocumentDto {
     private String documentTitle;
     @Schema(description = "Тип документа")
     private DocumentType documentType;
+    @Schema(description = "Тип протокола")
+    private ProtocolType protocolType;
 }

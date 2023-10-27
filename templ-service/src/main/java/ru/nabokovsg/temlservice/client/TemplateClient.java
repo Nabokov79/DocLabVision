@@ -2,6 +2,8 @@ package ru.nabokovsg.temlservice.client;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.nabokovsg.temlservice.dto.client.EmployeeDto;
+import ru.nabokovsg.temlservice.dto.client.ObjectsTypeDto;
 import ru.nabokovsg.temlservice.dto.client.OrganizationDto;
 import ru.nabokovsg.temlservice.dto.client.ReportingDocumentDto;
 
@@ -17,5 +19,13 @@ public class TemplateClient {
 
     public ReportingDocumentDto getReportingDocument(Long id){
         return client.getReportingDocument("/data/applications/document/" + id);
+    }
+
+    public ObjectsTypeDto getObjectsType(Long id) {
+        return client.getObjectsType("/data/objects/type" + id);
+    }
+
+    public EmployeeDto getEmployee(Long id) {
+        return client.getEmployee("/data/employee/" + id);
     }
 }

@@ -1,5 +1,7 @@
 package ru.nabokovsg.dataservice.models;
 
+import ru.nabokovsg.dataservice.enums.BuilderType;
+
 import java.util.List;
 import java.util.Map;
 

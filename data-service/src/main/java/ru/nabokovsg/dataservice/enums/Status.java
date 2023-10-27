@@ -1,4 +1,4 @@
-package ru.nabokovsg.dataservice.models;
+package ru.nabokovsg.dataservice.enums;
 
 import java.util.Optional;
 

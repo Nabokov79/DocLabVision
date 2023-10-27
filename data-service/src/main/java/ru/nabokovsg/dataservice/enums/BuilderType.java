@@ -1,4 +1,4 @@
-package ru.nabokovsg.dataservice.models;
+package ru.nabokovsg.dataservice.enums;
 
 public enum BuilderType {
 

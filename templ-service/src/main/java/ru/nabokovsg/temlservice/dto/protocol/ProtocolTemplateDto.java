@@ -5,11 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.nabokovsg.temlservice.dto.PageHeaderTemplateDto;
 import ru.nabokovsg.temlservice.dto.appendices.AppendicesTemplateDto;
-import ru.nabokovsg.temlservice.dto.pageTitle.PageTitleTemplateDto;
 import ru.nabokovsg.temlservice.dto.subsection.SubsectionTemplateDto;
 import ru.nabokovsg.temlservice.dto.tableTemlate.TableTemplateDto;
-
 import java.util.List;
 
 @Setter
@@ -21,8 +20,14 @@ public class ProtocolTemplateDto {
 
     @Schema(description = "Индентификатор")
     private Long id;
+    @Schema(description = "Порядковый номер протокола")
+    private Integer sequentialProtocolNumber;
+    @Schema(description = "Название документа")
+    private String protocolName;
+    @Schema(description = "Заголовок протокола")
+    private String protocolTitle;
     @Schema(description = "Шаблон заголовка страницы протокола")
-    private PageTitleTemplateDto pageHeader;
+    private PageHeaderTemplateDto pageHeader;
     @Schema(description = "Шаблон подраздела протокола")
     private List<SubsectionTemplateDto> subsectionsTemplate;
     @Schema(description = "Шаблон таблиц протокола")

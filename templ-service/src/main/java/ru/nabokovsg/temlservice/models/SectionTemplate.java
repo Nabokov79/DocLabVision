@@ -26,14 +26,14 @@ public class SectionTemplate {
             joinColumns = {@JoinColumn(name = "section_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "subsections_template_id")})
     @ToString.Exclude
-    private List<SubsectionTemplate> subsectionsTemplate;
+    private List<SubsectionTemplate> subsectionsTemplates;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "section_templates_report_protocol_templates",
             joinColumns = {@JoinColumn(name = "section_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "report_protocol_template_id")})
     @ToString.Exclude
-    private List<ReportProtocolTemplate> reportProtocolTemplates;
+    private List<ProtocolTemplate> protocolTemplates;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "section_templates_recommendations",

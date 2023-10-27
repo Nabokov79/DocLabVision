@@ -20,9 +20,13 @@ public class ReportTemplate {
     private Long objectsTypeId;
     @Column(name = "reporting_document_id")
     private Long reportingDocumentId;
+    @Column(name = "report_name")
+    private String reportName;
+    @Column(name = "report_title")
+    private String reportTitle;
     @OneToOne
-    @JoinColumn(name = "title_page_header_id", referencedColumnName = "id")
-    private PageTitleTemplate titlePageHeader;
+    @JoinColumn(name = "page_title_id", referencedColumnName = "id")
+    private PageTitleTemplate pageTitle;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "report_templates_section_templates",

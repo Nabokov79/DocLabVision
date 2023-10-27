@@ -9,6 +9,7 @@ import ru.nabokovsg.dataservice.dto.ObjectsIds;
 import ru.nabokovsg.dataservice.dto.certificate.CertificateDto;
 import ru.nabokovsg.dataservice.dto.certificate.NewCertificateDto;
 import ru.nabokovsg.dataservice.dto.certificate.UpdateCertificateDto;
+import ru.nabokovsg.dataservice.enums.BuilderType;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
 import ru.nabokovsg.dataservice.mappers.CertificateMapper;
 import ru.nabokovsg.dataservice.models.*;

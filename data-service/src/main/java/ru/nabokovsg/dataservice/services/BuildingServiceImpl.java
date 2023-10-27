@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.nabokovsg.dataservice.dto.building.BuildingDto;
 import ru.nabokovsg.dataservice.dto.building.NewBuildingDto;
 import ru.nabokovsg.dataservice.dto.building.UpdateBuildingDto;
+import ru.nabokovsg.dataservice.enums.BuilderType;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
 import ru.nabokovsg.dataservice.mappers.BuildingMapper;
 import ru.nabokovsg.dataservice.mappers.DepartmentMapper;

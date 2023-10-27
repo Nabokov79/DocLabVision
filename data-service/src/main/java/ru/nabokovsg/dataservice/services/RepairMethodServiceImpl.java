@@ -2,15 +2,12 @@ package ru.nabokovsg.dataservice.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.nabokovsg.dataservice.dto.objectsTypeData.ObjectsTypeRepairMethodDataDto;
 import ru.nabokovsg.dataservice.dto.repairMethod.NewRepairMethodDto;
 import ru.nabokovsg.dataservice.dto.repairMethod.RepairMethodDto;
 import ru.nabokovsg.dataservice.dto.repairMethod.UpdateRepairMethodDto;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
-import ru.nabokovsg.dataservice.mappers.ObjectsTypeDataMapper;
 import ru.nabokovsg.dataservice.mappers.RepairMethodMapper;
-import ru.nabokovsg.dataservice.models.BuilderType;
-import ru.nabokovsg.dataservice.models.DataBuilder;
+import ru.nabokovsg.dataservice.models.ObjectsType;
 import ru.nabokovsg.dataservice.models.RepairMethod;
 import ru.nabokovsg.dataservice.repository.RepairMethodRepository;
 
@@ -25,29 +22,17 @@ public class RepairMethodServiceImpl implements RepairMethodService {
 
     private final RepairMethodRepository repository;
     private final RepairMethodMapper mapper;
-    private final ObjectsTypeDataService dataService;
-    private final ObjectsTypeDataMapper dataMapper;
+    private final ObjectsTypeService objectsTypeService;
 
     @Override
-    public List<ObjectsTypeRepairMethodDataDto> save(List<Long> objectsTypeId, List<NewRepairMethodDto> methodsDto) {
-        Map<String, RepairMethod> methodsDb = repository.findAllByMethodName((
-                        methodsDto.stream()
-                                .map(NewRepairMethodDto::getMethodName)
-                                .toList()))
-                .stream()
-                .collect(Collectors.toMap(RepairMethod::getMethodName, r -> r));
+    public List<RepairMethodDto> save(List<Long> objectsTypeId, List<NewRepairMethodDto> methodsDto) {
         List<RepairMethod> methods = mapper.mapToNewRepairMethod(methodsDto);
-        if (!methodsDb.isEmpty()) {
-            methods = repository.saveAll(methods.stream()
-                    .filter(m -> !methodsDb.containsKey(m.getMethodName()))
-                    .toList());
-            methods.addAll(methodsDb.values());
+        List<RepairMethod> methodsDb = new ArrayList<>();
+        List<ObjectsType> objectsTypes = objectsTypeService.getAll(objectsTypeId);
+        for (ObjectsType type : objectsTypes) {
+            methodsDb.addAll(methods.stream().peek(m -> m.setObjectsType(type)).toList());
         }
-        return dataMapper.mapToObjectsTypeRepairMethodDataDto(
-                dataService.save(new DataBuilder.Data().type(BuilderType.REPAIR_METHOD)
-                        .ids(objectsTypeId)
-                        .methods(repository.saveAll(methods))
-                        .build()));
+        return mapper.mapToNewRepairMethodDto(repository.saveAll(methodsDb));
     }
 
     @Override

@@ -7,6 +7,7 @@ import ru.nabokovsg.dataservice.dto.objectSurvey.NewObjectSurveyDto;
 import ru.nabokovsg.dataservice.dto.objectSurvey.ShortObjectSurveyDto;
 import ru.nabokovsg.dataservice.dto.objectSurvey.ObjectSurveyDto;
 import ru.nabokovsg.dataservice.dto.objectSurvey.UpdateObjectSurveyDto;
+import ru.nabokovsg.dataservice.enums.BuilderType;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
 import ru.nabokovsg.dataservice.mappers.ObjectSurveyMapper;
 import ru.nabokovsg.dataservice.models.*;

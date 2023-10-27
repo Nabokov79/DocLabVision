@@ -18,26 +18,19 @@ public class PageTitleTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "organization")
-    private String organization;
-    @Column(name = "organization_license")
-    private String organizationLicense;
-    @Column(name = "requisites_organization")
-    private String organizationRequisites;
-    @Column(name = "branch")
-    private String branch;
-    @Column(name = "branch_requisites")
-    private String branchRequisites;
-    @Column(name = "license_branch")
-    private String licenseBranch;
-    @Column(name = "department")
-    private String department;
-    @Column(name = "department_requisites")
-    private String departmentRequisites;
-    @Column(name = "department_license")
-    private String departmentLicense;
-    @Column(name = "document_name")
-    private String documentName;
-    @Column(name = "document_title")
-    private String documentTitle;
+    @OneToOne
+    @JoinColumn(name = "page_header_template_id", referencedColumnName = "id")
+    private PageHeaderTemplate pageHeaderTemplate;
+    @Column(name = "object_string")
+    private String objectString;
+    @Column(name = "installation_location_string")
+    private String installationLocationString;
+    @Column(name = "address_string")
+    private String addressString;
+    @Column(name = "employee")
+    private String employee;
+    @Column(name = "city")
+    private String city;
+    @Column(name = "year")
+    private String year;
 }

@@ -16,6 +16,8 @@ public class Defect {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private ObjectsType objectsType;
     @Column(name = "defect_name")
     private String defectName;
     @ManyToMany(fetch = FetchType.LAZY)

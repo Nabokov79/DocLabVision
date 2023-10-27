@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.nabokovsg.temlservice.dto.template.NewTemplateDataDto;
+import ru.nabokovsg.temlservice.dto.pageHeader.NewPageHeaderTemplateDto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -14,14 +14,18 @@ import javax.validation.constraints.Positive;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Данные нового протокола отчета")
+@Schema(description = "Данные нового протокола, заключения")
 public class NewProtocolTemplateDto {
 
-    @Schema(description = "Данные шаблона документа(отчет, протокол, заключение")
-    @NotNull(message = "template should not be null")
-    private NewTemplateDataDto template;
-    @Schema(description = "Порядковый номер протокола")
-    @NotNull(message = "sequential protocol number should not be null")
-    @Positive(message = "sequential protocol number must be positive")
-    private Integer sequentialProtocolNumber;
+    @Schema(description = "Данные нового заголовка")
+    @NotNull(message = "page header should not be null")
+    private NewPageHeaderTemplateDto pageHeader;
+    @Schema(description = "Индентификатор отчетного документа")
+    @NotNull(message = "reporting document id should not be null")
+    @Positive(message = "reporting document id can only be positive")
+    private Long reportingDocumentId;
+    @Schema(description = "Индентификатор типа объекта")
+    @NotNull(message = "object type id should not be null")
+    @Positive(message = "object type id can only be positive")
+    private Long objectsTypeId;
 }

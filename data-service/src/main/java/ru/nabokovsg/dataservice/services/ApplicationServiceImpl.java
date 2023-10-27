@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.nabokovsg.dataservice.dto.ObjectsIds;
 import ru.nabokovsg.dataservice.dto.application.*;
+import ru.nabokovsg.dataservice.enums.BuilderType;
+import ru.nabokovsg.dataservice.enums.Status;
 import ru.nabokovsg.dataservice.exceptions.BadRequestException;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
 import ru.nabokovsg.dataservice.mappers.ApplicationMapper;

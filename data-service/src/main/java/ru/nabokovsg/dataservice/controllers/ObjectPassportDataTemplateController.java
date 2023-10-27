@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.dataservice.dto.objectPassportDataTemplate.NewObjectPassportDataTemplateDto;
 import ru.nabokovsg.dataservice.dto.objectPassportDataTemplate.ObjectPassportDataTemplateDto;
 import ru.nabokovsg.dataservice.dto.objectPassportDataTemplate.UpdateObjectPassportDataTemplateDto;
-import ru.nabokovsg.dataservice.dto.objectsTypeData.ObjectsTypeTemplateDataDto;
 import ru.nabokovsg.dataservice.services.ObjectPassportDataTemplateService;
 
 import javax.validation.Valid;
@@ -34,7 +33,7 @@ public class ObjectPassportDataTemplateController {
 
     @Operation(summary = "Добавление новоых элементов объекта")
     @PostMapping
-    public ResponseEntity<List<ObjectsTypeTemplateDataDto>> save(
+    public ResponseEntity<List<ObjectPassportDataTemplateDto>> save(
                                             @RequestParam("objectsTypeId") @NotNull @NotEmpty List<Long> objectsTypeId,
                                             @RequestBody @Parameter(description = "Шаблон паспортных данных объекта")
                                             @Valid List<NewObjectPassportDataTemplateDto> templatesDto) {

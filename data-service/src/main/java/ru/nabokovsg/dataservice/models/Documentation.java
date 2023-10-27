@@ -1,9 +1,6 @@
 package ru.nabokovsg.dataservice.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -18,6 +15,8 @@ public class Documentation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private ObjectsType objectsType;
     @Column(name = "view", nullable = false)
     private String view;
     @Column(name = "number", nullable = false)

@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.nabokovsg.dataservice.dto.application.ShortApplicationDto;
 import ru.nabokovsg.dataservice.dto.employee.ShortEmployeeDto;
-import ru.nabokovsg.dataservice.models.Status;
+import ru.nabokovsg.dataservice.enums.Status;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

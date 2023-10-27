@@ -8,8 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.nabokovsg.temlservice.dto.report.NewReportTemplateDto;
 import ru.nabokovsg.temlservice.dto.report.ReportTemplateDto;
-import ru.nabokovsg.temlservice.dto.template.NewTemplateDataDto;
 import ru.nabokovsg.temlservice.services.ReportTemplateService;
 
 @RestController
@@ -25,11 +25,21 @@ public class ReportTemplateController {
 
     private final ReportTemplateService service;
 
-    @Operation(summary = "Добавление нового шаблона документа")
+    @Operation(summary = "Данные титульного листа отчета")
     @PostMapping
-    public ResponseEntity<ReportTemplateDto> save(
-                  @RequestBody
-                  @Parameter(description = "Данные шаблона отчета, протокола, заключения") NewTemplateDataDto templateDto) {
-        return ResponseEntity.ok().body(service.save(templateDto));
+    public ResponseEntity<ReportTemplateDto> save(@RequestBody NewReportTemplateDto reportTemplateDto) {
+        return ResponseEntity.ok().body(service.save(reportTemplateDto));
+    }
+
+    @Operation(summary = "Получить шаблон отчета")
+    @GetMapping
+    public ResponseEntity<ReportTemplateDto> get(
+            @RequestParam(required = false)
+            @Parameter(description = "Индентификатор") Long id,
+            @RequestParam(required = false)
+            @Parameter(description = "Индентификатор типа объекта") Long objectsTypeId,
+            @RequestParam(required = false)
+            @Parameter(description = "Индентификатор отчетного документа") Long reportingDocumentId) {
+        return ResponseEntity.ok().body(service.get(id, objectsTypeId, reportingDocumentId));
     }
 }

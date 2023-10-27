@@ -8,7 +8,7 @@ import ru.nabokovsg.temlservice.models.ProtocolTemplate;
 @Mapper(componentModel = "spring")
 public interface ProtocolTemplateMapper {
 
-    ProtocolTemplate mapToNewProtocolTemplate(NewProtocolTemplateDto reportTemplateDto);
+    ProtocolTemplate mapToNewProtocolTemplate(NewProtocolTemplateDto protocolTemplateDto);
 
     ProtocolTemplateDto mapToDocumentTemplateDto(ProtocolTemplate protocolTemplate);
 }

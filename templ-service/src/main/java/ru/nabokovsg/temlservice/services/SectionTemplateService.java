@@ -1,9 +1,14 @@
 package ru.nabokovsg.temlservice.services;
 
-import ru.nabokovsg.temlservice.dto.section.SectionTemplateDto;
-import ru.nabokovsg.temlservice.dto.section.NewSectionTemplateDto;
+import ru.nabokovsg.temlservice.dto.report.ReportTemplateDto;
+import ru.nabokovsg.temlservice.dto.section.NewReportSectionTemplateDto;
+import ru.nabokovsg.temlservice.models.SectionTemplate;
 
 public interface SectionTemplateService {
 
-    SectionTemplateDto save(NewSectionTemplateDto templateDto);
+    ReportTemplateDto save(NewReportSectionTemplateDto sectionTemplateDto);
+
+    SectionTemplate getById(Long id);
+
+    void saveTemplate(SectionTemplate sectionTemplate);
 }

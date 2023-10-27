@@ -1,9 +1,7 @@
 package ru.nabokovsg.dataservice.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -18,6 +16,8 @@ public class Norm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private ObjectsType objectsType;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "element_id", referencedColumnName = "id")
     private Element element;
@@ -54,17 +54,18 @@ public class Norm {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Norm norm = (Norm) o;
-        return id == norm.id && Objects.equals(element, norm.element)
-                             && Objects.equals(subElement, norm.subElement)
-                             && Objects.equals(diameter, norm.diameter)
-                             && Objects.equals(thickness, norm.thickness)
-                             && Objects.equals(minInPercent, norm.minInPercent)
-                             && Objects.equals(min, norm.min)
-                             && Objects.equals(measurementError, norm.measurementError);
+        return id == norm.id && Objects.equals(objectsType, norm.objectsType)
+                && Objects.equals(element, norm.element)
+                && Objects.equals(subElement, norm.subElement)
+                && Objects.equals(diameter, norm.diameter)
+                && Objects.equals(thickness, norm.thickness)
+                && Objects.equals(minInPercent, norm.minInPercent)
+                && Objects.equals(min, norm.min)
+                && Objects.equals(measurementError, norm.measurementError);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, element, subElement, diameter, thickness, minInPercent, min, measurementError);
+        return Objects.hash(id, objectsType, element, subElement, diameter, thickness, minInPercent, min, measurementError);
     }
 }

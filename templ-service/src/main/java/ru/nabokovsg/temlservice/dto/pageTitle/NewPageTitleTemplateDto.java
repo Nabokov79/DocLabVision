@@ -5,8 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.nabokovsg.temlservice.dto.template.NewTemplateDataDto;
+import ru.nabokovsg.temlservice.dto.pageHeader.NewPageHeaderTemplateDto;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
@@ -14,46 +15,26 @@ import javax.validation.constraints.Positive;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Данные нового титульного листа отчета, протокола, заключения")
+@Schema(description = "Данные нового заголовка листа")
 public class NewPageTitleTemplateDto {
 
-    @Schema(description = "Данные шаблона документа(отчет, протокол, заключение")
-    @NotNull(message = "template should not be null")
-    private NewTemplateDataDto template;
-    @Schema(description = "Индентификатор организации")
-    @NotNull(message = "organization id should not be null")
-    @Positive(message = "organization id can only be positive")
-    private Long organizationId;
-    @Schema(description = "Указать в документе полное название организации")
-    @NotNull(message = "organization full name should not be null")
-    private boolean organizationFullName;
-    @Schema(description = "Индентификатор лицензии организации")
-    private Long organizationLicenseId;
-    @Schema(description = "Указать контактные данные организации")
-    @NotNull(message = "organization requisites should not be null")
-    private boolean organizationRequisites;
-    @Schema(description = "Индентификатор филиала организации")
-    @NotNull(message = "branch id should not be null")
-    @Positive(message = "branch id can only be positive")
-    private Long branchId;
-    @Schema(description = "Указать позное название филиала организации")
-    @NotNull(message = "branch full name should not be null")
-    private boolean branchFullName;
-    @Schema(description = "Указать контактные данные филиала организации")
-    @NotNull(message = "branch requisites should not be null")
-    private boolean branchRequisites;
-    @Schema(description = "Указать лицензию филиала организации")
-    private Long branchLicenseId;
-    @Schema(description = "Индентификатор подразделения филиала организации")
-    @NotNull(message = "department id should not be null")
-    @Positive(message = "department id can only be positive")
-    private Long departmentId;
-    @Schema(description = "Указать полное название подразделения организации")
-    @NotNull(message = "department full name should not be null")
-    private boolean departmentFullName;
-    @Schema(description = "Указать контактные данные подразделения филиала организации")
-    @NotNull(message = "department requisites should not be null")
-    private boolean departmentRequisites;
-    @Schema(description = "Указать лицензию подразделения филиала организации")
-    private Long departmentLicenseId;
+    @Schema(description = "Данные нового заголовка")
+    @NotNull(message = "page header should not be null")
+    private NewPageHeaderTemplateDto pageHeader;
+    @Schema(description = "Строка наименования объекта")
+    @NotBlank(message = "object string should not be blank")
+    private String objectString;
+    @Schema(description = "Строка наименования места расположения объекта")
+    @NotBlank(message = "installation location string should not be blank")
+    private String installationLocationString;
+    @Schema(description = "Строка указания адреса")
+    @NotBlank(message = "address string should not be blank")
+    private String addressString;
+    @Schema(description = "Индентификатор сотрудника")
+    @NotNull(message = "employee id should not be null")
+    @Positive(message = "employee id can only be positive")
+    private Long employeeId;
+    @Schema(description = "Населенный пункт")
+    @NotBlank(message = "city should not be blank")
+    private String city;
 }

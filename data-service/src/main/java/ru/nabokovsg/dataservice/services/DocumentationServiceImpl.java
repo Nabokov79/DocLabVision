@@ -5,13 +5,10 @@ import org.springframework.stereotype.Service;
 import ru.nabokovsg.dataservice.dto.documentation.DocumentationDto;
 import ru.nabokovsg.dataservice.dto.documentation.NewDocumentationDto;
 import ru.nabokovsg.dataservice.dto.documentation.UpdateDocumentationDto;
-import ru.nabokovsg.dataservice.dto.objectsTypeData.ObjectsTypeDocumentationDataDto;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
 import ru.nabokovsg.dataservice.mappers.DocumentationMapper;
-import ru.nabokovsg.dataservice.mappers.ObjectsTypeDataMapper;
-import ru.nabokovsg.dataservice.models.BuilderType;
-import ru.nabokovsg.dataservice.models.DataBuilder;
 import ru.nabokovsg.dataservice.models.Documentation;
+import ru.nabokovsg.dataservice.models.ObjectsType;
 import ru.nabokovsg.dataservice.repository.DocumentationRepository;
 
 import java.util.ArrayList;
@@ -25,31 +22,18 @@ public class DocumentationServiceImpl implements DocumentationService {
 
     private final DocumentationRepository repository;
     private final DocumentationMapper mapper;
-    private final ObjectsTypeDataService dataService;
-    private final ObjectsTypeDataMapper dataMapper;
+    private final ObjectsTypeService objectsTypeService;
 
     @Override
-    public List<ObjectsTypeDocumentationDataDto> save(List<Long> objectsTypeId
+    public List<DocumentationDto> save(List<Long> objectsTypeId
                                                     , List<NewDocumentationDto> documentationsDto) {
-        Map<String, Documentation> documentations = repository.findAllByTitle(documentationsDto
-                                                                 .stream().map(NewDocumentationDto::getTitle).toList())
-                                                            .stream()
-                                                            .collect(Collectors.toMap(Documentation::getTitle, d -> d));
-        List<Documentation> documentationsDb = mapper.mapToNewDocumentations(documentationsDto);
-        if (documentations.isEmpty()) {
-            documentationsDb = repository.saveAll(documentationsDb);
-        } else {
-            documentationsDb =  repository.saveAll(documentationsDb.stream()
-                                                                 .filter(d -> !documentations.containsKey(d.getTitle()))
-                                                                 .toList());
-            documentationsDb.addAll(documentations.values());
-
+        List<Documentation> documentations = mapper.mapToNewDocumentations(documentationsDto);
+        List<Documentation> documentationsDb = new ArrayList<>();
+        List<ObjectsType> objectsTypes = objectsTypeService.getAll(objectsTypeId);
+        for (ObjectsType type : objectsTypes) {
+            documentationsDb.addAll(documentations.stream().peek(d -> d.setObjectsType(type)).toList());
         }
-        return dataMapper.mapToObjectsTypeDocumentationDataDto(
-                dataService.save(new DataBuilder.Data().type(BuilderType.DOCUMENTATION)
-                        .ids(objectsTypeId)
-                        .documentations(documentationsDb)
-                        .build()));
+        return mapper.mapToDocumentationDto(repository.saveAll(documentationsDb));
     }
 
     @Override

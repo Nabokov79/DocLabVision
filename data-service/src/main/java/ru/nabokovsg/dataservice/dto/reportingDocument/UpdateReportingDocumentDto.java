@@ -28,4 +28,6 @@ public class UpdateReportingDocumentDto {
     @Schema(description = "Тип документа")
     @NotBlank(message = "reporting document type should not be blank")
     private String documentType;
+    @Schema(description = "Тип протокола")
+    private String protocolType;
 }

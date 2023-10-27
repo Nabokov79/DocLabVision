@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.dataservice.dto.norms.NewNormsDto;
 import ru.nabokovsg.dataservice.dto.norms.NormsDto;
 import ru.nabokovsg.dataservice.dto.norms.UpdateNormsDto;
-import ru.nabokovsg.dataservice.dto.objectsTypeData.ObjectsTypeNormsDataDto;
 import ru.nabokovsg.dataservice.services.NormsService;
 
 import javax.validation.Valid;
@@ -34,7 +33,7 @@ public class NormsController {
 
     @Operation(summary = "Добавление новых норм браковки")
     @PostMapping
-    public ResponseEntity<List<ObjectsTypeNormsDataDto>> saveNorms(
+    public ResponseEntity<List<NormsDto>> saveNorms(
             @RequestParam("objectsTypeId") @NotNull @NotEmpty List<Long> objectsTypeId,
             @RequestBody @Parameter(description = "Список норм") @Valid List<NewNormsDto> normsDto) {
         return ResponseEntity.ok().body(service.save(objectsTypeId, normsDto));

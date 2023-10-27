@@ -6,14 +6,14 @@ import ru.nabokovsg.dataservice.dto.objectsType.ObjectsTypeDto;
 import ru.nabokovsg.dataservice.dto.objectsType.UpdateObjectsTypeDto;
 import ru.nabokovsg.dataservice.models.ObjectsType;
 
-import java.util.List;
-
 @Mapper(componentModel = "spring")
 public interface ObjectsTypeMapper {
 
-    ObjectsType mapToNewObjectsType(NewObjectsTypeDto objectsTypesDto);
+    ObjectsType mapToNewObjectType(NewObjectsTypeDto objectsTypesDto);
 
-    ObjectsType mapToUpdateObjectsType(UpdateObjectsTypeDto objectsTypesDto);
+    ObjectsType mapToUpdateObjectType(UpdateObjectsTypeDto objectsTypesDto);
 
-    List<ObjectsTypeDto> mapToObjectsTypeDto(List<ObjectsType> objectsTypes);
+    ObjectsTypeDto mapToObjectTypeDto(ObjectsType objectsTypes);
+
+    ObjectsType mapToObjectType(ObjectsTypeDto objectsTypesDto);
 }

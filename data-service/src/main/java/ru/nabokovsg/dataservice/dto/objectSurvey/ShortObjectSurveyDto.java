@@ -20,6 +20,4 @@ public class ShortObjectSurveyDto {
     private String model;
     @Schema(description = "Объем объекта")
     private Integer number;
-    @Schema(description = "Объем объекта")
-    private Integer volume;
 }

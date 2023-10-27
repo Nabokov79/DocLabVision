@@ -18,8 +18,6 @@ public class RecommendationTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "objectType_id")
-    private Long objectTypeId;
     @Column(name = "recommendation_text")
     private String recommendationText;
 }

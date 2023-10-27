@@ -1,6 +1,7 @@
 package ru.nabokovsg.dataservice.models;
 
 import lombok.*;
+import ru.nabokovsg.dataservice.enums.Status;
 
 import javax.persistence.*;
 import java.time.LocalDate;

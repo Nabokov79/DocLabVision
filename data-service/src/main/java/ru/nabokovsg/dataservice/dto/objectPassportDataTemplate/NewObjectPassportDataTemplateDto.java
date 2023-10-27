@@ -20,7 +20,7 @@ public class NewObjectPassportDataTemplateDto {
     @Schema(description = "Номер подраздела")
     @NotNull(message = "data sequence number must not be null")
     @Positive(message = "data sequence number must be negative")
-    private String sequentialSubsectionNumber;
+    private Double sequentialSubsectionNumber;
     @Schema(description = "Название")
     @NotBlank(message = "data name must not be null")
     private String dataName;

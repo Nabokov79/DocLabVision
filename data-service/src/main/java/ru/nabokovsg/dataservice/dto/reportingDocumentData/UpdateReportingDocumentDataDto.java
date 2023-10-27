@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import ru.nabokovsg.dataservice.models.Status;
+import ru.nabokovsg.dataservice.enums.Status;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

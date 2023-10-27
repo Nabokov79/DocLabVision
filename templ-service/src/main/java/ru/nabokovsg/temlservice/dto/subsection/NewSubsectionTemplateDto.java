@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.nabokovsg.temlservice.dto.template.NewTemplateDataDto;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -18,9 +16,6 @@ import javax.validation.constraints.Positive;
 @Schema(description = "Данные нового подраздела раздела отчета, подаздела протокола, подраздела заключения")
 public class NewSubsectionTemplateDto {
 
-    @Schema(description = "Данные шаблона документа(отчет, протокол, заключение")
-    @NotNull(message = "template should not be null")
-    private NewTemplateDataDto template;
     @Schema(description = "Порядковый номер подраздела")
     @NotNull(message = "sequential subsection number should not be null")
     @Positive(message = "sequential subsection number can only be positive")
@@ -30,7 +25,7 @@ public class NewSubsectionTemplateDto {
     private String subsectionName;
     @Schema(description = "Текст подраздела")
     private String subsectionText;
-    @Schema(description = "Тип данных пораздела")
+    @Schema(description = "Тип данных подраздела")
     @NotBlank(message = "data type subsection should not be blank")
     private String subsectionDataType;
     @Schema(description = "Показать номер подраздела в документе")

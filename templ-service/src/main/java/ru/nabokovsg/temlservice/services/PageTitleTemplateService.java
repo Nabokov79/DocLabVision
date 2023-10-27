@@ -1,9 +1,9 @@
 package ru.nabokovsg.temlservice.services;
 
 import ru.nabokovsg.temlservice.dto.pageTitle.NewPageTitleTemplateDto;
-import ru.nabokovsg.temlservice.dto.pageTitle.PageTitleTemplateDto;
+import ru.nabokovsg.temlservice.models.PageTitleTemplate;
 
 public interface PageTitleTemplateService {
 
-    PageTitleTemplateDto save(NewPageTitleTemplateDto pageTitleDto);
+    PageTitleTemplate save(Long reportingDocumentId, NewPageTitleTemplateDto pageTitleTemplateDto);
 }

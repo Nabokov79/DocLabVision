@@ -21,6 +21,8 @@ public class UpdateElementDto {
     @NotNull(message = "id should not be blank")
     @Positive(message = "id can only be positive")
     private Long id;
+    @Schema(description = "Индентификатор типа объекта")
+    private Long objectsTypeId;
     @Schema(description = "Название элемента")
     @NotBlank(message = "element name should not be blank")
     private String elementName;

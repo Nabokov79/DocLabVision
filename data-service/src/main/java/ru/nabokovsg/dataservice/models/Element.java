@@ -17,10 +17,10 @@ public class Element {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private ObjectsType objectsType;
     @Column(name = "element_name")
     private String elementName;
-    @Column(name = "objects_type_id")
-    private Long objectsTypeId;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "elements_sub_elements",
@@ -33,8 +33,8 @@ public class Element {
     public String toString() {
         return "Element{" +
                 "id=" + id +
+                ", objectsType=" + objectsType +
                 ", elementName='" + elementName + '\'' +
-                ", objectsTypeId=" + objectsTypeId +
                 ", subElements=" + subElements +
                 '}';
     }
@@ -44,13 +44,13 @@ public class Element {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Element element = (Element) o;
-        return id == element.id && Objects.equals(elementName, element.elementName)
-                                && Objects.equals(objectsTypeId, element.objectsTypeId)
-                                && Objects.equals(subElements, element.subElements);
+        return id == element.id && Objects.equals(objectsType, element.objectsType)
+                && Objects.equals(elementName, element.elementName)
+                && Objects.equals(subElements, element.subElements);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, elementName, objectsTypeId, subElements);
+        return Objects.hash(id, objectsType, elementName, subElements);
     }
 }

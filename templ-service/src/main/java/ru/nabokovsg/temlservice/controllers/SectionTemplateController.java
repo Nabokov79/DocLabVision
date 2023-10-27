@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.nabokovsg.temlservice.dto.section.SectionTemplateDto;
-import ru.nabokovsg.temlservice.dto.section.NewSectionTemplateDto;
+import ru.nabokovsg.temlservice.dto.report.ReportTemplateDto;
+import ru.nabokovsg.temlservice.dto.section.NewReportSectionTemplateDto;
 import ru.nabokovsg.temlservice.services.SectionTemplateService;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(
@@ -30,9 +32,9 @@ public class SectionTemplateController {
 
     @Operation(summary = "Добавление нового шаблона шаблона")
     @PostMapping
-    public ResponseEntity<SectionTemplateDto> save(
-            @RequestBody
-            @Parameter(description = "Данные нового шаблона раздела отчета") NewSectionTemplateDto templateDto) {
-        return ResponseEntity.ok().body(service.save(templateDto));
+    public ResponseEntity<ReportTemplateDto> save(
+                                            @RequestBody@Parameter(description = "Данные нового шаблона раздела отчета")
+                                            @Valid NewReportSectionTemplateDto sectionTemplateDto) {
+        return ResponseEntity.ok().body(service.save(sectionTemplateDto));
     }
 }

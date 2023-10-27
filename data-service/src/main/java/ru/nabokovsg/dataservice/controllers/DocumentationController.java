@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.dataservice.dto.documentation.DocumentationDto;
 import ru.nabokovsg.dataservice.dto.documentation.NewDocumentationDto;
 import ru.nabokovsg.dataservice.dto.documentation.UpdateDocumentationDto;
-import ru.nabokovsg.dataservice.dto.objectsTypeData.ObjectsTypeDocumentationDataDto;
 import ru.nabokovsg.dataservice.services.DocumentationService;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -34,7 +32,7 @@ public class DocumentationController {
 
     @Operation(summary = "Добавление нового нормативного документа")
     @PostMapping
-    public ResponseEntity<List<ObjectsTypeDocumentationDataDto>> save(
+    public ResponseEntity<List<DocumentationDto>> save(
                                             @RequestParam("objectsTypeId") @NotNull @NotEmpty List<Long> objectsTypeId,
                                             @RequestBody @Parameter(description = "Нормативный документ")
                                             @Valid List<NewDocumentationDto> documentationsDto) {

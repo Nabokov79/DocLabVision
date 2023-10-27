@@ -8,7 +8,7 @@ import ru.nabokovsg.dataservice.dto.license.NewLicenseDto;
 import ru.nabokovsg.dataservice.dto.license.UpdateLicenseDto;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
 import ru.nabokovsg.dataservice.mappers.LicenseMapper;
-import ru.nabokovsg.dataservice.models.BuilderType;
+import ru.nabokovsg.dataservice.enums.BuilderType;
 import ru.nabokovsg.dataservice.models.DataBuilder;
 import ru.nabokovsg.dataservice.models.Licenses;
 import ru.nabokovsg.dataservice.repository.LicenseRepository;

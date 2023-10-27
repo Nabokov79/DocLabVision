@@ -1,7 +1,6 @@
 package ru.nabokovsg.temlservice.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -15,9 +14,11 @@ import ru.nabokovsg.temlservice.dto.protocol.NewProtocolTemplateDto;
 import ru.nabokovsg.temlservice.dto.protocol.ProtocolTemplateDto;
 import ru.nabokovsg.temlservice.services.ProtocolTemplateService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(
-        value = "/template/report/protocol",
+        value = "/template/protocol",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -28,11 +29,9 @@ public class ProtocolTemplateController {
 
     private final ProtocolTemplateService service;
 
-    @Operation(summary = "Добавление новых данных шаблона протокола/заключения")
+    @Operation(summary = "Данные заголовка протокола/заключения")
     @PostMapping
-    public ResponseEntity<ProtocolTemplateDto> save(
-            @RequestBody
-            @Parameter(description = "Данные протокола") NewProtocolTemplateDto templateDto) {
-        return ResponseEntity.ok().body(service.save(templateDto));
+    public ResponseEntity<ProtocolTemplateDto> save(@RequestBody @Valid NewProtocolTemplateDto protocolTemplateDto) {
+        return ResponseEntity.ok().body(service.save(protocolTemplateDto));
     }
 }

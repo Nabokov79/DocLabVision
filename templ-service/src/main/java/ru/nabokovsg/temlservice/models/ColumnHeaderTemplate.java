@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "columns_headers")
+@Table(name = "columns_headers_templates")
 public class ColumnHeaderTemplate {
 
     @Id
@@ -23,5 +23,7 @@ public class ColumnHeaderTemplate {
     private Integer sequentialCellNumber;
     @Column(name = "cell_name")
     private String cellName;
+    @Column(name = "column_data_type")
+    @Enumerated(EnumType.STRING)
     private ColumnDataType columnDataType;
 }

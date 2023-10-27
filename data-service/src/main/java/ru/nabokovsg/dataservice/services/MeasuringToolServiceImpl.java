@@ -9,7 +9,7 @@ import ru.nabokovsg.dataservice.dto.ObjectsIds;
 import ru.nabokovsg.dataservice.dto.measuringTool.*;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
 import ru.nabokovsg.dataservice.mappers.MeasuringToolMapper;
-import ru.nabokovsg.dataservice.models.BuilderType;
+import ru.nabokovsg.dataservice.enums.BuilderType;
 import ru.nabokovsg.dataservice.models.DataBuilder;
 import ru.nabokovsg.dataservice.models.MeasuringTool;
 import ru.nabokovsg.dataservice.models.QMeasuringTool;

@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.dataservice.dto.defect.DefectDto;
 import ru.nabokovsg.dataservice.dto.defect.NewDefectDto;
 import ru.nabokovsg.dataservice.dto.defect.UpdateDefectDto;
-import ru.nabokovsg.dataservice.dto.objectsTypeData.ObjectsTypeDefectDataDto;
 import ru.nabokovsg.dataservice.services.DefectsService;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -34,7 +32,7 @@ public class DefectsController {
 
     @Operation(summary = "Добавление новых дефектов объекта")
     @PostMapping
-    public ResponseEntity<List<ObjectsTypeDefectDataDto>> save(
+    public ResponseEntity<List<DefectDto>> save(
             @RequestParam("objectsTypeId") @NotNull @NotEmpty List<Long> objectsTypeId,
             @RequestBody @Parameter(description = "Дефекты элемента") @Valid List<NewDefectDto> defectsDto) {
         return ResponseEntity.ok().body(service.save(objectsTypeId, defectsDto));

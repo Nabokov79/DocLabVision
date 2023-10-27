@@ -10,4 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Schema(description = "Данные рекомендаций для объектов обследования")
 public class RecommendationTemplateDto {
+
+    @Schema(description = "Индентификатор")
+    private Long id;
+    @Schema(description = "Текст рекомендации")
+    private String recommendationText;
 }

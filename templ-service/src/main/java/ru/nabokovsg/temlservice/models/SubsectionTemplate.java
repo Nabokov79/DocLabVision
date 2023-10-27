@@ -28,6 +28,20 @@ public class SubsectionTemplate {
     private String subsectionText;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
+            name = "subsection_templates_subsection_data_templates",
+            joinColumns = {@JoinColumn(name = "subsection_template_id")},
+            inverseJoinColumns = {@JoinColumn(name = "subsection_data_template_id")})
+    @ToString.Exclude
+    private List<SubsectionDataTemplate> subsectionData;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "subsection_templates_table_templates",
+            joinColumns = {@JoinColumn(name = "subsection_template_id")},
+            inverseJoinColumns = {@JoinColumn(name = "table_template_id")})
+    @ToString.Exclude
+    private List<TableTemplate> tablesTemplate;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
             name = "subsection_templates_recommendations",
             joinColumns = {@JoinColumn(name = "subsection_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "recommendation_id")})
@@ -36,6 +50,4 @@ public class SubsectionTemplate {
     @OneToOne
     @JoinColumn(name = "conclusions_template_id", referencedColumnName = "id")
     private ConclusionTemplate conclusionsTemplate;
-    @Column(name = "subsection_number")
-    private double subsectionNumber;
 }

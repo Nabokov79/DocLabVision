@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import ru.nabokovsg.temlservice.dto.appendices.AppendicesTemplateDto;
+import ru.nabokovsg.temlservice.dto.protocol.ProtocolTemplateDto;
 import ru.nabokovsg.temlservice.dto.recommendation.RecommendationTemplateDto;
 import ru.nabokovsg.temlservice.dto.subsection.SubsectionTemplateDto;
 import java.util.List;
@@ -22,9 +23,9 @@ public class SectionTemplateDto {
     @Schema(description = "Название раздела документа")
     private String sectionName;
     @Schema(description = "Подразделы раздела документа")
-    private List<SubsectionTemplateDto> subsectionTemplates;
+    private List<SubsectionTemplateDto> subsectionsTemplates;
     @Schema(description = "Протоколы раздела документа")
-    private List<ReportProtocolTemplateDto> reportProtocolTemplates;
+    private List<ProtocolTemplateDto> protocolTemplates;
     @Schema(description = "Рекомендации для объекта обследования")
     private List<RecommendationTemplateDto> recommendations;
     @Schema(description = "Приложения документа")

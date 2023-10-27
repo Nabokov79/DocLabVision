@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.nabokovsg.dataservice.enums.DocumentType;
+import ru.nabokovsg.dataservice.enums.ProtocolType;
 
 import javax.persistence.*;
 
@@ -25,4 +27,7 @@ public class ReportingDocument {
     @Column(name = "document_type")
     @Enumerated(EnumType.STRING)
     private DocumentType documentType;
+    @Column(name = "protocol_type")
+    @Enumerated(EnumType.STRING)
+    private ProtocolType protocolType;
 }

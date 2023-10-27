@@ -8,12 +8,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.nabokovsg.dataservice.dto.objectsTypeData.ObjectsTypeRepairMethodDataDto;
 import ru.nabokovsg.dataservice.dto.repairMethod.NewRepairMethodDto;
 import ru.nabokovsg.dataservice.dto.repairMethod.RepairMethodDto;
 import ru.nabokovsg.dataservice.dto.repairMethod.UpdateRepairMethodDto;
 import ru.nabokovsg.dataservice.services.RepairMethodService;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
@@ -33,7 +31,7 @@ public class RepairMethodController {
 
     @Operation(summary = "Добавление новоых элементов объекта")
     @PostMapping
-    public ResponseEntity<List<ObjectsTypeRepairMethodDataDto>> saveRepairMethod(
+    public ResponseEntity<List<RepairMethodDto>> saveRepairMethod(
                                                       @RequestParam("objectsTypeId") @NotEmpty List<Long> objectsTypeId,
                                                       @RequestBody @Parameter(description = "Список способов ремонта")
                                                       @Valid List<NewRepairMethodDto> methodsDto) {

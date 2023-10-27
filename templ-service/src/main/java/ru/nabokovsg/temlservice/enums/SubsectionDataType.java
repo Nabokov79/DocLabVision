@@ -11,7 +11,8 @@ public enum SubsectionDataType {
     LABORATORY_CERTIFICATION,
     EMPLOYEE_CERTIFICATION,
     LABORATORY_DATA_EMPLOYEE_CERTIFICATION,
-    MEANS_CONTROL_MEASUREMENT;
+    MEANS_CONTROL_MEASUREMENT,
+    TEXT;
 
     public static Optional<SubsectionDataType> from(String subsectionDataType) {
         for (SubsectionDataType type : values()) {

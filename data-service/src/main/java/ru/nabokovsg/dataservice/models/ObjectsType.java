@@ -3,41 +3,47 @@ package ru.nabokovsg.dataservice.models;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Objects;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "objects_types")
+@Table(name = "object_types")
 public class ObjectsType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "object")
-    private String object;
-    @Column(name = "orientation")
-    private String orientation;
+    @Column(name = "object_name")
+    private String objectName;
     @Column(name = "volume")
     private Integer volume;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "objects_types_plot_of_objects",
-            joinColumns = {@JoinColumn(name = "object_type_id")},
-            inverseJoinColumns = {@JoinColumn(name = "plot_of_object_id")})
-    @ToString.Exclude
-    private List<PlotOfObject> plotOfObjects;
+    @Column(name = "orientation")
+    private String orientation;
 
     @Override
     public String toString() {
         return "ObjectsType{" +
                 "id=" + id +
-                ", object='" + object + '\'' +
+                ", objectName='" + objectName + '\'' +
                 ", orientation='" + orientation + '\'' +
-                ", volume=" + volume +
-                ", plotOfObjects=" + plotOfObjects +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ObjectsType that = (ObjectsType) o;
+        return id == that.id && Objects.equals(objectName, that.objectName)
+                             && Objects.equals(volume, that.volume)
+                             && Objects.equals(orientation, that.orientation);
+                }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, objectName, volume, orientation);
     }
 }

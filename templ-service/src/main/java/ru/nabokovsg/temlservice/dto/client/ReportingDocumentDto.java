@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.nabokovsg.temlservice.enums.DocumentType;
+import ru.nabokovsg.temlservice.enums.ProtocolType;
 
 @Setter
 @Getter
@@ -20,4 +21,6 @@ public class ReportingDocumentDto {
     private String documentTitle;
     @Schema(description = "Тип документа")
     private DocumentType documentType;
+    @Schema(description = "Тип документа")
+    private ProtocolType protocolType;
 }

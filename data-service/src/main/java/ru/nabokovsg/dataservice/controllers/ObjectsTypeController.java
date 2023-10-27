@@ -43,6 +43,13 @@ public class ObjectsTypeController {
     }
 
     @Operation(summary = "Удаление типа объекта")
+    @GetMapping("/{id}")
+    public ResponseEntity<ObjectsTypeDto> get(@PathVariable
+                                         @Parameter(description = "Индентификатор типа объекта") Long id) {
+        return ResponseEntity.ok().body(service.get(id));
+    }
+
+    @Operation(summary = "Удаление типа объекта")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable
                                          @Parameter(description = "Индентификатор типа объекта") Long id) {

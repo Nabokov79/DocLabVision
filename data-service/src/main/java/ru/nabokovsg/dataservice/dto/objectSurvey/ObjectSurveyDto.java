@@ -7,6 +7,7 @@ import lombok.Setter;
 import ru.nabokovsg.dataservice.dto.building.BuildingDto;
 import ru.nabokovsg.dataservice.dto.objectsSurveyElement.ObjectsSurveyElementDto;
 import ru.nabokovsg.dataservice.dto.objectsType.ObjectsTypeDto;
+
 import java.util.List;
 
 @Setter

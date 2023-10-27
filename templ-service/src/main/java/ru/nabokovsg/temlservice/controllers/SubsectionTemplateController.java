@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.nabokovsg.temlservice.dto.subsection.NewSubsectionTemplateDto;
+import ru.nabokovsg.temlservice.dto.subsection.NewSectionSubsectionTemplateDto;
 import ru.nabokovsg.temlservice.dto.subsection.SubsectionTemplateDto;
 import ru.nabokovsg.temlservice.services.SubsectionTemplateService;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(
@@ -30,9 +33,10 @@ public class SubsectionTemplateController {
 
     @Operation(summary = "Добавление нового шаблона документа")
     @PostMapping
-    public ResponseEntity<SubsectionTemplateDto> save(
-            @RequestBody
-            @Parameter(description = "Данные шаблона титульного листа, заголовков") NewSubsectionTemplateDto templateDto) {
+    public ResponseEntity<List<SubsectionTemplateDto>> save(
+                                                @RequestBody
+                                                @Parameter(description = "Данные шаблона титульного листа, заголовков")
+                                                @Valid NewSectionSubsectionTemplateDto templateDto) {
         return ResponseEntity.ok().body(service.save(templateDto));
     }
 }
