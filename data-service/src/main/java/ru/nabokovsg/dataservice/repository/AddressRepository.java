@@ -8,4 +8,7 @@ import java.util.Set;
 public interface AddressRepository extends JpaRepository<Address, Long> {
 
     Set<Address> findByCity(String city);
+
+    Address findByCityAndStreetAndHouseNumberAndBuildingNumberAndLetter(String city, String street, Integer houseNumber
+                                                                              , Integer buildingNumber, String letter);
 }
