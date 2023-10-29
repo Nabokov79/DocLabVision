@@ -2,6 +2,7 @@ package ru.nabokovsg.dataservice.mappers;
 
 import org.mapstruct.Mapper;
 import ru.nabokovsg.dataservice.dto.norms.NewNormsDto;
+import ru.nabokovsg.dataservice.dto.norms.NormSearchParametersDto;
 import ru.nabokovsg.dataservice.dto.norms.NormsDto;
 import ru.nabokovsg.dataservice.dto.norms.UpdateNormsDto;
 import ru.nabokovsg.dataservice.models.Norm;
@@ -16,4 +17,6 @@ public interface NormsMapper {
     Norm mapToUpdateNormsDto(UpdateNormsDto normDto);
 
     List<NormsDto> mapToNormsDto(List<Norm> norms);
+
+    NormSearchParametersDto mapToNormSearchParameters(NewNormsDto normDto);
 }
