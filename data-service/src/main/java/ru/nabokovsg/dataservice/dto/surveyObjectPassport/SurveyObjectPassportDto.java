@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import ru.nabokovsg.dataservice.dto.dataPassportOfObject.DataPassportOfObjectDto;
-import ru.nabokovsg.dataservice.dto.objectSurvey.ShortObjectSurveyDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.ShortSurveyObjectDto;
 import ru.nabokovsg.dataservice.dto.surveyObjectRepair.SurveyObjectRepairDto;
 import ru.nabokovsg.dataservice.dto.surveyObjectSurveys.SurveyObjectSurveysDto;
 import java.util.List;
@@ -20,7 +20,7 @@ public class SurveyObjectPassportDto {
     @Schema(description = "Индентификатор")
     private long id;
     @Schema(description = "Объект обследования")
-    private ShortObjectSurveyDto object;
+    private ShortSurveyObjectDto object;
     @Schema(description = "Список проведенных обследований")
     private List<SurveyObjectSurveysDto> surveys;
     @Schema(description = "Список произведенных ремонтов")
