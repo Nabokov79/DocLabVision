@@ -15,8 +15,6 @@ public class Documentation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private ObjectsType objectsType;
     @Column(name = "view", nullable = false)
     private String view;
     @Column(name = "number", nullable = false)
