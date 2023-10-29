@@ -14,6 +14,9 @@ import ru.nabokovsg.dataservice.dto.measuringTool.RequestParameters;
 import ru.nabokovsg.dataservice.dto.measuringTool.UpdateMeasuringToolDto;
 import ru.nabokovsg.dataservice.services.MeasuringToolService;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Null;
+import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -32,15 +35,17 @@ public class MeasuringToolController {
 
     @Operation(summary = "Добавление данных нового интструмента(прибора)")
     @PostMapping
-    public ResponseEntity<List<MeasuringToolDto>> save(@RequestBody @Parameter(description = "Инструмент(прибор)")
-                                                 List<NewMeasuringToolDto> measuringTools) {
+    public ResponseEntity<List<MeasuringToolDto>> save(
+                              @RequestBody @Valid
+                              @Parameter(description = "Инструмент(прибор)") List<NewMeasuringToolDto> measuringTools) {
         return ResponseEntity.ok().body(service.save(measuringTools));
     }
 
     @Operation(summary = "Изменение данных инструмента(прибора)")
     @PatchMapping
-    public ResponseEntity<List<MeasuringToolDto>> update(@RequestBody @Parameter(description = "Инструмент(прибор)")
-                                                   List<UpdateMeasuringToolDto> measuringTools) {
+    public ResponseEntity<List<MeasuringToolDto>> update(
+                           @RequestBody @Valid
+                           @Parameter(description = "Инструмент(прибор)") List<UpdateMeasuringToolDto> measuringTools) {
         return ResponseEntity.ok().body(service.update(measuringTools));
     }
 
@@ -65,7 +70,7 @@ public class MeasuringToolController {
 
     @Operation(summary = "Удаление инструмента(прибора)")
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable
+    public ResponseEntity<String> delete(@PathVariable @Null @Positive
                                          @Parameter(description = "Индентификатор инструмента(прибора)") Long id) {
         service.delete(id);
         return ResponseEntity.ok("Инструмент/прибор удален.");

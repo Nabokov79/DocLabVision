@@ -14,6 +14,7 @@ import ru.nabokovsg.dataservice.dto.department.ShortDepartmentDto;
 import ru.nabokovsg.dataservice.dto.department.UpdateDepartmentDto;
 import ru.nabokovsg.dataservice.services.DepartmentService;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
@@ -34,20 +35,23 @@ public class DepartmentController {
     @Operation(summary = "Добавление данных подразделения филиала организации")
     @PostMapping
     public ResponseEntity<DepartmentDto> save(
-                                @RequestBody @Parameter(description = "Подразделение") NewDepartmentDto departmentDto) {
+                                @RequestBody @Valid
+                                @Parameter(description = "Подразделение") NewDepartmentDto departmentDto) {
         return ResponseEntity.ok().body(service.save(departmentDto));
     }
 
     @Operation(summary = "Изменение данных подразделения филиала организации")
     @PatchMapping
     public ResponseEntity<DepartmentDto> update(
-                             @RequestBody @Parameter(description = "Подразделение") UpdateDepartmentDto departmentDto) {
+                             @RequestBody @Valid
+                             @Parameter(description = "Подразделение") UpdateDepartmentDto departmentDto) {
         return ResponseEntity.ok().body(service.update(departmentDto));
     }
 
     @Operation(summary = "Получение данных подразделения филиала организации")
     @GetMapping("/{id}")
-    public ResponseEntity<DepartmentDto> get(@PathVariable @Parameter(description = "Индентификатор") Long id) {
+    public ResponseEntity<DepartmentDto> get(@PathVariable @NotNull @Positive
+                                             @Parameter(description = "Индентификатор") Long id) {
         return ResponseEntity.ok().body(service.get(id));
     }
 
@@ -61,7 +65,8 @@ public class DepartmentController {
 
     @Operation(summary = "Удаление данных подразделения филиала организации")
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable @Parameter(description = "Индентификатор") Long id) {
+    public ResponseEntity<String> delete(@PathVariable @NotNull @Positive
+                                         @Parameter(description = "Индентификатор") Long id) {
         service.delete(id);
         return ResponseEntity.ok("удалено");
     }

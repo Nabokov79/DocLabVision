@@ -13,6 +13,7 @@ import ru.nabokovsg.dataservice.dto.dataPassportOfObject.NewDataPassportOfObject
 import ru.nabokovsg.dataservice.dto.dataPassportOfObject.UpdateDataPassportOfObjectDto;
 import ru.nabokovsg.dataservice.services.DataPassportOfObjectService;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
@@ -35,7 +36,7 @@ public class DataPassportOfObjectController {
     public ResponseEntity<List<DataPassportOfObjectDto>> save(
          @RequestParam @Parameter(description = "Индентификатор объекта обследования")
          @NotNull @Positive Long surveyObjectId,
-         @RequestBody @Validated @Parameter(description = "Данные паспорта") List<NewDataPassportOfObjectDto> dataDto) {
+         @RequestBody @Valid @Parameter(description = "Данные паспорта") List<NewDataPassportOfObjectDto> dataDto) {
         return ResponseEntity.ok().body(service.save(surveyObjectId, dataDto));
     }
 
@@ -44,7 +45,7 @@ public class DataPassportOfObjectController {
     public ResponseEntity<List<DataPassportOfObjectDto>> update(
             @RequestParam @Parameter(description = "Индентификатор объекта обследования")
             @NotNull @Positive Long surveyObjectId,
-            @RequestBody @Validated
+            @RequestBody @Valid
             @Parameter(description = "Данные паспорта") List<UpdateDataPassportOfObjectDto> dataDto) {
         return ResponseEntity.ok().body(service.update(surveyObjectId, dataDto));
     }

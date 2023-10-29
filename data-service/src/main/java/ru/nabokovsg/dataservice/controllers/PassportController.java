@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.nabokovsg.dataservice.dto.surveyObjectPassport.SurveyObjectPassportDto;
 import ru.nabokovsg.dataservice.services.SurveyObjectPassportService;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 @RestController
 @RequestMapping(
         value = "/data/passport",
@@ -29,7 +32,8 @@ public class PassportController {
 
     @Operation(summary = "Получение паспорта объекта")
     @GetMapping("/{id}")
-    public ResponseEntity<SurveyObjectPassportDto> get(@PathVariable @Parameter(description = "Индентификатор") Long id) {
+    public ResponseEntity<SurveyObjectPassportDto> get(@PathVariable @NotNull @Positive
+                                                       @Parameter(description = "Индентификатор") Long id) {
         return ResponseEntity.ok().body(service.get(id));
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.dataservice.dto.element.ElementDto;
 import ru.nabokovsg.dataservice.dto.element.NewElementDto;
 import ru.nabokovsg.dataservice.dto.element.UpdateElementDto;
-import ru.nabokovsg.dataservice.dto.objectsType.ObjectsTypeDto;
+import ru.nabokovsg.dataservice.dto.objectsType.ObjectsTypeElementsDto;
 import ru.nabokovsg.dataservice.services.ElementService;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -21,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(
-        value = "/data/object/type/data/elements",
+        value = "/data/object/type/elements",
         consumes = MediaType.ALL_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -34,24 +34,26 @@ public class ElementController {
 
     @Operation(summary = "Добавление новых элементов объекта")
     @PostMapping
-    public ResponseEntity<List<ElementDto>> save(
-            @RequestParam("objectsTypeId") @NotNull @NotEmpty List<Long> objectsTypeId,
-            @RequestBody @Parameter(description = "Список элементов") @Valid List<NewElementDto> elementsDto) {
+    public ResponseEntity<List<ObjectsTypeElementsDto>> save(
+                                        @RequestParam("objectsTypeId") @NotNull @NotEmpty List<Long> objectsTypeId,
+                                        @RequestBody @Valid
+                                        @Parameter(description = "Список элементов") List<NewElementDto> elementsDto) {
         return ResponseEntity.ok().body(service.save(objectsTypeId, elementsDto));
     }
 
     @Operation(summary = "Изменение данных элементов объекта")
     @PatchMapping
     public ResponseEntity<List<ElementDto>> update(
-            @RequestBody @Parameter(description = "Список элементов") @Valid List<UpdateElementDto> elementsDto) {
+                                     @RequestBody @Valid
+                                     @Parameter(description = "Список элементов") List<UpdateElementDto> elementsDto) {
         return ResponseEntity.ok().body(service.update(elementsDto));
     }
 
     @Operation(summary = "Изменение данных элементов объекта")
     @GetMapping("/{objectsTypeId}")
-    public ResponseEntity<ObjectsTypeDto> getAll(
-            @PathVariable
-            @Parameter(description = "Индентификатор типа объекта") @NotNull @Positive Long objectsTypeId) {
+    public ResponseEntity<ObjectsTypeElementsDto> getAll(
+                                          @PathVariable @NotNull @Positive
+                                          @Parameter(description = "Индентификатор типа объекта") Long objectsTypeId) {
         return ResponseEntity.ok().body(service.getAll(objectsTypeId));
     }
 }

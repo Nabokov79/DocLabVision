@@ -13,6 +13,7 @@ import ru.nabokovsg.dataservice.dto.objectsSurveyElement.ObjectsSurveyElementDto
 import ru.nabokovsg.dataservice.dto.objectsSurveyElement.UpdateObjectsSurveyElementDto;
 import ru.nabokovsg.dataservice.services.ObjectsSurveyElementService;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
@@ -35,7 +36,7 @@ public class ObjectsSurveyElementController {
     public ResponseEntity<List<ObjectsSurveyElementDto>> save(
             @RequestParam @Parameter(description = "Индентификатор объекта обследования")
             @NotNull @Positive Long surveyObjectId,
-            @RequestBody
+            @RequestBody @Valid
             @Parameter(description = "Объект обследования") List<NewObjectsSurveyElementDto> elementsDataDto) {
         return ResponseEntity.ok().body(service.save(surveyObjectId, elementsDataDto));
     }
@@ -45,14 +46,15 @@ public class ObjectsSurveyElementController {
     public ResponseEntity<List<ObjectsSurveyElementDto>> update(
             @RequestParam @Parameter(description = "Индентификатор объекта обследования")
             @NotNull @Positive Long surveyObjectId,
-            @RequestBody
+            @RequestBody @Valid
             @Parameter(description = "Объект обследования") List<UpdateObjectsSurveyElementDto> elementsDataDto) {
         return ResponseEntity.ok().body(service.update(surveyObjectId, elementsDataDto));
     }
 
     @Operation(summary = "Удаление элемента")
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable @Parameter(description = "Индентификатор элемента") Long id) {
+    public ResponseEntity<String> delete(@PathVariable @NotNull @Positive
+                                         @Parameter(description = "Индентификатор элемента") Long id) {
         service.delete(id);
         return ResponseEntity.ok("Элемент был удален");
     }

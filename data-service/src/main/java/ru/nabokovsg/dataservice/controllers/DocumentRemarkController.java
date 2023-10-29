@@ -13,6 +13,9 @@ import ru.nabokovsg.dataservice.dto.documentRemark.NewDocumentRemarkDto;
 import ru.nabokovsg.dataservice.dto.documentRemark.UpdateDocumentRemarkDto;
 import ru.nabokovsg.dataservice.services.DocumentRemarkService;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
@@ -31,14 +34,16 @@ public class DocumentRemarkController {
     @Operation(summary = "Изменение данных заявки")
     @PostMapping
     public ResponseEntity<DocumentRemarkDto> save(
-            @RequestBody @Parameter(description = "Данные документа") NewDocumentRemarkDto remarkDto) {
+                                         @RequestBody @Valid
+                                         @Parameter(description = "Данные документа") NewDocumentRemarkDto remarkDto) {
         return ResponseEntity.ok().body(service.save(remarkDto));
     }
 
     @Operation(summary = "Изменение данных заявки")
     @PatchMapping
     public ResponseEntity<DocumentRemarkDto> update(
-            @RequestBody @Parameter(description = "Данные документа") UpdateDocumentRemarkDto remarkDto) {
+                                       @RequestBody @Valid
+                                       @Parameter(description = "Данные документа") UpdateDocumentRemarkDto remarkDto) {
         return ResponseEntity.ok().body(service.update(remarkDto));
     }
 
@@ -56,8 +61,8 @@ public class DocumentRemarkController {
 
     @Operation(summary = "Удаление замечания")
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(
-            @PathVariable @Parameter(description = "Индентификатор замечания") Long id) {
+    public ResponseEntity<String> delete(@PathVariable @NotNull @Positive
+                                         @Parameter(description = "Индентификатор замечания") Long id) {
         service.delete(id);
         return ResponseEntity.ok("Замечание удалено");
     }

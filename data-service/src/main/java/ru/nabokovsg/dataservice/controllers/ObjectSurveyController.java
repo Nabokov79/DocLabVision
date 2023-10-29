@@ -8,12 +8,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.nabokovsg.dataservice.dto.objectSurvey.NewObjectSurveyDto;
-import ru.nabokovsg.dataservice.dto.objectSurvey.ObjectSurveyDto;
-import ru.nabokovsg.dataservice.dto.objectSurvey.ShortObjectSurveyDto;
-import ru.nabokovsg.dataservice.dto.objectSurvey.UpdateObjectSurveyDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.NewSurveyObjectDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.SurveyObjectDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.ShortSurveyObjectDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.UpdateSurveyObjectDto;
 import ru.nabokovsg.dataservice.services.ObjectSurveyService;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
@@ -33,28 +34,31 @@ public class ObjectSurveyController {
 
     @Operation(summary = "Добавление сведений об объекте")
     @PostMapping
-    public ResponseEntity<List<ShortObjectSurveyDto>> save(
-                     @RequestBody @Parameter(description = "Объект обследования") List<NewObjectSurveyDto> objectsDto) {
+    public ResponseEntity<List<ShortSurveyObjectDto>> save(
+                                  @RequestBody @Valid
+                                  @Parameter(description = "Объект обследования") List<NewSurveyObjectDto> objectsDto) {
         return ResponseEntity.ok().body(service.save(objectsDto));
     }
 
     @Operation(summary = "Изменение сведений об объекте")
     @PatchMapping
-    public ResponseEntity<List<ShortObjectSurveyDto>> update(
-                    @RequestBody @Parameter(description = "Объект обследования") List<UpdateObjectSurveyDto> objectsDto) {
+    public ResponseEntity<List<ShortSurveyObjectDto>> update(
+                               @RequestBody @Valid
+                               @Parameter(description = "Объект обследования") List<UpdateSurveyObjectDto> objectsDto) {
         return ResponseEntity.ok().body(service.update(objectsDto));
     }
 
     @Operation(summary = "Изменение сведений об объекте")
     @GetMapping("/{id}")
-    public ResponseEntity<ObjectSurveyDto> get(@PathVariable @Parameter(description = "Индентификатор объекта")
-                                                             @NotNull @Positive Long id) {
+    public ResponseEntity<SurveyObjectDto> get(@PathVariable @NotNull @Positive
+                                               @Parameter(description = "Индентификатор объекта") Long id) {
         return ResponseEntity.ok().body(service.get(id));
     }
 
     @Operation(summary = "Удаление объекта")
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable @Parameter(description = "Индентификатор объекта") Long id) {
+    public ResponseEntity<String> delete(@PathVariable @NotNull @Positive
+                                         @Parameter(description = "Индентификатор объекта") Long id) {
         service.delete(id);
         return ResponseEntity.ok("Объект был удален");
     }

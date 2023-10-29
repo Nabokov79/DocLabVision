@@ -14,6 +14,9 @@ import ru.nabokovsg.dataservice.dto.organization.ShortOrganizationDto;
 import ru.nabokovsg.dataservice.dto.organization.UpdateOrganizationDto;
 import ru.nabokovsg.dataservice.services.OrganizationService;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
@@ -32,22 +35,23 @@ public class OrganizationController {
     @Operation(summary = "Добавление данных организации")
     @PostMapping
     public ResponseEntity<OrganizationDto> save(
-                                 @RequestBody @Parameter(description = "Организация") NewOrganizationDto organizationDto
-    ) {
+                                           @RequestBody @Valid
+                                           @Parameter(description = "Организация") NewOrganizationDto organizationDto) {
         return ResponseEntity.ok().body(service.save(organizationDto));
     }
 
     @Operation(summary = "Изменение данных организации")
     @PatchMapping
     public ResponseEntity<OrganizationDto> update(
-                              @RequestBody @Parameter(description = "Организация") UpdateOrganizationDto organizationDto
-    ) {
+                                        @RequestBody @Valid
+                                        @Parameter(description = "Организация") UpdateOrganizationDto organizationDto) {
         return ResponseEntity.ok().body(service.update(organizationDto));
     }
 
     @Operation(summary = "Получение полных данных организации")
     @GetMapping("/{id}")
-    public ResponseEntity<OrganizationDto> get(@PathVariable @Parameter(description = "Индентификатор") Long id) {
+    public ResponseEntity<OrganizationDto> get(@PathVariable @NotNull @Positive
+                                               @Parameter(description = "Индентификатор") Long id) {
         return ResponseEntity.ok().body(service.get(id));
     }
 
@@ -59,7 +63,8 @@ public class OrganizationController {
 
     @Operation(summary = "Удаление данных организации")
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable @Parameter(description = "Индентификатор") Long id) {
+    public ResponseEntity<String> delete(@PathVariable @NotNull @Positive
+                                         @Parameter(description = "Индентификатор") Long id) {
         service.delete(id);
         return ResponseEntity.ok("удалено");
     }

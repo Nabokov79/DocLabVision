@@ -8,12 +8,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.nabokovsg.dataservice.dto.objectsType.ObjectsTypeRepairMethodDto;
 import ru.nabokovsg.dataservice.dto.repairMethod.NewRepairMethodDto;
 import ru.nabokovsg.dataservice.dto.repairMethod.RepairMethodDto;
 import ru.nabokovsg.dataservice.dto.repairMethod.UpdateRepairMethodDto;
 import ru.nabokovsg.dataservice.services.RepairMethodService;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -31,18 +33,19 @@ public class RepairMethodController {
 
     @Operation(summary = "Добавление новоых элементов объекта")
     @PostMapping
-    public ResponseEntity<List<RepairMethodDto>> saveRepairMethod(
-                                                      @RequestParam("objectsTypeId") @NotEmpty List<Long> objectsTypeId,
-                                                      @RequestBody @Parameter(description = "Список способов ремонта")
-                                                      @Valid List<NewRepairMethodDto> methodsDto) {
+    public ResponseEntity<List<ObjectsTypeRepairMethodDto>> saveRepairMethod(
+                              @RequestParam("objectsTypeId") @NotNull @NotEmpty
+                              @Parameter(description = "Индентификатор типа объекта") List<Long> objectsTypeId,
+                              @RequestBody @Valid
+                              @Parameter(description = "Список способов ремонта") List<NewRepairMethodDto> methodsDto) {
         return ResponseEntity.ok().body(service.save(objectsTypeId, methodsDto));
     }
 
     @Operation(summary = "Изменение данных элементов объекта")
     @PatchMapping
     public ResponseEntity<List<RepairMethodDto>> updateRepairMethod(
-                                                        @RequestBody @Parameter(description = "Список способов ремонта")
-                                                        @Valid List<UpdateRepairMethodDto> methodsDto) {
+                           @RequestBody @Valid
+                           @Parameter(description = "Список способов ремонта") List<UpdateRepairMethodDto> methodsDto) {
         return ResponseEntity.ok().body(service.update(methodsDto));
     }
 }

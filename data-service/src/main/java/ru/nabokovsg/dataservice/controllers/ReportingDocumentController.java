@@ -13,6 +13,7 @@ import ru.nabokovsg.dataservice.dto.reportingDocument.ReportingDocumentDto;
 import ru.nabokovsg.dataservice.dto.reportingDocument.UpdateReportingDocumentDto;
 import ru.nabokovsg.dataservice.services.ReportingDocumentService;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
@@ -33,22 +34,24 @@ public class ReportingDocumentController {
     @Operation(summary = "Добавление новых типов отчетных документов")
     @PostMapping
     public ResponseEntity<List<ReportingDocumentDto>> save(
-            @RequestBody
-            @Parameter(description = "Типы отчетного документа") List<NewReportingDocumentDto> reportingDocumentDto) {
+              @RequestBody @Valid
+              @Parameter(description = "Типы отчетного документа") List<NewReportingDocumentDto> reportingDocumentDto) {
         return ResponseEntity.ok().body(service.save(reportingDocumentDto));
     }
 
     @Operation(summary = "Изменение данных типов отчетных документа")
     @PatchMapping
     public ResponseEntity<List<ReportingDocumentDto>> update(
-           @RequestBody
+           @RequestBody @Valid
            @Parameter(description = "Типы отчетного документа") List<UpdateReportingDocumentDto> reportingDocumentDto) {
         return ResponseEntity.ok().body(service.update(reportingDocumentDto));
     }
 
     @Operation(summary = "Получение данных типов отчетных документов")
     @GetMapping("/{id}")
-    public ResponseEntity<ReportingDocumentDto> get(@PathVariable @NotNull @Positive Long id) {
+    public ResponseEntity<ReportingDocumentDto> get(
+                                               @PathVariable @NotNull @Positive
+                                               @Parameter(description = "Индентификатор отчетного документа") Long id) {
         return ResponseEntity.ok().body(service.get(id));
     }
 
@@ -60,7 +63,8 @@ public class ReportingDocumentController {
 
     @Operation(summary = "Удаление типа отчетного документа")
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable @Parameter(description = "Индентификатор") Long id) {
+    public ResponseEntity<String> delete(@PathVariable @NotNull @Positive
+                                         @Parameter(description = "Индентификатор отчетного документа") Long id) {
         service.delete(id);
         return ResponseEntity.ok("удалено");
     }

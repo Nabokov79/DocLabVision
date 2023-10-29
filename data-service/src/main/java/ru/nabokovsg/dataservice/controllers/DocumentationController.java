@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.dataservice.dto.documentation.DocumentationDto;
 import ru.nabokovsg.dataservice.dto.documentation.NewDocumentationDto;
 import ru.nabokovsg.dataservice.dto.documentation.UpdateDocumentationDto;
+import ru.nabokovsg.dataservice.dto.objectsType.ObjectsTypeDocumentationDto;
 import ru.nabokovsg.dataservice.services.DocumentationService;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -32,18 +33,18 @@ public class DocumentationController {
 
     @Operation(summary = "Добавление нового нормативного документа")
     @PostMapping
-    public ResponseEntity<List<DocumentationDto>> save(
-                                            @RequestParam("objectsTypeId") @NotNull @NotEmpty List<Long> objectsTypeId,
-                                            @RequestBody @Parameter(description = "Нормативный документ")
-                                            @Valid List<NewDocumentationDto> documentationsDto) {
+    public ResponseEntity<List<ObjectsTypeDocumentationDto>> save(
+                         @RequestParam("objectsTypeId") @NotNull @NotEmpty List<Long> objectsTypeId,
+                         @RequestBody @Valid
+                         @Parameter(description = "Нормативный документ") List<NewDocumentationDto> documentationsDto) {
         return ResponseEntity.ok().body(service.save(objectsTypeId,documentationsDto));
     }
 
     @Operation(summary = "Изменение данных нормативного документа")
     @PatchMapping
     public ResponseEntity<List<DocumentationDto>> update(
-                                            @RequestBody @Parameter(description = "Нормативный документ")
-                                            @Valid List<UpdateDocumentationDto> documentationsDto) {
+                      @RequestBody @Valid
+                      @Parameter(description = "Нормативный документ") List<UpdateDocumentationDto> documentationsDto) {
         return ResponseEntity.ok().body(service.update(documentationsDto));
     }
 }

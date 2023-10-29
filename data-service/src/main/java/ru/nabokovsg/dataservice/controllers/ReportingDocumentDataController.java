@@ -15,6 +15,8 @@ import ru.nabokovsg.dataservice.dto.reportingDocumentData.ReportingDocumentDataD
 import ru.nabokovsg.dataservice.dto.reportingDocumentData.UpdateReportingDocumentDataDto;
 import ru.nabokovsg.dataservice.dto.reportingDocumentData.ReportingDocumentDataSearchParametersDto;
 import ru.nabokovsg.dataservice.services.ReportingDocumentDataService;
+
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -34,7 +36,8 @@ public class ReportingDocumentDataController {
     @Operation(summary = "Изменение данных заявки")
     @PatchMapping
     public ResponseEntity<List<ReportingDocumentDataDto>> update(
-            @RequestBody @Parameter(description = "Данные документа") List<UpdateReportingDocumentDataDto> dataDto) {
+                            @RequestBody @Valid
+                            @Parameter(description = "Данные документа") List<UpdateReportingDocumentDataDto> dataDto) {
         return ResponseEntity.ok().body(service.update(dataDto));
     }
 
@@ -67,7 +70,8 @@ public class ReportingDocumentDataController {
     @Operation(summary = "Сохранить данные документа")
     @PostMapping("/document")
     public ResponseEntity<HttpStatus> saveDocumentData(
-            @RequestBody @Parameter(description = "Данные документа") DocumentDataDto pathDto) {
+                                                @RequestBody @Valid
+                                                @Parameter(description = "Данные документа") DocumentDataDto pathDto) {
         service.saveDocumentData(pathDto);
         return ResponseEntity.ok().build();
     }
@@ -75,7 +79,8 @@ public class ReportingDocumentDataController {
     @Operation(summary = "Сохранить данные чертежа")
     @PostMapping("/drawing")
     public ResponseEntity<HttpStatus> saveDrawingData(
-            @RequestBody @Parameter(description = "Данные документа") DrawingDataDto pathDto) {
+                                                  @RequestBody @Valid
+                                                  @Parameter(description = "Данные документа") DrawingDataDto pathDto) {
         service.saveDrawingData(pathDto);
         return ResponseEntity.ok().build();
     }

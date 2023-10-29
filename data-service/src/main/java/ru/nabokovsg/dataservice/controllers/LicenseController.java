@@ -13,6 +13,7 @@ import ru.nabokovsg.dataservice.dto.license.NewLicenseDto;
 import ru.nabokovsg.dataservice.dto.license.UpdateLicenseDto;
 import ru.nabokovsg.dataservice.services.LicenseService;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
@@ -32,21 +33,22 @@ public class LicenseController {
 
     @Operation(summary = "Добавление данных лицензии")
     @PostMapping
-    public ResponseEntity<LicenseDto> save(@RequestBody @Parameter(description = "Лицензия") NewLicenseDto licenseDto) {
+    public ResponseEntity<LicenseDto> save(@RequestBody @Valid
+                                           @Parameter(description = "Лицензия") NewLicenseDto licenseDto) {
         return ResponseEntity.ok().body(service.save(licenseDto));
     }
 
     @Operation(summary = "Изменение данных лицензии")
     @PatchMapping
-    public ResponseEntity<LicenseDto> update(
-                                        @RequestBody @Parameter(description = "Лицензия") UpdateLicenseDto licenseDto) {
+    public ResponseEntity<LicenseDto> update(@RequestBody @Valid
+                                             @Parameter(description = "Лицензия") UpdateLicenseDto licenseDto) {
         return ResponseEntity.ok().body(service.update(licenseDto));
     }
 
     @Operation(summary = "Получение данных лицензии")
     @GetMapping("/{id}")
-    public ResponseEntity<LicenseDto> get(
-            @PathVariable @NotNull @Positive @Parameter(description = "Индентификатор лицензии") Long id) {
+    public ResponseEntity<LicenseDto> get(@PathVariable @NotNull @Positive
+                                          @Parameter(description = "Индентификатор лицензии") Long id) {
         return ResponseEntity.ok().body(service.get(id));
     }
 

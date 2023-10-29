@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.dataservice.dto.objectPassportDataTemplate.NewObjectPassportDataTemplateDto;
 import ru.nabokovsg.dataservice.dto.objectPassportDataTemplate.ObjectPassportDataTemplateDto;
 import ru.nabokovsg.dataservice.dto.objectPassportDataTemplate.UpdateObjectPassportDataTemplateDto;
+import ru.nabokovsg.dataservice.dto.objectsType.ObjectsTypePassportDataTemplateDto;
 import ru.nabokovsg.dataservice.services.ObjectPassportDataTemplateService;
 
 import javax.validation.Valid;
@@ -33,18 +34,20 @@ public class ObjectPassportDataTemplateController {
 
     @Operation(summary = "Добавление новоых элементов объекта")
     @PostMapping
-    public ResponseEntity<List<ObjectPassportDataTemplateDto>> save(
+    public ResponseEntity<List<ObjectsTypePassportDataTemplateDto>> save(
                                             @RequestParam("objectsTypeId") @NotNull @NotEmpty List<Long> objectsTypeId,
-                                            @RequestBody @Parameter(description = "Шаблон паспортных данных объекта")
-                                            @Valid List<NewObjectPassportDataTemplateDto> templatesDto) {
+                                            @RequestBody @Valid
+                                            @Parameter(description = "Шаблон паспортных данных объекта")
+                                                                  List<NewObjectPassportDataTemplateDto> templatesDto) {
         return ResponseEntity.ok().body(service.save(objectsTypeId, templatesDto));
     }
 
     @Operation(summary = "Изменение данных элементов объекта")
     @PatchMapping
     public ResponseEntity<List<ObjectPassportDataTemplateDto>> update(
-                                               @RequestBody @Parameter(description = "Шаблон паспортных данных объекта")
-                                               @Valid List<UpdateObjectPassportDataTemplateDto> templatesDto) {
+                                               @RequestBody @Valid
+                                               @Parameter(description = "Шаблон паспортных данных объекта")
+                                                               List<UpdateObjectPassportDataTemplateDto> templatesDto) {
         return ResponseEntity.ok().body(service.update(templatesDto));
     }
 }
