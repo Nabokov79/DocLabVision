@@ -33,7 +33,7 @@ public class Address {
     public String toString() {
         return "Address{" +
                 "id=" + id +
-                ", city=" + city +
+                ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
                 ", houseNumber=" + houseNumber +
                 ", buildingNumber=" + buildingNumber +
