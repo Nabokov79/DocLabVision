@@ -19,8 +19,6 @@ public class SurveyObject {
     @ManyToOne
     @JoinColumn(name = "objects_type_id", referencedColumnName = "id")
     private ObjectsType objectsType;
-    @Column(name = "model")
-    private String model;
     @Column(name = "stationary_number")
     private Integer stationaryNumber;
     @OneToMany(mappedBy = "objectSurvey", fetch = FetchType.LAZY)
