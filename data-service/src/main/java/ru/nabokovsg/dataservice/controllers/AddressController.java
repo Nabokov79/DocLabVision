@@ -13,7 +13,7 @@ import ru.nabokovsg.dataservice.dto.address.NewAddressDto;
 import ru.nabokovsg.dataservice.dto.address.UpdateAddressDto;
 import ru.nabokovsg.dataservice.services.AddressService;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
@@ -35,14 +35,14 @@ public class AddressController {
     @Operation(summary = "Добавление нового адреса")
     @PostMapping
     public ResponseEntity<AddressDto> save(
-                                   @RequestBody @Validated @Parameter(description = "Адрес") NewAddressDto addressDto) {
+                                   @RequestBody @Valid @Parameter(description = "Адрес") NewAddressDto addressDto) {
         return ResponseEntity.ok().body(service.save(addressDto));
     }
 
     @Operation(summary = "Изменение данных адреса")
     @PatchMapping
     public ResponseEntity<AddressDto> update(
-                                @RequestBody @Validated @Parameter(description = "Адрес") UpdateAddressDto addressDto) {
+                                @RequestBody @Valid @Parameter(description = "Адрес") UpdateAddressDto addressDto) {
         return ResponseEntity.ok().body(service.update(addressDto));
     }
 
