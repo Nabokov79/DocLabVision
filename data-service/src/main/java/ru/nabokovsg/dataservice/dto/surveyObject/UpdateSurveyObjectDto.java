@@ -1,4 +1,4 @@
-package ru.nabokovsg.dataservice.dto.objectSurvey;
+package ru.nabokovsg.dataservice.dto.surveyObject;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import javax.validation.constraints.Positive;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "Данные для изменения данных объекта")
-public class UpdateObjectSurveyDto {
+public class UpdateSurveyObjectDto {
 
     @Schema(description = "Индентификатор")
     @NotNull(message = "id should not be blank")
@@ -23,8 +23,6 @@ public class UpdateObjectSurveyDto {
     @NotNull(message = "id organization's address must not be null")
     @Positive(message = "id organization's address must be negative")
     private Long objectsTypeId;
-    @Schema(description = "Модель объекта")
-    private String model;
     @Schema(description = "Стационарный номер объекта")
     private Integer stationaryNumber;
     @Schema(description = "Индентификатор строения")
