@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.dataservice.dto.application.*;
 import ru.nabokovsg.dataservice.services.ApplicationService;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.time.LocalDate;
@@ -32,20 +33,21 @@ public class ApplicationController {
     @Operation(summary = "Добавление данных заявки")
     @PostMapping
     public ResponseEntity<List<ApplicationDto>> save(
-            @RequestBody @Parameter(description = "Заявка") List<NewApplicationDto> applicationsDto) {
+            @RequestBody @Valid @Parameter(description = "Заявка") List<NewApplicationDto> applicationsDto) {
         return ResponseEntity.ok().body(service.save(applicationsDto));
     }
 
     @Operation(summary = "Изменение данных заявки")
     @PatchMapping
     public ResponseEntity<List<ApplicationDto>> update(
-            @RequestBody @Parameter(description = "Заявка") List<UpdateApplicationDto> applicationsDto) {
+            @RequestBody @Valid @Parameter(description = "Заявка") List<UpdateApplicationDto> applicationsDto) {
         return ResponseEntity.ok().body(service.update(applicationsDto));
     }
 
     @Operation(summary = "Получение данных заявки")
     @GetMapping("/{id}")
-    public ResponseEntity<ApplicationDto> get(@PathVariable @Parameter(description = "Индентификатор") Long id) {
+    public ResponseEntity<ApplicationDto> get(
+                                @PathVariable @NotNull @Positive @Parameter(description = "Индентификатор") Long id) {
         return ResponseEntity.ok().body(service.get(id));
     }
 
