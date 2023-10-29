@@ -3,10 +3,10 @@ package ru.nabokovsg.dataservice.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.nabokovsg.dataservice.dto.ObjectsIds;
-import ru.nabokovsg.dataservice.dto.objectSurvey.NewObjectSurveyDto;
-import ru.nabokovsg.dataservice.dto.objectSurvey.ShortObjectSurveyDto;
-import ru.nabokovsg.dataservice.dto.objectSurvey.ObjectSurveyDto;
-import ru.nabokovsg.dataservice.dto.objectSurvey.UpdateObjectSurveyDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.NewSurveyObjectDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.ShortSurveyObjectDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.SurveyObjectDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.UpdateSurveyObjectDto;
 import ru.nabokovsg.dataservice.enums.BuilderType;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
 import ru.nabokovsg.dataservice.mappers.ObjectSurveyMapper;
@@ -28,7 +28,7 @@ public class ObjectSurveyServiceImpl implements ObjectSurveyService {
     private final DataFactory factory;
 
     @Override
-    public List<ShortObjectSurveyDto> save(List<NewObjectSurveyDto> objectsDto) {
+    public List<ShortSurveyObjectDto> save(List<NewSurveyObjectDto> objectsDto) {
         DataBuilder builder = getData(mapper.mapFromNewObjectSurveyIds(objectsDto));
         Map<Long, Building> buildings = convertBuildings(builder);
         Map<Long, ObjectsType> types = convertObjectsType(builder);
@@ -44,8 +44,8 @@ public class ObjectSurveyServiceImpl implements ObjectSurveyService {
     }
 
     @Override
-    public List<ShortObjectSurveyDto> update(List<UpdateObjectSurveyDto> objectsDto) {
-        validateIds(objectsDto.stream().map(UpdateObjectSurveyDto::getId).toList());
+    public List<ShortSurveyObjectDto> update(List<UpdateSurveyObjectDto> objectsDto) {
+        validateIds(objectsDto.stream().map(UpdateSurveyObjectDto::getId).toList());
         DataBuilder builder = getData(mapper.mapFromUpdateObjectSurveyIds(objectsDto));
         Map<Long, Building> buildings = convertBuildings(builder);
         Map<Long, ObjectsType> types = convertObjectsType(builder);
@@ -61,7 +61,7 @@ public class ObjectSurveyServiceImpl implements ObjectSurveyService {
     }
 
     @Override
-    public ObjectSurveyDto get(Long id) {
+    public SurveyObjectDto get(Long id) {
         return mapper.mapToObjectSurveyDto(
                 repository.findById(id)
                         .orElseThrow(
