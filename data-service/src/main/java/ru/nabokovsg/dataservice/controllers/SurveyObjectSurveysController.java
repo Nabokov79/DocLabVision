@@ -13,6 +13,7 @@ import ru.nabokovsg.dataservice.dto.surveyObjectSurveys.SurveyObjectSurveysDto;
 import ru.nabokovsg.dataservice.dto.surveyObjectSurveys.UpdateSurveyObjectSurveysDto;
 import ru.nabokovsg.dataservice.services.SurveyObjectSurveysService;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
@@ -33,18 +34,20 @@ public class SurveyObjectSurveysController {
     @Operation(summary = "Добавление нового обследования")
     @PostMapping
     public ResponseEntity<List<SurveyObjectSurveysDto>> save(
-            @RequestParam @Parameter(description = "Индентификатор объекта обследования")
-            @NotNull @Positive Long surveyObjectId,
-            @RequestBody @Validated @Parameter(description = "Обследования") List<NewSurveyObjectSurveysDto> surveysDto) {
+                                  @RequestParam @Parameter(description = "Индентификатор объекта обследования")
+                                  @NotNull @Positive Long surveyObjectId,
+                                  @RequestBody @Valid
+                                  @Parameter(description = "Обследования") List<NewSurveyObjectSurveysDto> surveysDto) {
         return ResponseEntity.ok().body(service.save(surveyObjectId,surveysDto));
     }
 
     @Operation(summary = "Изменение данных адреса")
     @PatchMapping
     public ResponseEntity<List<SurveyObjectSurveysDto>> update(
-            @RequestParam @Parameter(description = "Индентификатор объекта обследования")
-            @NotNull @Positive Long surveyObjectId,
-            @RequestBody @Validated @Parameter(description = "Обследования") List<UpdateSurveyObjectSurveysDto> surveysDto) {
+                               @RequestParam @Parameter(description = "Индентификатор объекта обследования")
+                               @NotNull @Positive Long surveyObjectId,
+                               @RequestBody @Valid
+                               @Parameter(description = "Обследования") List<UpdateSurveyObjectSurveysDto> surveysDto) {
         return ResponseEntity.ok().body(service.update(surveyObjectId, surveysDto));
     }
 }
