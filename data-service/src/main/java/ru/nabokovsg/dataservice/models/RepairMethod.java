@@ -15,8 +15,6 @@ public class RepairMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private ObjectsType objectsType;
     @Column(name = "method_name")
     private String methodName;
 }
