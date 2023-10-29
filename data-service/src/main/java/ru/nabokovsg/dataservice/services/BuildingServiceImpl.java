@@ -34,15 +34,15 @@ public class BuildingServiceImpl implements BuildingService {
                                                              .map(mapper::mapFromNewBuildingDto)
                                                              .toList()
                                                , BuilderType.BUILDING);
-        return mapper.mapToBuildingDto(repository.saveAll(buildingsDto
-                                                      .stream()
-                                                      .map(b -> {
-                                                           Building building = mapper.mapToNewBuilding(b);
-                                                           building.setDepartment(builder.getDepartments().get(b.getDepartmentId()));
-                                                           building.setAddress(builder.getAddresses().get(b.getAddressId()));
-                                                           return building;
-                                                        })
-                                                      .toList()));
+        return mapper.mapToBuildingDto(repository.saveAll(
+                             buildingsDto.stream()
+                                         .map(b -> {
+                                              Building building = mapper.mapToNewBuilding(b);
+                                              building.setDepartment(builder.getDepartments().get(b.getDepartmentId()));
+                                              building.setAddress(builder.getAddresses().get(b.getAddressId()));
+                                              return building;
+                                              })
+                                         .toList()));
     }
 
     @Override
