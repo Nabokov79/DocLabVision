@@ -13,6 +13,9 @@ import ru.nabokovsg.dataservice.dto.certificate.NewCertificateDto;
 import ru.nabokovsg.dataservice.dto.certificate.UpdateCertificateDto;
 import ru.nabokovsg.dataservice.services.CertificateService;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -32,7 +35,7 @@ public class CertificateController {
     @Operation(summary = "Добавление данных сертификатов сотрудника")
     @PostMapping
     public ResponseEntity<List<CertificateDto>> save(
-            @RequestBody
+            @RequestBody @Valid
             @Parameter(description = "Список сертификатов сотрудника")List<NewCertificateDto> certificatesDto) {
         return ResponseEntity.ok().body(service.save(certificatesDto));
     }
@@ -40,7 +43,7 @@ public class CertificateController {
     @Operation(summary = "Изменение данных аттестации сотрудника")
     @PatchMapping
     public ResponseEntity<List<CertificateDto>> update(
-            @RequestBody
+            @RequestBody @Valid
             @Parameter(description = "Список сертификатов сотрудника") List<UpdateCertificateDto> certificatesDto) {
         return ResponseEntity.ok().body(service.update(certificatesDto));
     }
@@ -56,7 +59,7 @@ public class CertificateController {
 
     @Operation(summary = "Удаление данных сертификата сотрудника")
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable
+    public ResponseEntity<String> delete(@PathVariable @NotNull @Positive
                                          @Parameter(description = "Индентификатор сертификата") Long id) {
         service.delete(id);
         return ResponseEntity.ok("Аттестация сотрудника удалена.");
