@@ -8,7 +8,7 @@ import ru.nabokovsg.dataservice.dto.address.AddressDto;
 import ru.nabokovsg.dataservice.dto.branch.ShortBranchDto;
 import ru.nabokovsg.dataservice.dto.department.ShortDepartmentDto;
 import ru.nabokovsg.dataservice.dto.employee.ShortEmployeeDto;
-import ru.nabokovsg.dataservice.dto.objectSurvey.ShortObjectSurveyDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.ShortSurveyObjectDto;
 import ru.nabokovsg.dataservice.dto.organization.ShortOrganizationDto;
 import ru.nabokovsg.dataservice.dto.reportingDocument.ReportingDocumentDto;
 
@@ -35,7 +35,7 @@ public class ApplicationDto {
     @Schema(description = "Адрес места проведения обследования/контроля")
     private AddressDto address;
     @Schema(description = "Объект обследования/контроля")
-    private ShortObjectSurveyDto surveyObject;
+    private ShortSurveyObjectDto surveyObject;
     @Schema(description = "Вид выполненной работы")
     private String workPerformed;
     @Schema(description = "Отчетный документ")
