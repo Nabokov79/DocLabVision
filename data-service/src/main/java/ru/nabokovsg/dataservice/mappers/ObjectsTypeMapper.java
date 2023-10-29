@@ -1,10 +1,10 @@
 package ru.nabokovsg.dataservice.mappers;
 
 import org.mapstruct.Mapper;
-import ru.nabokovsg.dataservice.dto.objectsType.NewObjectsTypeDto;
-import ru.nabokovsg.dataservice.dto.objectsType.ObjectsTypeDto;
-import ru.nabokovsg.dataservice.dto.objectsType.UpdateObjectsTypeDto;
+import ru.nabokovsg.dataservice.dto.objectsType.*;
 import ru.nabokovsg.dataservice.models.ObjectsType;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ObjectsTypeMapper {
@@ -15,5 +15,19 @@ public interface ObjectsTypeMapper {
 
     ObjectsTypeDto mapToObjectTypeDto(ObjectsType objectsTypes);
 
-    ObjectsType mapToObjectType(ObjectsTypeDto objectsTypesDto);
+    List<ShortObjectsTypeDto> mapToShortObjectsTypeDto(List<ObjectsType> objectsTypes);
+
+    ObjectsTypeDocumentationDto mapToObjectsTypeDocumentationDto(ObjectsType objectsType);
+
+    ObjectsTypeElementsDto mapToObjectsTypeElementsDto(ObjectsType objectsType);
+
+    ObjectsTypeDefectDto mapToObjectsTypeDefectDto(ObjectsType objectsType);
+
+    ObjectsTypeRepairMethodDto mapToObjectsTypeRepairMethodDto(ObjectsType objectsType);
+
+    ObjectsTypePassportDataTemplateDto mapToObjectsTypePassportDataTemplateDto(ObjectsType objectsType);
+
+    ObjectsTypeNormDto mapToObjectsTypeNormDto(ObjectsType objectsType);
+
+    List<NewObjectsTypeDto> mapToNewObjectTypeDto(List<ObjectsType> objectsTypes);
 }
