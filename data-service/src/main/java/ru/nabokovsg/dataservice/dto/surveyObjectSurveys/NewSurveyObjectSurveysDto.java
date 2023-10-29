@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 
 @Setter
 @Getter
@@ -17,10 +16,6 @@ import javax.validation.constraints.Positive;
 @Schema(description = "Данные нового обследования")
 public class NewSurveyObjectSurveysDto {
 
-    @Schema(description = "Индентификатор объекта обследования")
-    @NotNull(message = "id object data should not be blank")
-    @Positive(message = "id object data can only be positive")
-    private Long objectId;
     @Schema(description = "Дата обследования")
     @NotNull(message = "date repair should not be blank")
     private String date;
