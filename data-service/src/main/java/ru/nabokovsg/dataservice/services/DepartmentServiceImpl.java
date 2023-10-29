@@ -26,7 +26,11 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public DepartmentDto save(NewDepartmentDto departmentDto) {
-        Department department = mapper.mapToNewDepartment(departmentDto);
+        Department department = repository.findByDepartment(departmentDto.getDepartment());
+        if (department != null) {
+            return mapper.mapToDepartmentDto(department);
+        }
+        department = mapper.mapToNewDepartment(departmentDto);
         department.setRequisites(requisitesService.save(departmentDto.getRequisites()));
         department.setBranch(branchMapper.mapToBranch(branchService.get(departmentDto.getBranchId())));
         return mapper.mapToDepartmentDto(repository.save(department));
