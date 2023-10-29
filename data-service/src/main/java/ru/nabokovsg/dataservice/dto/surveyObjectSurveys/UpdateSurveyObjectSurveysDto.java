@@ -19,10 +19,6 @@ public class UpdateSurveyObjectSurveysDto {
     @NotNull(message = "id survey should not be blank")
     @Positive(message = "id survey must be positive")
     private Long id;
-    @Schema(description = "Индентификатор объекта обследования ")
-    @NotNull(message = "id object data should not be blank")
-    @Positive(message = "id object data can only be positive")
-    private Long objectId;
     @Schema(description = "Дата обследования")
     @NotNull(message = "date repair should not be blank")
     private String date;
