@@ -44,9 +44,8 @@ public class LicenseServiceImpl implements LicenseService {
 
     @Override
     public LicenseDto get(Long id) {
-        return mapper.mapToLicenseDto(
-                repository.findById(id).orElseThrow(() -> new NotFoundException(
-                        String.format("license with id=%s not found", id))));
+        return mapper.mapToLicenseDto(repository.findById(id).orElseThrow(() -> new NotFoundException(
+                                                                   String.format("license with id=%s not found", id))));
     }
 
     @Override
