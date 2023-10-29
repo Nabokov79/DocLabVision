@@ -13,6 +13,7 @@ import ru.nabokovsg.dataservice.dto.building.NewBuildingDto;
 import ru.nabokovsg.dataservice.dto.building.UpdateBuildingDto;
 import ru.nabokovsg.dataservice.services.BuildingService;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
@@ -33,14 +34,16 @@ public class BuildingController {
     @Operation(summary = "Добавление новой информации о строении")
     @PostMapping
     public ResponseEntity<List<BuildingDto>> save(
-                              @RequestBody @Validated @Parameter(description = "Строение") List<NewBuildingDto> buildingsDto) {
+                                              @RequestBody @Valid
+                                              @Parameter(description = "Строение") List<NewBuildingDto> buildingsDto) {
         return ResponseEntity.ok().body(service.save(buildingsDto));
     }
 
     @Operation(summary = "Изменение данных")
     @PatchMapping
     public ResponseEntity<List<BuildingDto>> update(
-                           @RequestBody @Validated @Parameter(description = "Строение") List<UpdateBuildingDto> buildingsDto) {
+                                           @RequestBody @Valid
+                                           @Parameter(description = "Строение") List<UpdateBuildingDto> buildingsDto) {
         return ResponseEntity.ok().body(service.update(buildingsDto));
     }
 
@@ -54,7 +57,8 @@ public class BuildingController {
 
     @Operation(summary = "Удаление данных строения")
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable @Parameter(description = "Индентификатор") Long id) {
+    public ResponseEntity<String> delete(@PathVariable @NotNull @Positive
+                                         @Parameter(description = "Индентификатор") Long id) {
         service.delete(id);
         return ResponseEntity.ok("Информация удалена");
     }
