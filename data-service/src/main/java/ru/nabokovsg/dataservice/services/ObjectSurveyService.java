@@ -1,19 +1,19 @@
 package ru.nabokovsg.dataservice.services;
 
-import ru.nabokovsg.dataservice.dto.objectSurvey.NewObjectSurveyDto;
-import ru.nabokovsg.dataservice.dto.objectSurvey.ObjectSurveyDto;
-import ru.nabokovsg.dataservice.dto.objectSurvey.ShortObjectSurveyDto;
-import ru.nabokovsg.dataservice.dto.objectSurvey.UpdateObjectSurveyDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.NewSurveyObjectDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.SurveyObjectDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.ShortSurveyObjectDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.UpdateSurveyObjectDto;
 
 import java.util.List;
 
 public interface ObjectSurveyService {
 
-    List<ShortObjectSurveyDto> save(List<NewObjectSurveyDto> objectsDto);
+    List<ShortSurveyObjectDto> save(List<NewSurveyObjectDto> objectsDto);
 
-    List<ShortObjectSurveyDto> update(List<UpdateObjectSurveyDto> objectsDto);
+    List<ShortSurveyObjectDto> update(List<UpdateSurveyObjectDto> objectsDto);
 
-    ObjectSurveyDto get(Long id);
+    SurveyObjectDto get(Long id);
 
      void delete(Long id);
 }
