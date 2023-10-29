@@ -6,7 +6,6 @@ import ru.nabokovsg.dataservice.dto.organization.NewOrganizationDto;
 import ru.nabokovsg.dataservice.dto.organization.OrganizationDto;
 import ru.nabokovsg.dataservice.dto.organization.ShortOrganizationDto;
 import ru.nabokovsg.dataservice.dto.organization.UpdateOrganizationDto;
-import ru.nabokovsg.dataservice.exceptions.BadRequestException;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
 import ru.nabokovsg.dataservice.mappers.OrganizationMapper;
 import ru.nabokovsg.dataservice.models.Organization;
@@ -24,10 +23,9 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public OrganizationDto save(NewOrganizationDto organizationDto) {
-        if (repository.existsByOrganization(organizationDto.getOrganization())) {
-            throw new BadRequestException(
-                    String.format("organization=%s found", organizationDto.getOrganization())
-            );
+        Organization organizationDb = repository.findByOrganization(organizationDto.getOrganization());
+        if (organizationDb!= null) {
+            return mapper.mapToOrganizationDto(organizationDb);
         }
         Organization organization = mapper.mapToNewOrganization(organizationDto);
         organization.setRequisites(requisitesService.save(organizationDto.getRequisites()));
