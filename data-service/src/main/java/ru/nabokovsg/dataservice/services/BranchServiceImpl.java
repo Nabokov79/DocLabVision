@@ -27,7 +27,11 @@ public class BranchServiceImpl implements BranchService {
 
     @Override
     public BranchDto save(NewBranchDto branchDto) {
-        Branch branch = mapper.mapToNewBranch(branchDto);
+        Branch branch = repository.findByBranch(branchDto.getBranch());
+        if (branch != null) {
+            return mapper.mapToBranchDto(branch);
+        }
+        branch = mapper.mapToNewBranch(branchDto);
         branch.setRequisites(requisitesService.save(branchDto.getRequisites()));
         branch.setOrganization(
                 organizationMapper.mapToOrganization(organizationService.get(branchDto.getOrganizationId())));
