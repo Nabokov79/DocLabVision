@@ -2,12 +2,12 @@ package ru.nabokovsg.dataservice.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.nabokovsg.dataservice.dto.objectsType.ObjectsTypeRepairMethodDto;
 import ru.nabokovsg.dataservice.dto.repairMethod.NewRepairMethodDto;
 import ru.nabokovsg.dataservice.dto.repairMethod.RepairMethodDto;
 import ru.nabokovsg.dataservice.dto.repairMethod.UpdateRepairMethodDto;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
 import ru.nabokovsg.dataservice.mappers.RepairMethodMapper;
-import ru.nabokovsg.dataservice.models.ObjectsType;
 import ru.nabokovsg.dataservice.models.RepairMethod;
 import ru.nabokovsg.dataservice.repository.RepairMethodRepository;
 
@@ -25,14 +25,21 @@ public class RepairMethodServiceImpl implements RepairMethodService {
     private final ObjectsTypeService objectsTypeService;
 
     @Override
-    public List<RepairMethodDto> save(List<Long> objectsTypeId, List<NewRepairMethodDto> methodsDto) {
+    public List<ObjectsTypeRepairMethodDto> save(List<Long> objectsTypeId, List<NewRepairMethodDto> methodsDto) {
+        Map<String, RepairMethod> methodsDb = repository.findAllByMethodName((
+                        methodsDto.stream()
+                                .map(NewRepairMethodDto::getMethodName)
+                                .toList()))
+                .stream()
+                .collect(Collectors.toMap(RepairMethod::getMethodName, r -> r));
         List<RepairMethod> methods = mapper.mapToNewRepairMethod(methodsDto);
-        List<RepairMethod> methodsDb = new ArrayList<>();
-        List<ObjectsType> objectsTypes = objectsTypeService.getAll(objectsTypeId);
-        for (ObjectsType type : objectsTypes) {
-            methodsDb.addAll(methods.stream().peek(m -> m.setObjectsType(type)).toList());
+        if (!methodsDb.isEmpty()) {
+            methods = repository.saveAll(methods.stream()
+                    .filter(m -> !methodsDb.containsKey(m.getMethodName()))
+                    .toList());
+            methods.addAll(methodsDb.values());
         }
-        return mapper.mapToNewRepairMethodDto(repository.saveAll(methodsDb));
+        return objectsTypeService.addRepairMethods(objectsTypeId, repository.saveAll(methods));
     }
 
     @Override
