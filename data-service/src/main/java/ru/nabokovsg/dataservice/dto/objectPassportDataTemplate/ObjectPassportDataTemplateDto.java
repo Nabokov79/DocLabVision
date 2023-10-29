@@ -15,10 +15,8 @@ public class ObjectPassportDataTemplateDto {
     private Long id;
     @Schema(description = "Порядковый номер подраздела")
     private String sequentialSubsectionNumber;
-    @Schema(description = "Номер раздела")
-    private Integer sectionNumber;
-    @Schema(description = "Номер подраздела")
-    private Integer subsectionNumber;
     @Schema(description = "Индентификатор типа объекта")
     private String dataName;
+    @Schema(description = "Применить в протоколе")
+    private Boolean applyProtocol;
 }
