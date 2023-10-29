@@ -8,7 +8,7 @@ import java.util.Set;
 
 public interface OrganizationRepository extends JpaRepository<Organization, Long> {
 
-    boolean existsByOrganization(String organization);
+    Organization findByOrganization(String organization);
 
     @Query("select o.organization, o.shortNameOrganization from Organization o")
     Set<Organization> findAllOrganization();
