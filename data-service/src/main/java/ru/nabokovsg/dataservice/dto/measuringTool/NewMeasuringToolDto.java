@@ -23,8 +23,7 @@ public class NewMeasuringToolDto {
     @NotBlank(message = "model should not be blank")
     private String model;
     @Schema(description = "Заводской номер")
-    @NotNull(message = "work number should not be blank")
-    @Positive(message = "work number must be positive")
+    @NotBlank(message = "work number should not be blank")
     private String workNumber;
     @Schema(description = "Назначение")
     @NotBlank(message = "purpose should not be blank")
@@ -66,7 +65,6 @@ public class NewMeasuringToolDto {
     @NotBlank(message = "registry should not be blank")
     private String registry;
     @Schema(description = "Примечание")
-    @NotBlank(message = "note should not be blank")
     private String note;
     @Schema(description = "Вид контроля")
     private String controlType;
