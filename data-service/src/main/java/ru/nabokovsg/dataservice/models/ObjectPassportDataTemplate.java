@@ -15,8 +15,6 @@ public class ObjectPassportDataTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private ObjectsType objectsType;
     @Column(name = "sequential_subsection_number")
     private Double sequentialSubsectionNumber;
     @Column(name = "data_name")
