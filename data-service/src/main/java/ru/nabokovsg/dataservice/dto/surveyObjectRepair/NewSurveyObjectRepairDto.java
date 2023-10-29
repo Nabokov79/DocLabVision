@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -22,7 +21,6 @@ public class NewSurveyObjectRepairDto {
     private String date;
     @Schema(description = "Описание ремонта")
     @NotBlank(message = "description repair should not be blank")
-    @Min(3)
     private String description;
     @Schema(description = "Организация, выполнившея ремонт")
     @NotBlank(message = "organization should not be blank")
