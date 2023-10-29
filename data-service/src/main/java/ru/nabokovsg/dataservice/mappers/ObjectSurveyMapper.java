@@ -2,10 +2,10 @@ package ru.nabokovsg.dataservice.mappers;
 
 import org.mapstruct.Mapper;
 import ru.nabokovsg.dataservice.dto.ObjectsIds;
-import ru.nabokovsg.dataservice.dto.objectSurvey.NewObjectSurveyDto;
-import ru.nabokovsg.dataservice.dto.objectSurvey.ObjectSurveyDto;
-import ru.nabokovsg.dataservice.dto.objectSurvey.ShortObjectSurveyDto;
-import ru.nabokovsg.dataservice.dto.objectSurvey.UpdateObjectSurveyDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.NewSurveyObjectDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.SurveyObjectDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.ShortSurveyObjectDto;
+import ru.nabokovsg.dataservice.dto.surveyObject.UpdateSurveyObjectDto;
 import ru.nabokovsg.dataservice.models.SurveyObject;
 
 import java.util.List;
@@ -13,15 +13,15 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ObjectSurveyMapper {
 
-    SurveyObject mapToNewObjectSurvey(NewObjectSurveyDto objectDto);
+    SurveyObject mapToNewObjectSurvey(NewSurveyObjectDto objectDto);
 
-    SurveyObject mapToUpdateObjectSurvey(UpdateObjectSurveyDto objectDto);
+    SurveyObject mapToUpdateObjectSurvey(UpdateSurveyObjectDto objectDto);
 
-    List<ShortObjectSurveyDto> mapToObjectSurveyDtos(List<SurveyObject> objects);
+    List<ShortSurveyObjectDto> mapToObjectSurveyDtos(List<SurveyObject> objects);
 
-    ObjectSurveyDto mapToObjectSurveyDto(SurveyObject object);
+    SurveyObjectDto mapToObjectSurveyDto(SurveyObject object);
 
-    List<ObjectsIds> mapFromNewObjectSurveyIds(List<NewObjectSurveyDto> objectsDto);
+    List<ObjectsIds> mapFromNewObjectSurveyIds(List<NewSurveyObjectDto> objectsDto);
 
-    List<ObjectsIds> mapFromUpdateObjectSurveyIds(List<UpdateObjectSurveyDto> objectsDto);
+    List<ObjectsIds> mapFromUpdateObjectSurveyIds(List<UpdateSurveyObjectDto> objectsDto);
 }
