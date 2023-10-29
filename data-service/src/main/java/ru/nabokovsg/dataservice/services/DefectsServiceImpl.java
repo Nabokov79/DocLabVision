@@ -4,13 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.nabokovsg.dataservice.dto.defect.NewDefectDto;
 import ru.nabokovsg.dataservice.dto.defect.UpdateDefectDto;
+import ru.nabokovsg.dataservice.dto.objectsType.ObjectsTypeDefectDto;
 import ru.nabokovsg.dataservice.dto.sizeParameters.NewSizeParametersDto;
 import ru.nabokovsg.dataservice.dto.sizeParameters.UpdateSizeParametersDto;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
 import ru.nabokovsg.dataservice.dto.defect.DefectDto;
 import ru.nabokovsg.dataservice.mappers.DefectMapper;
 import ru.nabokovsg.dataservice.models.Defect;
-import ru.nabokovsg.dataservice.models.ObjectsType;
 import ru.nabokovsg.dataservice.models.SizeParameters;
 import ru.nabokovsg.dataservice.repository.DefectRepository;
 
@@ -27,30 +27,39 @@ public class DefectsServiceImpl implements DefectsService {
     private final ObjectsTypeService objectsTypeService;
 
     @Override
-    public List<DefectDto> save(List<Long> objectsTypeId, List<NewDefectDto> defectsDto) {
+    public List<ObjectsTypeDefectDto> save(List<Long> objectsTypeId, List<NewDefectDto> defectsDto) {
+        Map<String, Defect> defectsDb = new ArrayList<>(repository.findDefectParameterByParametersName(
+                                                            defectsDto.stream()
+                                                                    .map(NewDefectDto::getDefectName)
+                                                                    .distinct()
+                                                                    .toList()))
+                                                            .stream()
+                                                            .collect(Collectors.toMap(Defect::getDefectName, d -> d));
         List<SizeParameters> parameters = parameterService.save(defectsDto.stream()
-                                                                          .map(NewDefectDto::getParameters)
-                                                                          .flatMap(Collection::stream)
-                                                                          .toList());
-        List<Defect> defectsDb = new ArrayList<>();
-        List<ObjectsType> objectsTypes = objectsTypeService.getAll(objectsTypeId);
-        for (ObjectsType type : objectsTypes) {
-            defectsDb.addAll(defectsDto.stream()
-                    .map(d -> {
-                        Defect defect = mapper.mapToNewDefect(d);
-                        defect.setObjectsType(type);
-                        List<String> parametersNames = d.getParameters().stream()
-                                .map(NewSizeParametersDto::getParametersName)
-                                .toList();
-                        defect.setParameters(parameters.stream()
-                                .filter(p -> parametersNames.contains(p.getParametersName()))
-                                .toList());
-                        return defect;
-                    })
-                    .toList());
-
+                .map(NewDefectDto::getParameters)
+                .flatMap(Collection::stream)
+                .toList());
+        if (defectsDto.size() != defectsDb.size()) {
+            List<Defect> defects = repository.saveAll(
+                    defectsDto.stream().filter(d -> !defectsDb.containsKey(d.getDefectName()))
+                            .map(d -> {
+                                Defect defect = mapper.mapToNewDefect(d);
+                                List<String> parametersNames = d.getParameters().stream()
+                                        .map(NewSizeParametersDto::getParametersName)
+                                        .toList();
+                                defect.setParameters(parameters.stream()
+                                        .filter(p -> parametersNames.contains(p.getParametersName()))
+                                        .toList());
+                                return defect;
+                            })
+                            .toList());
+            if (!defectsDb.isEmpty()) {
+                defects.addAll(defectsDb.values());
+            }
+            return objectsTypeService.addDefects(objectsTypeId, defects);
+        } else {
+            return objectsTypeService.addDefects(objectsTypeId, new ArrayList<>(defectsDb.values()));
         }
-        return mapper.mapToDefectDto(repository.saveAll(defectsDb));
     }
 
     @Override
