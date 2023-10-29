@@ -1,4 +1,4 @@
-package ru.nabokovsg.dataservice.dto.objectSurvey;
+package ru.nabokovsg.dataservice.dto.surveyObject;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -10,14 +10,12 @@ import ru.nabokovsg.dataservice.dto.objectsType.ObjectsTypeDto;
 @Getter
 @AllArgsConstructor
 @Schema(description = "Краткие данные объекта")
-public class ShortObjectSurveyDto {
+public class ShortSurveyObjectDto {
 
     @Schema(description = "Индентификатор")
     private Long id;
     @Schema(description = "Тип объекта")
     private ObjectsTypeDto objectsType;
-    @Schema(description = "Модель объекта")
-    private String model;
     @Schema(description = "Объем объекта")
     private Integer number;
 }
