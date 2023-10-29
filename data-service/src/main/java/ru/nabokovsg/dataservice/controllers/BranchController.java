@@ -14,6 +14,7 @@ import ru.nabokovsg.dataservice.dto.branch.ShortBranchDto;
 import ru.nabokovsg.dataservice.dto.branch.UpdateBranchDto;
 import ru.nabokovsg.dataservice.services.BranchService;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
@@ -33,19 +34,22 @@ public class BranchController {
 
     @Operation(summary = "Добавление данных филиала")
     @PostMapping
-    public ResponseEntity<BranchDto> save(@RequestBody @Parameter(description = "Филиал") NewBranchDto branchDto) {
+    public ResponseEntity<BranchDto> save(
+                                        @RequestBody @Valid @Parameter(description = "Филиал") NewBranchDto branchDto) {
         return ResponseEntity.ok().body(service.save(branchDto));
     }
 
     @Operation(summary = "Изменение данных филиала")
     @PatchMapping
-    public ResponseEntity<BranchDto> update(@RequestBody @Parameter(description = "Филиал") UpdateBranchDto branchDto) {
+    public ResponseEntity<BranchDto> update(
+                                     @RequestBody @Valid @Parameter(description = "Филиал") UpdateBranchDto branchDto) {
         return ResponseEntity.ok().body(service.update(branchDto));
     }
 
     @Operation(summary = "Получение данных падразделения")
     @GetMapping("/{id}")
-    public ResponseEntity<BranchDto> get(@PathVariable @Parameter(description = "Индентификатор") Long id) {
+    public ResponseEntity<BranchDto> get(@PathVariable @NotNull @Positive
+                                         @Parameter(description = "Индентификатор") Long id) {
         return ResponseEntity.ok().body(service.get(id));
     }
 
@@ -58,7 +62,8 @@ public class BranchController {
 
     @Operation(summary = "Удаление данных филиала организации")
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable @Parameter(description = "Индентификатор") Long id) {
+    public ResponseEntity<String> delete(@PathVariable @NotNull @Positive
+                                         @Parameter(description = "Индентификатор") Long id) {
         service.delete(id);
         return ResponseEntity.ok("удалено");
     }
