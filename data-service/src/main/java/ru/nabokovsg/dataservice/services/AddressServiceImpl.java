@@ -15,6 +15,7 @@ import ru.nabokovsg.dataservice.repository.AddressRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +26,13 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressDto save(NewAddressDto addressDto) {
-        return mapper.mapToAddressDto(repository.save(mapper.mapToNewAddress(addressDto)));
+        Address addresses = repository.findByCityAndStreetAndHouseNumberAndBuildingNumberAndLetter(
+                                                             addressDto.getCity(), addressDto.getStreet()
+                                                           , addressDto.getHouseNumber(), addressDto.getBuildingNumber()
+                                                           , addressDto.getLetter());
+        return mapper.mapToAddressDto(
+                Objects.requireNonNullElseGet(addresses, () -> repository.save(mapper.mapToNewAddress(addressDto)))
+        );
     }
 
     @Override
