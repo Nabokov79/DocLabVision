@@ -9,4 +9,6 @@ import java.util.Set;
 public interface BranchRepository extends JpaRepository<Branch, Long> {
 
     Set<Branch> findAllByOrganization(Organization organization);
+
+    Branch findByBranch(String branch);
 }
