@@ -1,7 +1,6 @@
 package ru.nabokovsg.dataservice.mappers;
 
 import org.mapstruct.Mapper;
-import ru.nabokovsg.dataservice.dto.ObjectsIds;
 import ru.nabokovsg.dataservice.dto.license.LicenseDto;
 import ru.nabokovsg.dataservice.dto.license.NewLicenseDto;
 import ru.nabokovsg.dataservice.dto.license.UpdateLicenseDto;
@@ -19,8 +18,4 @@ public interface LicenseMapper {
     Licenses mapToUpdateLicense(UpdateLicenseDto licenseDto);
 
     List<LicenseDto> mapToLicensesDto(List<Licenses> licenses);
-
-    ObjectsIds mapFromNewLicense(NewLicenseDto objectDto);
-
-    ObjectsIds mapFromUpdateLicense(UpdateLicenseDto objectDto);
 }
