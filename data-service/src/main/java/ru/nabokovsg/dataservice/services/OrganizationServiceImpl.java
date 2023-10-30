@@ -8,6 +8,7 @@ import ru.nabokovsg.dataservice.dto.organization.ShortOrganizationDto;
 import ru.nabokovsg.dataservice.dto.organization.UpdateOrganizationDto;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
 import ru.nabokovsg.dataservice.mappers.OrganizationMapper;
+import ru.nabokovsg.dataservice.models.Licenses;
 import ru.nabokovsg.dataservice.models.Organization;
 import ru.nabokovsg.dataservice.repository.OrganizationRepository;
 
@@ -45,13 +46,19 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public OrganizationDto get(Long id) {
-        return mapper.mapToOrganizationDto(repository.findById(id).orElseThrow(() -> new NotFoundException(
-                                                   String.format("Organization with id=%s not found for license",id))));
+        return mapper.mapToOrganizationDto(getById(id));
     }
 
     @Override
     public List<ShortOrganizationDto> getAll() {
         return mapper.mapToShortOrganizationDto(repository.findAllOrganization());
+    }
+
+    @Override
+    public void addLicense(Long id, Licenses license) {
+        Organization organization = getById(id);
+        organization.getLicenses().add(license);
+        repository.save(organization);
     }
 
     @Override
@@ -61,5 +68,11 @@ public class OrganizationServiceImpl implements OrganizationService {
             return;
         }
        throw new NotFoundException(String.format("Organization with id=%s not found for delete.", id));
+    }
+
+    @Override
+    public Organization getById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new NotFoundException(
+                                                    String.format("Organization with id=%s not found for license",id)));
     }
 }
