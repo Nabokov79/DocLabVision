@@ -18,15 +18,6 @@ public class Licenses {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "organization_id",  nullable = false)
-    private Organization organization;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "branch_id", referencedColumnName = "id")
-    private Branch branch;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id", referencedColumnName = "id")
-    private Department department;
     @Column(name = "document_type")
     private String documentType;
     @Column(name = "license_number")
