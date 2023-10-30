@@ -18,18 +18,10 @@ import java.time.LocalDate;
 @Schema(description = "Данные новой лицензии")
 public class NewLicenseDto {
 
-    @Schema(description = "Индентификатор организации")
-    @NotNull(message = "organization id should not be blank")
-    @Positive(message = "organization id can only be positive")
-    private Long organizationId;
-    @Schema(description = "Индентификатор филиала организации")
-    @NotNull(message = "branch id should not be blank")
-    @Positive(message = "branch id can only be positive")
-    private Long branchId;
-    @Schema(description = "Индентификатор структурного подразделения филиала организации")
-    @NotNull(message = "department id should not be blank")
-    @Positive(message = "department id can only be positive")
-    private Long departmentId;
+    @Schema(description = "Индентификатор структурного подразделения организации")
+    @NotNull(message = " division id should not be null")
+    @Positive(message = "division id can only be positive")
+    private Long divisionId;
     @Schema(description = "Вид документа")
     @NotBlank(message = "document should not be blank")
     private String documentType;
@@ -37,12 +29,15 @@ public class NewLicenseDto {
     @NotBlank(message = "license number should not be blank")
     private String licenseNumber;
     @Schema(description = "Дата выдачи лицензии")
-    @NotNull(message = "start date license should not be blank")
+    @NotNull(message = "start date license should not be null")
     private LocalDate startData;
     @Schema(description = "Дата окончания действия свидетельства")
-    @NotNull(message = "end date license should not be blank")
+    @NotNull(message = "end date license should not be null")
     private LocalDate endData;
     @Schema(description = "Индентификатор организации выдавшей лицензию")
-    @NotNull(message = "issuedLicense id should not be blank")
+    @NotNull(message = "issuedLicense id should not be null")
     private Long issuedLicenseId;
+    @Schema(description = "Принадлежность лицензии")
+    @NotNull(message = "license should not be null")
+    private String divisionType;
 }
