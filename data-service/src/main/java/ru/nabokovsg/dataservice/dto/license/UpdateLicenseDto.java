@@ -20,18 +20,6 @@ public class UpdateLicenseDto {
     @NotNull(message = "id should not be blank")
     @Positive(message = "license id can only be positive")
     private Long id;
-    @Schema(description = "Индентификатор организации")
-    @NotNull(message = "organization id should not be blank")
-    @Positive(message = "organization id can only be positive")
-    private Long organizationId;
-    @Schema(description = "Индентификатор филиала организации")
-    @NotNull(message = "branch id should not be blank")
-    @Positive(message = "branch id can only be positive")
-    private Long branchId;
-    @Schema(description = "Индентификатор структурного подразделения филиала организации")
-    @NotNull(message = "department id should not be blank")
-    @Positive(message = "department id can only be positive")
-    private Long departmentId;
     @Schema(description = "Вид документа")
     @NotBlank(message = "document should not be blank")
     private String documentType;
