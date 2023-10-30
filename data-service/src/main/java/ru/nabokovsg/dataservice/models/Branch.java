@@ -1,9 +1,6 @@
 package ru.nabokovsg.dataservice.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -34,9 +31,11 @@ public class Branch {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id",  nullable = false)
     private Organization organization;
-    @OneToMany(mappedBy = "branch",
-            orphanRemoval = true,
-            cascade = CascadeType.REMOVE,
-            fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "branches_licenses",
+            joinColumns = {@JoinColumn(name = "branch_id")},
+            inverseJoinColumns = {@JoinColumn(name = "license_id")})
+    @ToString.Exclude
     private List<Licenses> licenses;
 }
