@@ -70,23 +70,6 @@ public class DataFactory {
                                 .collect(Collectors.toMap(Employee::getId, e -> e)))
                         .build();
             }
-            case LICENSE -> {
-                return new DataBuilder.Data()
-                        .organizations(service.getOrganizations(Stream.of(ids.stream()
-                                                                             .map(ObjectsIds::getOrganizationId)
-                                                                        , ids.stream()
-                                                                             .map(ObjectsIds::getIssuedLicenseId))
-                                                                .flatMap(Function.identity()).toList())
-                                                                .stream()
-                                                                .collect(Collectors.toMap(Organization::getId, o -> o)))
-                        .branches(service.getBranches(ids.stream()
-                                                         .map(ObjectsIds::getBranchId)
-                                                         .toList()))
-                        .departments(service.getDepartments(ids.stream()
-                                                               .map(ObjectsIds::getDepartmentId)
-                                                               .toList()))
-                        .build();
-            }
             case APPLICATIONS -> {
                 return new DataBuilder.Data()
                         .organizations(service.getOrganizations(ids.stream()
