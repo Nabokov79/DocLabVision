@@ -6,6 +6,7 @@ import ru.nabokovsg.dataservice.dto.element.ElementDto;
 import ru.nabokovsg.dataservice.dto.element.NewElementDto;
 import ru.nabokovsg.dataservice.dto.element.UpdateElementDto;
 import ru.nabokovsg.dataservice.dto.objectsType.ObjectsTypeElementsDto;
+import ru.nabokovsg.dataservice.dto.subElement.NewSubElementDto;
 import ru.nabokovsg.dataservice.exceptions.NotFoundException;
 import ru.nabokovsg.dataservice.mappers.ElementMapper;
 import ru.nabokovsg.dataservice.mappers.ObjectsTypeMapper;
@@ -36,42 +37,39 @@ public class ElementServiceImpl implements ElementService {
                                                                             .toList());
         List<Element> elementsDb = new ArrayList<>(repository.findAllByObjectsTypeId(objectsTypeId));
         List<Element> elements = new ArrayList<>();
-        for (Long id : objectsTypeId) {
-            List<Element> elementsDbUpd = elementsDb.stream()
-                    .filter(e -> e.getObjectsTypeId().equals(id))
-                    .toList();
-            if (elementsDbUpd.isEmpty()) {
-                elements.addAll(repository.saveAll(elementsDto.stream().map(e -> {
+        if(elementsDb.isEmpty()) {
+            for (Long id : objectsTypeId) {
+                elements.addAll(elementsDto.stream().map(e -> {
                     Element element = mapper.mapToNewElement(e);
                     element.setObjectsTypeId(id);
                     if (e.getSubElements() != null) {
-                        List<String> subElementNames = element.getSubElements().stream()
-                                .map(SubElement::getSubElementName)
+                        List<String> subElementNames = e.getSubElements().stream()
+                                .map(NewSubElementDto::getSubElementName)
                                 .toList();
                         element.setSubElements(subElementsDb.stream()
                                 .filter(s -> subElementNames.contains(s.getSubElementName()))
                                 .toList());
                     }
                     return element;
-                }).toList()));
-            } else {
-                for (Element e : elementsDbUpd) {
-                    if (!e.getSubElements().isEmpty()) {
-                        List<String> subElementNames = e.getSubElements().stream()
-                                .map(SubElement::getSubElementName)
-                                .toList();
-                        List<SubElement> subElements = subElementsDb.stream()
-                                .filter(s -> !subElementNames.contains(s.getSubElementName()))
-                                .toList();
-                        if (!subElements.isEmpty()) {
-                            e.getSubElements().addAll(subElements);
-                        }
-                    }
-                    elements.addAll(repository.saveAll(elementsDbUpd));
+                }).toList());
+            }
+        } else {
+            Map<Long, List<Element>> elementsD = new HashMap<>();
+            for (Long id : objectsTypeId) {
+                elementsD.put(id, elementsDb.stream().filter(o -> o.getObjectsTypeId().equals(id)).toList());
+            }
+            for (Long id : objectsTypeId) {
+                List<String> elementNames = elementsD.get(id).stream().map(Element::getElementName).toList();
+                List<Element> elementList = elementsDto.stream()
+                                                        .filter(o -> !elementNames.contains(o.getElementName()))
+                                                        .map(mapper::mapToNewElement)
+                                                        .toList();
+                if (!elementList.isEmpty()) {
+                    elements.addAll(elementList);
                 }
             }
         }
-        return objectsTypeService.addElements(objectsTypeId, elements);
+        return objectsTypeService.addElements(objectsTypeId, repository.saveAll(elements));
     }
 
     @Override
@@ -99,7 +97,7 @@ public class ElementServiceImpl implements ElementService {
 
     @Override
     public ObjectsTypeElementsDto getAll(Long objectsTypeId) {
-        return objectsTypeMapper.mapToObjectsTypeElementsDto(objectsTypeService.getById(objectsTypeId));
+        return objectsTypeMapper.mapToObjectTypeElementsDto(objectsTypeService.getById(objectsTypeId));
     }
 
     private void validateIds(List<Long> ids) {
