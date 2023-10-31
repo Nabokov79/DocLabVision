@@ -14,7 +14,6 @@ public class RepairMethodDto {
 
     @Schema(description = "Индентификатор")
     private Long id;
-    private ObjectsTypeDto objectsType;
     @Schema(description = "Название способа ремонта")
     private String methodName;
 }
