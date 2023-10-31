@@ -13,7 +13,6 @@ public interface ElementMapper {
 
     Element mapToNewElement(NewElementDto elementDto);
 
-
     Element mapToUpdateElement(UpdateElementDto elementDto);
 
     List<ElementDto> mapToElementDto(List<Element> elements);
