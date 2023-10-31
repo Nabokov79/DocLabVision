@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.nabokovsg.dataservice.dto.objectPassportDataTemplate.ObjectPassportDataTemplateDto;
+
 import java.util.List;
 
 @Setter
@@ -23,5 +25,5 @@ public class ObjectsTypePassportDataTemplateDto {
     @Schema(description = "Положение объекта")
     private String orientation;
     @Schema(description = "Шаблоны названий паспортных данных объекта")
-    private List<ObjectsTypePassportDataTemplateDto> dataTemplates;
+    private List<ObjectPassportDataTemplateDto> dataTemplates;
 }
