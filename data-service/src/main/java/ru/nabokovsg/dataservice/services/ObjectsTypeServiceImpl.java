@@ -68,12 +68,12 @@ public class ObjectsTypeServiceImpl implements ObjectsTypeService {
 
     @Override
     public List<ObjectsTypeElementsDto> addElements(List<Long> ids, List<Element> elements) {
-        return repository.saveAll(getAllByIds(ids).stream()
-                                                  .peek(o -> o.setElements(elements))
-                                                  .toList())
-                                            .stream()
-                                            .map(mapper::mapToObjectsTypeElementsDto)
-                                            .toList();
+        return mapper.mapToObjectsTypeElementsDto(repository.saveAll(getAllByIds(ids)
+                                                            .stream()
+                                                            .peek(o -> o.getElements().addAll(elements.stream()
+                                                                    .filter(e -> e.getObjectsTypeId().equals(o.getId()))
+                                                                    .toList()))
+                                                            .toList()));
     }
 
     @Override
@@ -118,7 +118,11 @@ public class ObjectsTypeServiceImpl implements ObjectsTypeService {
     }
 
     private List<ObjectsType> getAllByIds(List<Long> ids) {
-        return repository.findAllById(ids);
+        List<ObjectsType> objectsTypes = repository.findAllById(ids);
+        if (objectsTypes.isEmpty()) {
+            throw new NotFoundException(String.format("ObjectsType with ids=%s not found", ids));
+        }
+        return objectsTypes;
     }
 
 
