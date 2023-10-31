@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import ru.nabokovsg.dataservice.dto.objectsType.ObjectsTypeDto;
+import ru.nabokovsg.dataservice.dto.objectsType.ShortObjectsTypeDto;
 
 @Setter
 @Getter
@@ -15,7 +15,7 @@ public class ShortSurveyObjectDto {
     @Schema(description = "Индентификатор")
     private Long id;
     @Schema(description = "Тип объекта")
-    private ObjectsTypeDto objectsType;
+    private ShortObjectsTypeDto objectsType;
     @Schema(description = "Объем объекта")
     private Integer number;
 }
