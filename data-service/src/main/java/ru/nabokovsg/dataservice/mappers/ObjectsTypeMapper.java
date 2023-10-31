@@ -19,7 +19,7 @@ public interface ObjectsTypeMapper {
 
     ObjectsTypeDocumentationDto mapToObjectsTypeDocumentationDto(ObjectsType objectsType);
 
-    ObjectsTypeElementsDto mapToObjectsTypeElementsDto(ObjectsType objectsType);
+    List<ObjectsTypeElementsDto> mapToObjectsTypeElementsDto(List<ObjectsType> objectsType);
 
     ObjectsTypeDefectDto mapToObjectsTypeDefectDto(ObjectsType objectsType);
 
@@ -30,4 +30,6 @@ public interface ObjectsTypeMapper {
     ObjectsTypeNormDto mapToObjectsTypeNormDto(ObjectsType objectsType);
 
     List<NewObjectsTypeDto> mapToNewObjectTypeDto(List<ObjectsType> objectsTypes);
+
+    ObjectsTypeElementsDto mapToObjectTypeElementsDto(ObjectsType objectType);
 }
