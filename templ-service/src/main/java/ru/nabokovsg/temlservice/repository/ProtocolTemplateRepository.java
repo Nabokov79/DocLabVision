@@ -9,5 +9,5 @@ public interface ProtocolTemplateRepository extends JpaRepository<ProtocolTempla
 
    boolean existsByObjectsTypeIdAndReportingDocumentId(Long objectsTypeId, Long reportingDocumentId);
 
-   Set<ProtocolTemplate> findAllByObjectsTypeIdAndReportingDocumentId(Long objectsTypeId, Long reportingDocumentId);
+   ProtocolTemplate findByObjectsTypeIdAndReportingDocumentId(Long objectsTypeId, Long reportingDocumentId);
 }

@@ -31,4 +31,8 @@ public class NewSubsectionTemplateDto {
     @Schema(description = "Показать номер подраздела в документе")
     @NotNull(message = "subsection number should not be null")
     private boolean subsectionNumber;
+    @Schema(description = "Индентификатор структурного подразделения организации")
+    private Long divisionId;
+    @Schema(description = "Вид структурного подразделения организации")
+    private String divisionType;
 }

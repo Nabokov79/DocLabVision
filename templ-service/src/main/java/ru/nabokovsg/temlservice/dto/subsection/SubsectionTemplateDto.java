@@ -18,6 +18,8 @@ import java.util.List;
 @Schema(description = "Данные подраздела раздела отчета, рподаздела протокола, подраздела заключения")
 public class SubsectionTemplateDto {
 
+    @Schema(description = "Индентификатор")
+    private Long id;
     @Schema(description = "Порядковый номер подраздела")
     private double sequentialSubsectionNumber;
     @Schema(description = "Название подраздела")

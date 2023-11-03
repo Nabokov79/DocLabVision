@@ -3,10 +3,7 @@ package ru.nabokovsg.temlservice.client;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
-import ru.nabokovsg.temlservice.dto.client.EmployeeDto;
-import ru.nabokovsg.temlservice.dto.client.ObjectsTypeDto;
-import ru.nabokovsg.temlservice.dto.client.OrganizationDto;
-import ru.nabokovsg.temlservice.dto.client.ReportingDocumentDto;
+import ru.nabokovsg.temlservice.dto.client.*;
 
 import java.util.Objects;
 
@@ -21,6 +18,20 @@ public class DataServiceClient {
                 .uri(uri)
                 .retrieve()
                 .toEntity(OrganizationDto.class).block()).getBody();
+    }
+
+    public BranchDto getBranch(String uri) {
+        return Objects.requireNonNull(webClient.get()
+                .uri(uri)
+                .retrieve()
+                .toEntity(BranchDto.class).block()).getBody();
+    }
+
+    public DepartmentDto getDepartment(String uri) {
+        return Objects.requireNonNull(webClient.get()
+                .uri(uri)
+                .retrieve()
+                .toEntity(DepartmentDto.class).block()).getBody();
     }
 
     public ReportingDocumentDto getReportingDocument(String uri){

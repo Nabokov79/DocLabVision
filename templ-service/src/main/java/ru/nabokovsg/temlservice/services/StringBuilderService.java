@@ -1,9 +1,8 @@
 package ru.nabokovsg.temlservice.services;
 
-import ru.nabokovsg.temlservice.dto.client.AddressDto;
-import ru.nabokovsg.temlservice.dto.client.EmployeeDto;
-import ru.nabokovsg.temlservice.dto.client.LicenseDto;
-import ru.nabokovsg.temlservice.dto.client.RequisitesDto;
+import ru.nabokovsg.temlservice.dto.client.*;
+
+import java.util.List;
 
 public interface StringBuilderService {
 
@@ -16,4 +15,12 @@ public interface StringBuilderService {
     String signatureEmployeeString(EmployeeDto employee);
 
     String documentTitleToString(AddressDto address);
+
+   String documentationToString(DocumentationDto documentations);
+
+   String organizationToStrong(OrganizationDto organization);
+
+   String branchToString(BranchDto branch);
+
+   String departmentToString(DepartmentDto department);
 }

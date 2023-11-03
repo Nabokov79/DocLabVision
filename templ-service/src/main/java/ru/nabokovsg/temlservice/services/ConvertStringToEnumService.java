@@ -13,4 +13,6 @@ public interface ConvertStringToEnumService {
     TableDataType convertTableDataType(String tableDataType);
 
     ProtocolType convertToProtocolType(String protocolType);
+
+    DivisionType convertDivisionType(String divisionType);
 }

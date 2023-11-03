@@ -1,21 +1,20 @@
-package ru.nabokovsg.dataservice.dto.documentation;
+package ru.nabokovsg.temlservice.dto.client;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.nabokovsg.dataservice.models.ObjectsType;
 
 @Setter
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "Данные автора проекта")
 public class DocumentationDto {
 
     @Schema(description = "Индентификатор")
     private Long id;
-    @Schema(description = "Тип объекта")
-    private ObjectsType objectsType;
     private String view;
     @Schema(description = "Номер документа")
     private String number;

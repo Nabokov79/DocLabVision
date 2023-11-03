@@ -1,12 +1,7 @@
 package ru.nabokovsg.temlservice.services;
 
 import org.springframework.stereotype.Service;
-import ru.nabokovsg.temlservice.dto.client.AddressDto;
-import ru.nabokovsg.temlservice.dto.client.EmployeeDto;
-import ru.nabokovsg.temlservice.dto.client.LicenseDto;
-import ru.nabokovsg.temlservice.dto.client.RequisitesDto;
-
-import java.util.Locale;
+import ru.nabokovsg.temlservice.dto.client.*;
 
 @Service
 public class StringBuilderServiceImpl implements StringBuilderService {
@@ -54,6 +49,28 @@ public class StringBuilderServiceImpl implements StringBuilderService {
 
     @Override
     public String documentTitleToString(AddressDto address) {
+        return null;
+    }
+
+    @Override
+    public String documentationToString(DocumentationDto documentations) {
+        return String.join(" ", documentations.getView()
+                                      , documentations.getNumber()
+                                      , String.join("", "«", documentations.getTitle(), "»"));
+    }
+
+    @Override
+    public String organizationToStrong(OrganizationDto organization) {
+        return null;
+    }
+
+    @Override
+    public String branchToString(BranchDto branch) {
+        return null;
+    }
+
+    @Override
+    public String departmentToString(DepartmentDto department) {
         return null;
     }
 }

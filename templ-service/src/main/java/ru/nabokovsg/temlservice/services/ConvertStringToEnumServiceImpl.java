@@ -10,13 +10,13 @@ public class ConvertStringToEnumServiceImpl implements ConvertStringToEnumServic
     @Override
     public ColumnDataType covertColumnDataType(String columnDataType) {
         return ColumnDataType.from(columnDataType)
-               .orElseThrow(() -> new BadRequestException(String.format("Unknown column data type=%s",columnDataType)));
+              .orElseThrow(() -> new BadRequestException(String.format("Unknown column data type=%s", columnDataType)));
     }
 
     @Override
     public DocumentType convertDocumentType(String documentType) {
         return DocumentType.from(documentType)
-                .orElseThrow(() -> new BadRequestException(String.format("Unknown document type=%s",documentType)));
+                .orElseThrow(() -> new BadRequestException(String.format("Unknown document type=%s", documentType)));
     }
 
     @Override
@@ -30,12 +30,18 @@ public class ConvertStringToEnumServiceImpl implements ConvertStringToEnumServic
     @Override
     public TableDataType convertTableDataType(String tableDataType) {
         return TableDataType.from(tableDataType)
-                .orElseThrow(() -> new BadRequestException(String.format("Unknown table data type=%s",tableDataType)));
+                .orElseThrow(() -> new BadRequestException(String.format("Unknown table data type=%s", tableDataType)));
     }
 
     @Override
     public ProtocolType convertToProtocolType(String protocolType) {
         return ProtocolType.from(protocolType)
-                .orElseThrow(() -> new BadRequestException(String.format("Unknown protocol type=%s",protocolType)));
+                .orElseThrow(() -> new BadRequestException(String.format("Unknown protocol type=%s", protocolType)));
+    }
+
+    @Override
+    public DivisionType convertDivisionType(String divisionType) {
+        return DivisionType.from(divisionType)
+                .orElseThrow(() -> new BadRequestException(String.format("Unknown protocol type=%s", divisionType)));
     }
 }

@@ -28,9 +28,6 @@ public class NewSectionSubsectionTemplateDto {
     private Long reportingDocumentId;
     @Schema(description = "Индентификатор раздела отчета")
     private Long sectionId;
-    @Schema(description = "Подразделы принадлежат протоколу, заключению")
-    @NotNull(message = "protocol template should not be null")
-    private boolean protocolTemplate;
     @Schema(description = "Подразделы раздела отчета, протокола, заключения")
     @NotNull(message = "section templates should not be null")
     @NotEmpty(message = "section templates should not be empty")

@@ -5,6 +5,7 @@ import ru.nabokovsg.temlservice.enums.SubsectionDataType;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Setter
 @Getter
@@ -17,6 +18,10 @@ public class SubsectionTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(name = "objects_type_id")
+    private Long objectsTypeId;
+    @Column(name = "reporting_document_id")
+    private Long reportingDocumentId;
     @Column(name = "subsection_data_type")
     @Enumerated(EnumType.STRING)
     private SubsectionDataType subsectionDataType;
@@ -50,4 +55,17 @@ public class SubsectionTemplate {
     @OneToOne
     @JoinColumn(name = "conclusions_template_id", referencedColumnName = "id")
     private ConclusionTemplate conclusionsTemplate;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SubsectionTemplate that = (SubsectionTemplate) o;
+        return id == that.id && Double.compare(that.sequentialSubsectionNumber, sequentialSubsectionNumber) == 0 && Objects.equals(objectsTypeId, that.objectsTypeId) && Objects.equals(reportingDocumentId, that.reportingDocumentId) && subsectionDataType == that.subsectionDataType && Objects.equals(subsectionName, that.subsectionName) && Objects.equals(subsectionText, that.subsectionText) && Objects.equals(subsectionData, that.subsectionData) && Objects.equals(tablesTemplate, that.tablesTemplate) && Objects.equals(recommendations, that.recommendations) && Objects.equals(conclusionsTemplate, that.conclusionsTemplate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, objectsTypeId, reportingDocumentId, subsectionDataType, sequentialSubsectionNumber, subsectionName, subsectionText, subsectionData, tablesTemplate, recommendations, conclusionsTemplate);
+    }
 }
