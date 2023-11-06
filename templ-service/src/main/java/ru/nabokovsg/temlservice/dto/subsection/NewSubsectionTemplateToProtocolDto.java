@@ -1,4 +1,4 @@
-package ru.nabokovsg.temlservice.dto.section;
+package ru.nabokovsg.temlservice.dto.subsection;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -15,8 +15,8 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Данные нового раздела отчета")
-public class NewReportSectionTemplateDto {
+@Schema(description = "Данные нового подраздела протокола, заключения")
+public class NewSubsectionTemplateToProtocolDto {
 
     @Schema(description = "Индентификатор типа объекта")
     @NotNull(message = "object type id should not be null")
@@ -26,8 +26,8 @@ public class NewReportSectionTemplateDto {
     @NotNull(message = "reporting document id should not be null")
     @Positive(message = "reporting document id must be positive")
     private Long reportingDocumentId;
-    @Schema(description = "Раздел отчета")
+    @Schema(description = "Подразделы раздела отчета, протокола, заключения")
     @NotNull(message = "section templates should not be null")
     @NotEmpty(message = "section templates should not be empty")
-    private List<NewSectionTemplateDto> sections;
+    private List<NewProtocolSubsectionTemplate> subsectionTemplates;
 }

@@ -5,31 +5,36 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
-import java.util.List;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Данные нового подраздела раздела отчета, подаздела протокола, подраздела заключения")
+@Schema(description = "Данные нового подраздела раздела отчета")
 public class NewSectionSubsectionTemplateDto {
 
-    @Schema(description = "Индентификатор типа объекта")
-    @NotNull(message = "object type id should not be null")
-    @Positive(message = "object type id must be positive")
-    private Long objectsTypeId;
-    @Schema(description = "Индентификатор типа отчетного документа")
-    @NotNull(message = "reporting document id should not be null")
-    @Positive(message = "reporting document id must be positive")
-    private Long reportingDocumentId;
-    @Schema(description = "Индентификатор раздела отчета")
-    private Long sectionId;
-    @Schema(description = "Подразделы раздела отчета, протокола, заключения")
-    @NotNull(message = "section templates should not be null")
-    @NotEmpty(message = "section templates should not be empty")
-    private List<NewSubsectionTemplateDto> subsectionTemplates;
+    @Schema(description = "Порядковый номер подраздела")
+    @NotNull(message = "sequential subsection number should not be null")
+    @Positive(message = "sequential subsection number can only be positive")
+    private double sequentialSubsectionNumber;
+    @Schema(description = "Название подраздела")
+    @NotBlank(message = "subsection name should not be blank")
+    private String subsectionName;
+    @Schema(description = "Текст подраздела")
+    private String subsectionText;
+    @Schema(description = "Тип данных подраздела")
+    @NotBlank(message = "data type subsection should not be blank")
+    private String subsectionDataType;
+    @Schema(description = "Показать номер подраздела в документе")
+    @NotNull(message = "subsection number should not be null")
+    private boolean subsectionNumber;
+    @Schema(description = "Индентификатор структурного подразделения организации")
+    private Long divisionId;
+    @Schema(description = "Вид структурного подразделения организации")
+    private String divisionType;
+    @Schema(description = "Пользовательское название структурного подразделения организации")
+    private String divisionName;
 }

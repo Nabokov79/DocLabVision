@@ -10,7 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.nabokovsg.temlservice.dto.report.NewReportTemplateDto;
 import ru.nabokovsg.temlservice.dto.report.ReportTemplateDto;
-import ru.nabokovsg.temlservice.services.ReportTemplateService;
+import ru.nabokovsg.temlservice.services.report.ReportTemplateService;
 
 @RestController
 @RequestMapping(

@@ -6,6 +6,7 @@ import ru.nabokovsg.temlservice.dto.tableTemlate.NewColumnHeaderTemplateDto;
 import ru.nabokovsg.temlservice.mappers.ColumnHeaderTemplateMapper;
 import ru.nabokovsg.temlservice.models.ColumnHeaderTemplate;
 import ru.nabokovsg.temlservice.repository.ColumnHeaderTemplateRepository;
+import ru.nabokovsg.temlservice.services.converters.ConvertToEnumService;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class ColumnHeaderTemplateServiceImpl implements ColumnHeaderTemplateServ
 
     private final ColumnHeaderTemplateRepository repository;
     private final ColumnHeaderTemplateMapper mapper;
-    private final ConvertStringToEnumService convert;
+    private final ConvertToEnumService convert;
 
     @Override
     public List<ColumnHeaderTemplate> save(List<NewColumnHeaderTemplateDto> templatesDto) {

@@ -1,8 +1,8 @@
-package ru.nabokovsg.temlservice.services;
+package ru.nabokovsg.temlservice.services.converters;
 
 import ru.nabokovsg.temlservice.enums.*;
 
-public interface ConvertStringToEnumService {
+public interface ConvertToEnumService {
 
     ColumnDataType covertColumnDataType(String columnDataType);
 
@@ -14,5 +14,7 @@ public interface ConvertStringToEnumService {
 
     ProtocolType convertToProtocolType(String protocolType);
 
-    DivisionType convertDivisionType(String divisionType);
+    DataType convertToDataType(String divisionType);
+
+    DivisionType convertToDivisionType(String divisionType);
 }

@@ -1,4 +1,4 @@
-package ru.nabokovsg.temlservice.services;
+package ru.nabokovsg.temlservice.services.report;
 
 import ru.nabokovsg.temlservice.dto.report.NewReportTemplateDto;
 import ru.nabokovsg.temlservice.dto.report.ReportTemplateDto;
@@ -12,5 +12,5 @@ public interface ReportTemplateService {
 
     ReportTemplate getById(Long objectsTypeId, Long reportingDocumentId);
 
-    ReportTemplateDto saveTemplate(ReportTemplate reportTemplate);
+    ReportTemplateDto saveReportTemplate(ReportTemplate reportTemplate);
 }

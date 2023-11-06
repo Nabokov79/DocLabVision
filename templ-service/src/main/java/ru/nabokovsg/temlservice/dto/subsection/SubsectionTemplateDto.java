@@ -27,7 +27,7 @@ public class SubsectionTemplateDto {
     @Schema(description = "Текст подраздела")
     private String subsectionText;
     @Schema(description = "Тип данных пораздела")
-    private String subsectionDataType;
+    private List<SubsectionDataTemplateDto> subsectionData;
     @Schema(description = "Шаблон таблиц")
     private List<TableTemplateDto> tablesTemplate;
     @Schema(description = "Шаблон рекомендаций")

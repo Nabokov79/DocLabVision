@@ -10,5 +10,5 @@ public interface ProtocolTemplateMapper {
 
     ProtocolTemplate mapToNewProtocolTemplate(NewProtocolTemplateDto protocolTemplateDto);
 
-    ProtocolTemplateDto mapToDocumentTemplateDto(ProtocolTemplate protocolTemplate);
+    ProtocolTemplateDto mapToProtocolTemplateDto(ProtocolTemplate protocolTemplate);
 }

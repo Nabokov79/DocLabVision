@@ -1,4 +1,4 @@
-package ru.nabokovsg.temlservice.services;
+package ru.nabokovsg.temlservice.services.report;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,6 +10,7 @@ import ru.nabokovsg.temlservice.exceptions.NotFoundException;
 import ru.nabokovsg.temlservice.mappers.ReportTemplateMapper;
 import ru.nabokovsg.temlservice.models.*;
 import ru.nabokovsg.temlservice.repository.ReportTemplateRepository;
+import ru.nabokovsg.temlservice.services.PageTitleTemplateService;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +30,7 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
             template.setReportName(reportingDocument.getDocument().toUpperCase());
             template.setReportTitle(reportingDocument.getDocumentTitle());
             template.setPageTitle(pageTitleTemplateService.save(reportTemplateDto.getReportingDocumentId(),reportTemplateDto.getPageTitleTemplate()));
-            return mapper.mapToReportTemplateDto(repository.save(template));
+            return saveReportTemplate(template);
         }
         return new ReportTemplateDto();
     }
@@ -54,8 +55,8 @@ public class ReportTemplateServiceImpl implements ReportTemplateService {
         return repository.findByObjectsTypeIdAndReportingDocumentId(objectsTypeId, reportingDocumentId);
     }
 
-    @Override
-    public ReportTemplateDto saveTemplate(ReportTemplate reportTemplate) {
+
+    public ReportTemplateDto saveReportTemplate(ReportTemplate reportTemplate) {
         return mapper.mapToReportTemplateDto(repository.save(reportTemplate));
     }
 }

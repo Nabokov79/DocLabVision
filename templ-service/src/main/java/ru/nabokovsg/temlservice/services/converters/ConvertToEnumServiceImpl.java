@@ -1,11 +1,11 @@
-package ru.nabokovsg.temlservice.services;
+package ru.nabokovsg.temlservice.services.converters;
 
 import org.springframework.stereotype.Service;
 import ru.nabokovsg.temlservice.enums.*;
 import ru.nabokovsg.temlservice.exceptions.BadRequestException;
 
 @Service
-public class ConvertStringToEnumServiceImpl implements ConvertStringToEnumService {
+public class ConvertToEnumServiceImpl implements ConvertToEnumService {
 
     @Override
     public ColumnDataType covertColumnDataType(String columnDataType) {
@@ -40,8 +40,17 @@ public class ConvertStringToEnumServiceImpl implements ConvertStringToEnumServic
     }
 
     @Override
-    public DivisionType convertDivisionType(String divisionType) {
+    public DataType convertToDataType(String divisionType) {
+        return DataType.from(divisionType)
+                .orElseThrow(() -> new BadRequestException(String.format("Unknown division type=%s", divisionType)));
+    }
+
+    @Override
+    public DivisionType convertToDivisionType(String divisionType) {
+        if (divisionType == null) {
+            return null;
+        }
         return DivisionType.from(divisionType)
-                .orElseThrow(() -> new BadRequestException(String.format("Unknown protocol type=%s", divisionType)));
+                .orElseThrow(() -> new BadRequestException(String.format("Unknown division type=%s", divisionType)));
     }
 }
