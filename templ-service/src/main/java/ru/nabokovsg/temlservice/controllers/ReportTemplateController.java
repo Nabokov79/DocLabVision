@@ -7,10 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-import ru.nabokovsg.temlservice.dto.report.NewReportTemplateDto;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import ru.nabokovsg.temlservice.dto.report.ReportTemplateDto;
-import ru.nabokovsg.temlservice.services.report.ReportTemplateService;
+import ru.nabokovsg.temlservice.services.ReportTemplateService;
 
 @RestController
 @RequestMapping(
@@ -25,21 +27,11 @@ public class ReportTemplateController {
 
     private final ReportTemplateService service;
 
-    @Operation(summary = "Данные титульного листа отчета")
-    @PostMapping
-    public ResponseEntity<ReportTemplateDto> save(@RequestBody NewReportTemplateDto reportTemplateDto) {
-        return ResponseEntity.ok().body(service.save(reportTemplateDto));
-    }
-
     @Operation(summary = "Получить шаблон отчета")
     @GetMapping
     public ResponseEntity<ReportTemplateDto> get(
-            @RequestParam(required = false)
-            @Parameter(description = "Индентификатор") Long id,
-            @RequestParam(required = false)
-            @Parameter(description = "Индентификатор типа объекта") Long objectsTypeId,
-            @RequestParam(required = false)
-            @Parameter(description = "Индентификатор отчетного документа") Long reportingDocumentId) {
-        return ResponseEntity.ok().body(service.get(id, objectsTypeId, reportingDocumentId));
+            @RequestParam @Parameter(description = "Индентификатор типа объекта") Long objectsTypeId,
+            @RequestParam @Parameter(description = "Индентификатор отчетного документа") Long reportingDocumentId) {
+        return ResponseEntity.ok().body(service.get(objectsTypeId, reportingDocumentId));
     }
 }

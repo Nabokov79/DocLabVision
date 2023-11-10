@@ -5,10 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.nabokovsg.temlservice.dto.PageHeaderTemplateDto;
-import ru.nabokovsg.temlservice.dto.appendices.AppendicesTemplateDto;
+import ru.nabokovsg.temlservice.dto.header.PageHeaderTemplateDto;
 import ru.nabokovsg.temlservice.dto.subsection.SubsectionTemplateDto;
-import ru.nabokovsg.temlservice.dto.tableTemlate.TableTemplateDto;
 import java.util.List;
 
 @Setter
@@ -27,11 +25,7 @@ public class ProtocolTemplateDto {
     @Schema(description = "Заголовок протокола")
     private String protocolTitle;
     @Schema(description = "Шаблон заголовка страницы протокола")
-    private PageHeaderTemplateDto pageHeader;
-    @Schema(description = "Шаблон подраздела протокола")
-    private List<SubsectionTemplateDto> subsectionsTemplate;
-    @Schema(description = "Шаблон таблиц протокола")
-    private List<TableTemplateDto> tablesHeaderTemplate;
-    @Schema(description = "Шаблон приложений протокола")
-    private List<AppendicesTemplateDto> appendices;
+    private PageHeaderTemplateDto header;
+    @Schema(description = "Подразделы")
+    private List<SubsectionTemplateDto> subsections;
 }

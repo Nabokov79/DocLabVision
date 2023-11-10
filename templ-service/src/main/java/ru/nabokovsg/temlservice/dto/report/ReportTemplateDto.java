@@ -19,8 +19,8 @@ public class ReportTemplateDto {
 
     @Schema(description = "Индентификатор")
     private Long id;
-    @Schema(description = "Шаблон титульной страницы отчета")
+    @Schema(description = "Шаблон титульной страницы")
     private PageTitleTemplateDto pageTitle;
-    @Schema(description = "Шаблон раздел отчета")
-    private List<SectionTemplateDto> sectionTemplates;
+    @Schema(description = "Шаблон раздел")
+    private List<SectionTemplateDto> sections;
 }

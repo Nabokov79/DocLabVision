@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import ru.nabokovsg.temlservice.dto.PageHeaderTemplateDto;
+import ru.nabokovsg.temlservice.dto.header.PageHeaderTemplateDto;
 
 @Setter
 @Getter
@@ -14,7 +14,12 @@ public class PageTitleTemplateDto {
 
     @Schema(description = "Индентификатор")
     private Long id;
-    private PageHeaderTemplateDto pageHeaderTemplate;
+    @Schema(description = "Заголовок титульной страницы")
+    private PageHeaderTemplateDto header;
+    @Schema(description = "Заголовок документа")
+    private String documentName;
+    @Schema(description = "Название документа")
+    private String documentTitle;
     @Schema(description = "Строка наименования объекта")
     private String objectString;
     @Schema(description = "Строка наименования места расположения объекта")
@@ -22,7 +27,7 @@ public class PageTitleTemplateDto {
     @Schema(description = "Строка указания адреса")
     private String addressString;
     @Schema(description = "Подпись сотрудника")
-    private String employee;
+    private String signatureString;
     @Schema(description = "Населенный пункт")
     private String city;
     @Schema(description = "Год выдачи документа")

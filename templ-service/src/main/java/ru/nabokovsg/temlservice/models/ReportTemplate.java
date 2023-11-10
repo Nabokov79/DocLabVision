@@ -20,10 +20,6 @@ public class ReportTemplate {
     private Long objectsTypeId;
     @Column(name = "reporting_document_id")
     private Long reportingDocumentId;
-    @Column(name = "report_name")
-    private String reportName;
-    @Column(name = "report_title")
-    private String reportTitle;
     @OneToOne
     @JoinColumn(name = "page_title_id", referencedColumnName = "id")
     private PageTitleTemplate pageTitle;
@@ -33,5 +29,5 @@ public class ReportTemplate {
             joinColumns = {@JoinColumn(name = "report_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "section_template_id")})
     @ToString.Exclude
-    private List<SectionTemplate> sectionTemplates;
+    private List<SectionTemplate> sections;
 }

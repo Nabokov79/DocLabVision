@@ -19,16 +19,20 @@ public class PageTitleTemplate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @OneToOne
-    @JoinColumn(name = "page_header_template_id", referencedColumnName = "id")
-    private PageHeaderTemplate pageHeaderTemplate;
+    @JoinColumn(name = "header_id", referencedColumnName = "id")
+    private HeaderTemplate header;
+    @Column(name = "document_name")
+    private String documentName;
+    @Column(name = "document_title")
+    private String documentTitle;
     @Column(name = "object_string")
     private String objectString;
     @Column(name = "installation_location_string")
     private String installationLocationString;
     @Column(name = "address_string")
     private String addressString;
-    @Column(name = "employee")
-    private String employee;
+    @Column(name = "signature_string")
+    private String signatureString;
     @Column(name = "city")
     private String city;
     @Column(name = "year")

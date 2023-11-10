@@ -1,71 +1,52 @@
 package ru.nabokovsg.temlservice.services;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.nabokovsg.temlservice.dto.report.ReportTemplateDto;
 import ru.nabokovsg.temlservice.dto.section.NewReportSectionTemplateDto;
-import ru.nabokovsg.temlservice.exceptions.NotFoundException;
-import ru.nabokovsg.temlservice.mappers.ReportTemplateMapper;
+import ru.nabokovsg.temlservice.dto.section.NewSectionTemplateDto;
 import ru.nabokovsg.temlservice.mappers.SectionTemplateMapper;
 import ru.nabokovsg.temlservice.models.ReportTemplate;
 import ru.nabokovsg.temlservice.models.SectionTemplate;
 import ru.nabokovsg.temlservice.repository.SectionTemplateRepository;
-import ru.nabokovsg.temlservice.services.report.ReportTemplateService;
-
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class SectionTemplateServiceImpl implements SectionTemplateService {
 
     private final SectionTemplateRepository repository;
     private final SectionTemplateMapper mapper;
     private final ReportTemplateService service;
-    private final ReportTemplateMapper reportTemplateMapper;
 
     @Override
     public ReportTemplateDto save(NewReportSectionTemplateDto sectionTemplateDto) {
         ReportTemplate report = service.getById(sectionTemplateDto.getObjectsTypeId()
                                               , sectionTemplateDto.getReportingDocumentId());
+        List<NewSectionTemplateDto> sections = sectionTemplateDto.getSections();
         if (report != null) {
-            if (report.getSectionTemplates() != null) {
-                List<Integer> sequentialSectionNumbers = report.getSectionTemplates()
-                                                              .stream()
-                                                              .map(SectionTemplate::getSequentialSectionNumber)
-                                                              .toList();
-               List<SectionTemplate> sections = sectionTemplateDto.getSections()
-                                                                  .stream()
-                                                                  .filter(s -> !sequentialSectionNumbers.contains(s.getSequentialSectionNumber()))
-                                                                  .map(mapper::mapToNewSectionTemplate)
-                                                                  .toList();
-                if (!sections.isEmpty()) {
-                    report.getSectionTemplates().addAll(saveAll(sections));
-                } else {
-                    return reportTemplateMapper.mapToReportTemplateDto(report);
-                }
-            } else {
-                report.setSectionTemplates(saveAll(sectionTemplateDto.getSections()
-                                                                                .stream()
-                                                                                .map(mapper::mapToNewSectionTemplate)
-                                                                                .toList()));
+            if (report.getSections() != null) {
+                Set<String> sectionNames = report.getSections()
+                                                               .stream()
+                                                               .map(SectionTemplate::getSectionName)
+                                                               .collect(Collectors.toSet());
+                sections = sections.stream()
+                                   .filter(s -> !sectionNames.contains(s.getSectionName()))
+                                   .toList();
             }
-            return service.saveReportTemplate(report);
+            if (!sections.isEmpty()) {
+                report.setSections(repository.saveAll(sections.stream()
+                                                              .map(mapper::mapToNewSectionTemplate)
+                                                              .toList()));
+            }
         }
-       throw new NotFoundException(
-               String.format("Report template by objectsTypeId=%s, reportingDocumentId=%s not found"
-                                                                       , sectionTemplateDto.getObjectsTypeId()
-                                                                       , sectionTemplateDto.getReportingDocumentId()));
+        return service.save(report);
     }
 
     @Override
-    public List<SectionTemplate> saveAll(List<SectionTemplate> sections) {
-        return repository.saveAll(sections);
-    }
-
-    @Override
-    public SectionTemplate updateSectionTemplate(SectionTemplate section) {
+    public SectionTemplate saveSection(SectionTemplate section) {
         return repository.save(section);
     }
 }

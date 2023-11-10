@@ -12,8 +12,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "page_header_templates")
-public class PageHeaderTemplate {
+@Table(name = "header_templates")
+public class HeaderTemplate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

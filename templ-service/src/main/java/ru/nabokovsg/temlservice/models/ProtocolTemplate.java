@@ -1,7 +1,7 @@
 package ru.nabokovsg.temlservice.models;
 
 import lombok.*;
-import ru.nabokovsg.temlservice.enums.ProtocolType;
+import ru.nabokovsg.temlservice.models.enums.ProtocolType;
 
 import javax.persistence.*;
 import java.util.List;
@@ -31,25 +31,25 @@ public class ProtocolTemplate {
     @Column(name = "protocol_title")
     private String protocolTitle;
     @OneToOne
-    @JoinColumn(name = "page_header_id", referencedColumnName = "id")
-    private PageHeaderTemplate pageHeader;
+    @JoinColumn(name = "header_id", referencedColumnName = "id")
+    private HeaderTemplate header;
     @OneToOne
     @JoinColumn(name = "conclusions_template_id", referencedColumnName = "id")
-    private ConclusionTemplate conclusionsTemplate;
+    private ConclusionTemplate conclusions;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "protocol_templates_subsection_templates",
             joinColumns = {@JoinColumn(name = "protocol_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "subsections_template_id")})
     @ToString.Exclude
-    private List<SubsectionTemplate> subsectionsTemplate;
+    private List<SubsectionTemplate> subsections;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "protocol_templates_table_templates",
             joinColumns = {@JoinColumn(name = "protocol_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "table_template_id")})
     @ToString.Exclude
-    private List<TableTemplate> tablesTemplate;
+    private List<TableTemplate> tables;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "protocol_templates_appendices_templates",

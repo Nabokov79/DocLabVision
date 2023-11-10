@@ -1,7 +1,7 @@
 package ru.nabokovsg.temlservice.models;
 
 import lombok.*;
-import ru.nabokovsg.temlservice.enums.TableDataType;
+import ru.nabokovsg.temlservice.models.enums.TableDataType;
 
 import javax.persistence.*;
 import java.util.List;

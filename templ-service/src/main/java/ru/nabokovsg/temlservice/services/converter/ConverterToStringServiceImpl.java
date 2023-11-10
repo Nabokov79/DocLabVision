@@ -1,7 +1,7 @@
-package ru.nabokovsg.temlservice.services.converters;
+package ru.nabokovsg.temlservice.services.converter;
 
 import org.springframework.stereotype.Service;
-import ru.nabokovsg.temlservice.builders.TemplateData;
+import ru.nabokovsg.temlservice.models.TemplateData;
 import ru.nabokovsg.temlservice.dto.client.*;
 import ru.nabokovsg.temlservice.exceptions.BadRequestException;
 
@@ -11,25 +11,34 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class ConvertObjectDataToStringServiceImpl implements ConvertObjectDataToStringService {
+public class ConverterToStringServiceImpl implements ConverterToStringService {
 
     @Override
     public String createString(TemplateData data) {
-        switch (data.getDataType()) {
-            case LICENSE -> {return licenseToString(data.getLicenses());}
-            case REQUISITES -> {return requisitesToString(data.getRequisites());}
-            case SHORT_REQUISITES -> {return shortRequisitesToString(data.getRequisites());}
-            case ADDRESS -> {return addressToString(data.getAddress());}
-            case SIGNATURE -> {return signatureEmployeeString(data.getEmployee());}
-            case DOCUMENTATION -> {return documentationToString(data.getDocumentations());}
-            case ORGANIZATION -> {return organizationToStrong(data.getOrganization());}
-            case BRANCH -> {return branchToString(data.getDivisionName(), data.getBranch());}
-            case DEPARTMENT -> {return departmentToString(data.getDivisionName(), data.getDepartment());}
+        switch (data.getType()) {
+            case LICENSE -> {return  convertLicense(data.getLicenses());}
+            case REQUISITES -> {return convertRequisites(data.getRequisites());}
+            case SIGNATURE -> {return convertEmployee(data.getEmployee());}
+            case ORGANIZATION -> { return convertOrganization(data.getOrganization());}
+            case BRANCH -> {return convertBranch(data.getDivisionName(), data.getBranch());}
+            case DEPARTMENT -> {return convertDepartment(data.getDivisionName(), data.getDepartment());}
+            case DOCUMENTATION -> {return convertDocumentation(data.getDocument());}
             default -> throw new BadRequestException(String.format("data type=%s is not supported", data.getType()));
         }
     }
 
-    private String licenseToString(List<LicenseDto> licenses) {
+    private String convertDocumentation(DocumentationDto documentations) {
+        String string = String.join("", "«", documentations.getTitle(), "»");
+        if (documentations.getNumber() != null) {
+            string = String.join(" ", documentations.getNumber(), string);
+        }
+        if (documentations.getView() != null) {
+            string = String.join(" ", documentations.getView(), string);
+        }
+        return string;
+    }
+
+    private String convertLicense(List<LicenseDto> licenses) {
         LicenseDto license = licenses.stream()
                 .filter(l -> l.getEndData().isAfter(LocalDate.now()))
                 .toList()
@@ -46,18 +55,18 @@ public class ConvertObjectDataToStringServiceImpl implements ConvertObjectDataTo
                                                   license.getStartData().toString());
     }
 
-    private String requisitesToString(RequisitesDto requisites) {
+    private String convertRequisites(RequisitesDto requisites) {
         return String.join("//"
-        , String.join(" ", String.valueOf(requisites.getIndex()), addressToString(requisites.getAddress()))
+        , String.join(", ", String.valueOf(requisites.getIndex()), convertAddress(requisites.getAddress()))
         , String.join(" ","тел./факс", requisites.getPhone(),"/", requisites.getFax())
         , String.join(" ", "E-mail:", requisites.getEmail()));
     }
 
-    private String shortRequisitesToString(RequisitesDto requisites) {
-        return String.join(", ", String.valueOf(requisites.getIndex()), addressToString(requisites.getAddress()));
+    private String convertToShortRequisites(RequisitesDto requisites) {
+        return String.join(", ", String.valueOf(requisites.getIndex()),  convertAddress(requisites.getAddress()));
     }
 
-    private String addressToString(AddressDto address) {
+    private String convertAddress(AddressDto address) {
         String string = String.join(", ", address.getCity()
                                                 , String.join(" ", address.getStreet()
                                                                             , "д.", String.valueOf(address.getHouseNumber())));
@@ -70,7 +79,7 @@ public class ConvertObjectDataToStringServiceImpl implements ConvertObjectDataTo
         return string;
     }
 
-    private String signatureEmployeeString(EmployeeDto employee) {
+    private String convertEmployee(EmployeeDto employee) {
         return String.join("/"
                 , employee.getPost()
                 , String.join(". ", String.join(".", String.valueOf(employee.getName().charAt(0))
@@ -79,40 +88,29 @@ public class ConvertObjectDataToStringServiceImpl implements ConvertObjectDataTo
                                          , employee.getSurname()));
     }
 
-    private String documentationToString(DocumentationDto documentations) {
-        String string = String.join("", "«", documentations.getTitle(), "»");
-        if (documentations.getNumber() != null) {
-            string = String.join(" ", documentations.getNumber(), string);
-        }
-        if (documentations.getView() != null) {
-            string = String.join(" ", documentations.getView(), string);
-        }
-        return string;
-    }
-
-    private String organizationToStrong(OrganizationDto organization) {
+    private String convertOrganization(OrganizationDto organization) {
         return String.join(". ", organization.getOrganization()
-                , shortRequisitesToString(organization.getRequisites())
-                , licenseToString(organization.getLicenses()));
+                , convertToShortRequisites(organization.getRequisites())
+                , convertLicense(organization.getLicenses()));
     }
 
-    private String branchToString(String divisionName, BranchDto branch) {
+    private String convertBranch(String divisionName, BranchDto branch) {
         String name = branch.getBranch();
         if (divisionName != null) {
             name = divisionName;
         }
         return String.join(". ", name
-                , shortRequisitesToString(branch.getRequisites())
-                , licenseToString(branch.getLicenses()));
+                , convertToShortRequisites(branch.getRequisites())
+                , convertLicense(branch.getLicenses()));
     }
 
-    private String departmentToString(String divisionName, DepartmentDto department) {
+    private String convertDepartment(String divisionName, DepartmentDto department) {
         String name = department.getDepartment();
         if (divisionName != null) {
             name = divisionName;
         }
         return String.join(". ", name
-                , shortRequisitesToString(department.getRequisites())
-                , licenseToString(department.getLicenses()));
+                , convertToShortRequisites(department.getRequisites())
+                , convertLicense(department.getLicenses()));
     }
 }

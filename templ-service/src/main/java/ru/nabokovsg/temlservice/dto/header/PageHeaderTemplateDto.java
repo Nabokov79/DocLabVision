@@ -1,4 +1,4 @@
-package ru.nabokovsg.temlservice.dto;
+package ru.nabokovsg.temlservice.dto.header;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-@Schema(description = "Данные заголовка листп протокола, заключения")
+@Schema(description = "Данные заголовка титульной страницы")
 public class PageHeaderTemplateDto {
 
     @Schema(description = "Индентификатор")
@@ -17,18 +17,18 @@ public class PageHeaderTemplateDto {
     private String organization;
     @Schema(description = "Лицензия организации")
     private String organizationLicense;
-    @Schema(description = "Контактные данные организации")
+    @Schema(description = "Лицензия организации")
     private String organizationRequisites;
     @Schema(description = "Филиал организации")
     private String branch;
-    @Schema(description = "Контактные данные филиала организации")
+    @Schema(description = "Реквизиты филиала")
     private String branchRequisites;
-    @Schema(description = "Лицензия филиала организации")
+    @Schema(description = "Лицензия/аттестация филиала")
     private String licenseBranch;
     @Schema(description = "Подразделение филиала организации")
     private String department;
-    @Schema(description = "Контактные данные подразделения филиала организации")
+    @Schema(description = "Реквизиты подразделения")
     private String departmentRequisites;
-    @Schema(description = "Лицензия подразделения филиала организации")
+    @Schema(description = "Лицензия/аттестация подразделения")
     private String departmentLicense;
 }

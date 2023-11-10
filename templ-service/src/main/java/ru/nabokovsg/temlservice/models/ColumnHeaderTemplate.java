@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.nabokovsg.temlservice.enums.ColumnDataType;
+import ru.nabokovsg.temlservice.models.enums.ColumnDataType;
 
 import javax.persistence.*;
 

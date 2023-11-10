@@ -31,7 +31,4 @@ public class LicenseDto {
     @Schema(description = "Дата окончания действия свидетельства")
     @NotNull(message = "end date license should not be blank")
     private LocalDate endData;
-    @Schema(description = "Организация выдавшая лицензию")
-    @NotNull(message = "issuedLicense id should not be blank")
-    private ShortOrganizationDto issuedLicense;
 }

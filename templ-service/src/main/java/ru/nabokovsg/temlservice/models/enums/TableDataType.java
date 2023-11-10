@@ -1,4 +1,4 @@
-package ru.nabokovsg.temlservice.enums;
+package ru.nabokovsg.temlservice.models.enums;
 
 import java.util.Optional;
 

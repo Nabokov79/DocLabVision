@@ -1,7 +1,7 @@
 package ru.nabokovsg.temlservice.models;
 
 import lombok.*;
-import ru.nabokovsg.temlservice.enums.SubsectionDataType;
+import ru.nabokovsg.temlservice.models.enums.DataType;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,7 +20,7 @@ public class SubsectionTemplate {
     private long id;
     @Column(name = "subsection_data_type")
     @Enumerated(EnumType.STRING)
-    private SubsectionDataType subsectionDataType;
+    private DataType dataType;
     @Column(name = "sequential_subsection_number")
     private double sequentialSubsectionNumber;
     @Column(name = "subsection_name")
@@ -58,7 +58,7 @@ public class SubsectionTemplate {
         if (o == null || getClass() != o.getClass()) return false;
         SubsectionTemplate that = (SubsectionTemplate) o;
         return id == that.id && Double.compare(that.sequentialSubsectionNumber, sequentialSubsectionNumber) == 0
-                             && subsectionDataType == that.subsectionDataType
+                             && dataType == that.dataType
                              && Objects.equals(subsectionName, that.subsectionName)
                              && Objects.equals(subsectionText, that.subsectionText)
                              && Objects.equals(subsectionData, that.subsectionData)
@@ -69,6 +69,7 @@ public class SubsectionTemplate {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, subsectionDataType, sequentialSubsectionNumber, subsectionName, subsectionText, subsectionData, tablesTemplate, recommendations, conclusionsTemplate);
+        return Objects.hash(id, dataType, sequentialSubsectionNumber, subsectionName
+                              , subsectionText, subsectionData, tablesTemplate, recommendations, conclusionsTemplate);
     }
 }

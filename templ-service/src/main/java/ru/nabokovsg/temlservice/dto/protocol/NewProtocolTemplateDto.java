@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.nabokovsg.temlservice.dto.pageHeader.NewPageHeaderTemplateDto;
+import ru.nabokovsg.temlservice.dto.header.NewHeaderTemplateDto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -19,7 +19,7 @@ public class NewProtocolTemplateDto {
 
     @Schema(description = "Данные нового заголовка")
     @NotNull(message = "page header should not be null")
-    private NewPageHeaderTemplateDto pageHeader;
+    private NewHeaderTemplateDto header;
     @Schema(description = "Индентификатор отчетного документа")
     @NotNull(message = "reporting document id should not be null")
     @Positive(message = "reporting document id can only be positive")

@@ -26,14 +26,14 @@ public class SectionTemplate {
             joinColumns = {@JoinColumn(name = "section_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "subsections_template_id")})
     @ToString.Exclude
-    private List<SubsectionTemplate> subsectionsTemplates;
+    private List<SubsectionTemplate> subsections;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "section_templates_report_protocol_templates",
             joinColumns = {@JoinColumn(name = "section_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "report_protocol_template_id")})
     @ToString.Exclude
-    private List<ProtocolTemplate> protocolTemplates;
+    private List<ProtocolTemplate> protocols;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "section_templates_recommendations",
@@ -48,4 +48,17 @@ public class SectionTemplate {
             inverseJoinColumns = {@JoinColumn(name = "appendices_id")})
     @ToString.Exclude
     private List<AppendicesTemplates> appendices;
+
+    @Override
+    public String toString() {
+        return "SectionTemplate{" +
+                "id=" + id +
+                ", sequentialSectionNumber=" + sequentialSectionNumber +
+                ", sectionName='" + sectionName + '\'' +
+                ", subsections=" + subsections +
+                ", protocols=" + protocols +
+                ", recommendations=" + recommendations +
+                ", appendices=" + appendices +
+                '}';
+    }
 }

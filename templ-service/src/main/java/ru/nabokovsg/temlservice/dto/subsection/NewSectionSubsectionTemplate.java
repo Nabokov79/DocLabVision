@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "Данные нового подраздела заключения/протокола")
-public class NewProtocolSubsectionTemplate {
+public class NewSectionSubsectionTemplate {
 
     @Schema(description = "Индентификатор типа объекта")
     @NotNull(message = "object type id should not be null")
@@ -27,6 +27,10 @@ public class NewProtocolSubsectionTemplate {
     @NotNull(message = "reporting document id should not be null")
     @Positive(message = "reporting document id must be positive")
     private Long reportingDocumentId;
+    @Schema(description = "Индентификатор раздела отчета")
+    @NotNull(message = "section id should not be null")
+    @Positive(message = "section id must be positive")
+    private Long sectionId;
     @Schema(description = "Подразделы заключения/протокола")
     @NotNull(message = "section templates should not be null")
     @NotEmpty(message = "section templates should not be empty")

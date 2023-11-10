@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.nabokovsg.temlservice.dto.recommendation.RecommendationTemplateDto;
-import ru.nabokovsg.temlservice.dto.tableTemlate.TableTemplateDto;
-import ru.nabokovsg.temlservice.dto.сonclusion.ConclusionTemplateDto;
 
 import java.util.List;
 
@@ -26,14 +23,14 @@ public class SubsectionTemplateDto {
     private String subsectionName;
     @Schema(description = "Текст подраздела")
     private String subsectionText;
-    @Schema(description = "Тип данных пораздела")
-    private List<SubsectionDataTemplateDto> subsectionData;
-    @Schema(description = "Шаблон таблиц")
-    private List<TableTemplateDto> tablesTemplate;
-    @Schema(description = "Шаблон рекомендаций")
-    private List<RecommendationTemplateDto> recommendations;
-    @Schema(description = "Шаблон заключений")
-    private ConclusionTemplateDto conclusionsTemplate;
+//    @Schema(description = "Тип данных пораздела")
+//    private List<SubsectionDataTemplateDto> subsectionData;
+//    @Schema(description = "Шаблон таблиц")
+//    private List<TableTemplateDto> tablesTemplate;
+//    @Schema(description = "Шаблон рекомендаций")
+//    private List<RecommendationTemplateDto> recommendations;
+//    @Schema(description = "Шаблон заключений")
+//    private ConclusionTemplateDto conclusionsTemplate;
     @Schema(description = "Показать номер подраздела в документе")
     private boolean subsectionNumber;
 }

@@ -5,8 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.nabokovsg.temlservice.dto.pageHeader.NewPageHeaderTemplateDto;
+import ru.nabokovsg.temlservice.dto.header.NewPageTitleHeaderTemplateDto;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -18,9 +19,18 @@ import javax.validation.constraints.Positive;
 @Schema(description = "Данные нового заголовка листа")
 public class NewPageTitleTemplateDto {
 
+    @Schema(description = "Индентификатор типа объекта")
+    @NotNull(message = "object type id should not be null")
+    @Positive(message = "object type id must be positive")
+    private Long objectsTypeId;
+    @Schema(description = "Индентификатор типа отчетного документа")
+    @NotNull(message = "reporting document id should not be null")
+    @Positive(message = "reporting document id must be positive")
+    private Long reportingDocumentId;
     @Schema(description = "Данные нового заголовка")
     @NotNull(message = "page header should not be null")
-    private NewPageHeaderTemplateDto pageHeader;
+    @Valid
+    private NewPageTitleHeaderTemplateDto header;
     @Schema(description = "Строка наименования объекта")
     @NotBlank(message = "object string should not be blank")
     private String objectString;

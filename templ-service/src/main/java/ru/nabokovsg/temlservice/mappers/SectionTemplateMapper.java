@@ -7,5 +7,5 @@ import ru.nabokovsg.temlservice.models.SectionTemplate;
 @Mapper(componentModel = "spring")
 public interface SectionTemplateMapper {
 
-    SectionTemplate mapToNewSectionTemplate(NewSectionTemplateDto sectionTemplateDto);
+   SectionTemplate mapToNewSectionTemplate(NewSectionTemplateDto sectionDto);
 }
