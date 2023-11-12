@@ -34,17 +34,17 @@ public class SubsectionTemplateController {
 
     @Operation(summary = "Добавление нового шаблона подраздела раздела отчета")
     @PostMapping("/section")
-    public ResponseEntity<ReportTemplateDto> saveToSectionTemplate(
+    public ResponseEntity<ReportTemplateDto> addToSectionTemplate(
             @RequestBody @Valid
             @Parameter(description = "Данные шаблона подразделов") NewSectionSubsectionTemplate sectionsDto) {
-        return ResponseEntity.ok().body(service.saveToSectionTemplate(sectionsDto));
+        return ResponseEntity.ok().body(service.addToSectionTemplate(sectionsDto));
     }
 
     @Operation(summary = "Добавление нового шаблона подраздела раздела отчета")
     @PostMapping("/protocol")
-    public ResponseEntity<ProtocolTemplateDto> saveToProtocolTemplate(
+    public ResponseEntity<ProtocolTemplateDto> addToProtocolTemplate(
             @RequestBody @Valid
             @Parameter(description = "Данные шаблона подразделов") NewProtocolSubsectionTemplate sectionsDto) {
-        return ResponseEntity.ok().body(service.saveToProtocolTemplate(sectionsDto));
+        return ResponseEntity.ok().body(service.addToProtocolTemplate(sectionsDto));
     }
 }

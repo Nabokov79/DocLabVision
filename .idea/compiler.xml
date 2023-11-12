@@ -14,6 +14,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="DocLabVision" options="" />
       <module name="data-service" options="-parameters" />
       <module name="templ-service" options="-parameters" />
     </option>

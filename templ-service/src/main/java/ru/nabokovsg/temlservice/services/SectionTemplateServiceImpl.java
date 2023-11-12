@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.nabokovsg.temlservice.dto.report.ReportTemplateDto;
 import ru.nabokovsg.temlservice.dto.section.NewReportSectionTemplateDto;
 import ru.nabokovsg.temlservice.dto.section.NewSectionTemplateDto;
+import ru.nabokovsg.temlservice.exceptions.NotFoundException;
 import ru.nabokovsg.temlservice.mappers.SectionTemplateMapper;
 import ru.nabokovsg.temlservice.models.ReportTemplate;
 import ru.nabokovsg.temlservice.models.SectionTemplate;
@@ -48,5 +49,10 @@ public class SectionTemplateServiceImpl implements SectionTemplateService {
     @Override
     public SectionTemplate saveSection(SectionTemplate section) {
         return repository.save(section);
+    }
+
+    @Override
+    public SectionTemplate get(Long id) {
+        return repository.findById(id).orElseThrow(() -> new NotFoundException(String.format("Section template with id=%s not found", id)));
     }
 }

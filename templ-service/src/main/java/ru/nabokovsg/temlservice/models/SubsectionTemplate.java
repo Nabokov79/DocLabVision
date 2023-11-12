@@ -40,7 +40,7 @@ public class SubsectionTemplate {
             joinColumns = {@JoinColumn(name = "subsection_template_id")},
             inverseJoinColumns = {@JoinColumn(name = "table_template_id")})
     @ToString.Exclude
-    private List<TableTemplate> tablesTemplate;
+    private List<TableTemplate> tables;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "subsection_templates_recommendations",
@@ -50,7 +50,7 @@ public class SubsectionTemplate {
     private List<RecommendationTemplate> recommendations;
     @OneToOne
     @JoinColumn(name = "conclusions_template_id", referencedColumnName = "id")
-    private ConclusionTemplate conclusionsTemplate;
+    private ConclusionTemplate conclusions;
 
     @Override
     public boolean equals(Object o) {
@@ -62,14 +62,14 @@ public class SubsectionTemplate {
                              && Objects.equals(subsectionName, that.subsectionName)
                              && Objects.equals(subsectionText, that.subsectionText)
                              && Objects.equals(subsectionData, that.subsectionData)
-                             && Objects.equals(tablesTemplate, that.tablesTemplate)
+                             && Objects.equals(tables, that.tables)
                              && Objects.equals(recommendations, that.recommendations)
-                             && Objects.equals(conclusionsTemplate, that.conclusionsTemplate);
+                             && Objects.equals(conclusions, that.conclusions);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, dataType, sequentialSubsectionNumber, subsectionName
-                              , subsectionText, subsectionData, tablesTemplate, recommendations, conclusionsTemplate);
+                              , subsectionText, subsectionData, tables, recommendations, conclusions);
     }
 }

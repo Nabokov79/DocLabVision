@@ -15,7 +15,7 @@ import java.util.Objects;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Данные нового подраздела раздела отчета")
+@Schema(description = "Новый подраздел раздела отчета")
 public class NewSubsectionTemplateDto {
 
     @Schema(description = "Порядковый номер подраздела")

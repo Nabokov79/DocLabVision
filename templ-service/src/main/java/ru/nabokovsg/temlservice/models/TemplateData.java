@@ -8,33 +8,39 @@ import java.util.List;
 public class TemplateData {
 
     private final DataType type;
+    private final String divisionType;
     private final List<LicenseDto> licenses;
     private final RequisitesDto requisites;
     private final EmployeeDto employee;
     private final Long divisionId;
-    private final List<DocumentationDto> documentations;
     private final DocumentationDto document;
     private final String divisionName;
     private final OrganizationDto organization;
     private final BranchDto branch;
     private final DepartmentDto department;
+    private final ObjectsTypeDto objectType;
 
     public TemplateData(Builder builder) {
         this.type = builder.type;
+        this.divisionType = builder.divisionType;
         this.licenses = builder.licenses;
         this.requisites = builder.requisites;
         this.employee = builder.employee;
         this.divisionId = builder.divisionId;
-        this.documentations = builder.documentations;
         this.document = builder.document;
         this.divisionName = builder.divisionName;
         this.organization = builder.organization;
         this.branch = builder.branch;
         this.department = builder.department;
+        this.objectType = builder.objectType;
     }
 
     public DataType getType() {
         return type;
+    }
+
+    public String getDivisionType() {
+        return divisionType;
     }
 
     public List<LicenseDto> getLicenses() {
@@ -51,10 +57,6 @@ public class TemplateData {
 
     public Long getDivisionId() {
         return divisionId;
-    }
-
-    public List <DocumentationDto> getDocumentations() {
-        return documentations;
     }
 
     public DocumentationDto getDocument() {
@@ -77,19 +79,24 @@ public class TemplateData {
         return department;
     }
 
+    public ObjectsTypeDto getObjectType() {
+        return objectType;
+    }
+
     public static class Builder {
 
         private DataType type;
+        private String divisionType;
         private List<LicenseDto> licenses;
         private RequisitesDto requisites;
         private EmployeeDto employee;
         private Long divisionId;
-        private List<DocumentationDto> documentations;
         private DocumentationDto document;
         private String divisionName;
         private OrganizationDto organization;
         private BranchDto branch;
         private DepartmentDto department;
+        private ObjectsTypeDto objectType;
 
         public Builder organization(OrganizationDto organization) {
             this.organization = organization;
@@ -107,6 +114,11 @@ public class TemplateData {
         }
         public Builder type(DataType type) {
             this.type = type;
+            return this;
+        }
+
+        public Builder divisionType(String divisionType) {
+            this.divisionType = divisionType;
             return this;
         }
 
@@ -130,11 +142,6 @@ public class TemplateData {
             return this;
         }
 
-        public Builder documentations(List<DocumentationDto> documentations) {
-            this.documentations = documentations;
-            return this;
-        }
-
         public Builder document(DocumentationDto document) {
             this.document = document;
             return this;
@@ -144,6 +151,12 @@ public class TemplateData {
             this.divisionName = divisionName;
             return this;
         }
+
+        public Builder objectType(ObjectsTypeDto objectType) {
+            this.objectType = objectType;
+            return this;
+        }
+
 
         public TemplateData build() {
             return new TemplateData(this);

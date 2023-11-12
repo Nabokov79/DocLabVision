@@ -3,7 +3,6 @@ package ru.nabokovsg.temlservice.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.nabokovsg.temlservice.client.TemplateClient;
-import ru.nabokovsg.temlservice.dto.client.ReportingDocumentDto;
 import ru.nabokovsg.temlservice.dto.header.NewHeaderTemplateDto;
 import ru.nabokovsg.temlservice.exceptions.NotFoundException;
 import ru.nabokovsg.temlservice.mappers.ProtocolTemplateMapper;
@@ -19,18 +18,15 @@ public class ProtocolTemplateServiceImpl implements ProtocolTemplateService {
     private final ProtocolTemplateRepository repository;
     private final ProtocolTemplateMapper mapper;
     private final TemplateClient client;
+
     @Override
     public ProtocolTemplateDto save(HeaderTemplate header, NewHeaderTemplateDto headerDto) {
-        ProtocolTemplate protocol = new ProtocolTemplate();
-        ReportingDocumentDto document = client.getReportingDocument(headerDto.getReportingDocumentId());
-        protocol.setObjectsTypeId(headerDto.getObjectsTypeId());
-        protocol.setReportingDocumentId(headerDto.getReportingDocumentId());
-        protocol.setProtocolType(document.getProtocolType());
-        protocol.setProtocolName(document.getDocument());
-        protocol.setProtocolTitle(document.getDocumentTitle());
-        protocol.setProtocolType(document.getProtocolType());
-        protocol.setHeader(header);
-        return mapper.mapToProtocolTemplateDto(repository.save(protocol));
+        return mapper.mapToProtocolTemplateDto(
+               saveProtocol(mapper.mapToNewProtocolTemplate(header
+                                                       , client.getReportingDocument(headerDto.getReportingDocumentId())
+                                                       , headerDto.getObjectsTypeId()
+                                                       , headerDto.getReportingDocumentId()))
+        );
     }
 
     @Override
@@ -46,7 +42,18 @@ public class ProtocolTemplateServiceImpl implements ProtocolTemplateService {
     }
 
     @Override
+    public ProtocolTemplate getProtocolById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Protocol template with id=%s not found", id)));
+    }
+
+    @Override
     public ProtocolTemplate getById(Long objectsTypeId, Long reportingDocumentId) {
         return repository.findByObjectsTypeIdAndReportingDocumentId(objectsTypeId, reportingDocumentId);
+    }
+
+    @Override
+    public ProtocolTemplate saveProtocol(ProtocolTemplate protocol) {
+        return repository.save(protocol);
     }
 }

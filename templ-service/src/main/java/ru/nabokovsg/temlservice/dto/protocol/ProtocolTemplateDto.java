@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.nabokovsg.temlservice.dto.header.PageHeaderTemplateDto;
 import ru.nabokovsg.temlservice.dto.subsection.SubsectionTemplateDto;
+import ru.nabokovsg.temlservice.dto.table.TableTemplateDto;
+
 import java.util.List;
 
 @Setter
@@ -28,4 +30,6 @@ public class ProtocolTemplateDto {
     private PageHeaderTemplateDto header;
     @Schema(description = "Подразделы")
     private List<SubsectionTemplateDto> subsections;
+    @Schema(description = "Шаблон таблиц")
+    private List<TableTemplateDto> tables;
 }

@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class ConverterToStringServiceImpl implements ConverterToStringService {
+public class StringFactoryImpl implements StringFactory {
 
     @Override
-    public String createString(TemplateData data) {
+    public String create(TemplateData data) {
         switch (data.getType()) {
             case LICENSE -> {return  convertLicense(data.getLicenses());}
             case REQUISITES -> {return convertRequisites(data.getRequisites());}

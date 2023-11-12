@@ -8,10 +8,11 @@ import ru.nabokovsg.temlservice.dto.header.NewHeaderTemplateDto;
 import ru.nabokovsg.temlservice.dto.header.NewPageTitleHeaderTemplateDto;
 import ru.nabokovsg.temlservice.dto.protocol.ProtocolTemplateDto;
 import ru.nabokovsg.temlservice.mappers.HeaderTemplateMapper;
+import ru.nabokovsg.temlservice.mappers.ProtocolTemplateMapper;
 import ru.nabokovsg.temlservice.models.*;
 import ru.nabokovsg.temlservice.models.enums.DataType;
 import ru.nabokovsg.temlservice.repository.HeaderTemplateRepository;
-import ru.nabokovsg.temlservice.services.converter.ConverterToStringService;
+import ru.nabokovsg.temlservice.services.converter.StringFactory;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -23,17 +24,18 @@ public class HeaderTemplateServiceImpl implements HeaderTemplateService {
     private final HeaderTemplateRepository repository;
     private final HeaderTemplateMapper mapper;
     private final ProtocolTemplateService service;
-    private final ConverterToStringService convert;
+    private final ProtocolTemplateMapper protocolMapper;
+    private final StringFactory factory;
     private final TemplateClient client;
 
     @Override
     public ProtocolTemplateDto save(NewHeaderTemplateDto headerDto) {
-        ProtocolTemplateDto protocol = service.get(headerDto.getObjectsTypeId()
+        ProtocolTemplate protocol = service.getById(headerDto.getObjectsTypeId()
                                                  , headerDto.getReportingDocumentId());
         if (protocol == null) {
             return service.save(saveHeader(headerDto), headerDto);
         }
-        return protocol;
+        return protocolMapper.mapToProtocolTemplateDto(protocol);
     }
 
     @Override
@@ -81,16 +83,16 @@ public class HeaderTemplateServiceImpl implements HeaderTemplateService {
             header.setOrganization(organization.getShortNameOrganization());
         }
         if (licenses) {
-            header.setOrganizationLicense(convert.createString(new TemplateData.Builder()
-                                                                                  .type(DataType.LICENSE)
-                                                                                  .licenses(organization.getLicenses())
-                                                                                  .build()));
+            header.setOrganizationLicense(factory.create(new TemplateData.Builder()
+                                                                         .type(DataType.LICENSE)
+                                                                         .licenses(organization.getLicenses())
+                                                                         .build()));
         }
         if (requisites) {
-            header.setOrganizationRequisites(convert.createString(new TemplateData.Builder()
-                                                                               .type(DataType.REQUISITES)
-                                                                               .requisites(organization.getRequisites())
-                                                                               .build()));
+            header.setOrganizationRequisites(factory.create(new TemplateData.Builder()
+                                                                            .type(DataType.REQUISITES)
+                                                                            .requisites(organization.getRequisites())
+                                                                            .build()));
         }
     }
 
@@ -102,16 +104,16 @@ public class HeaderTemplateServiceImpl implements HeaderTemplateService {
             header.setBranch(branch.getShortNameBranch());
         }
         if (licenses) {
-            header.setOrganizationLicense(convert.createString(new TemplateData.Builder()
-                                                                                  .type(DataType.LICENSE)
-                                                                                  .licenses(branch.getLicenses())
-                                                                                  .build()));
+            header.setOrganizationLicense(factory.create(new TemplateData.Builder()
+                                                                         .type(DataType.LICENSE)
+                                                                         .licenses(branch.getLicenses())
+                                                                         .build()));
         }
         if (requisites) {
-            header.setBranchRequisites(convert.createString(new TemplateData.Builder()
-                                                                               .type(DataType.REQUISITES)
-                                                                               .requisites(branch.getRequisites())
-                                                                               .build()));
+            header.setBranchRequisites(factory.create(new TemplateData.Builder()
+                                                                      .type(DataType.REQUISITES)
+                                                                      .requisites(branch.getRequisites())
+                                                                      .build()));
         }
     }
 
@@ -123,16 +125,16 @@ public class HeaderTemplateServiceImpl implements HeaderTemplateService {
             header.setDepartment(department.getShortNameDepartment());
         }
         if (licenses) {
-            header.setDepartmentLicense(convert.createString(new TemplateData.Builder()
-                                                                                .type(DataType.LICENSE)
-                                                                                .licenses(department.getLicenses())
-                                                                                .build()));
+            header.setDepartmentLicense(factory.create(new TemplateData.Builder()
+                                                                       .type(DataType.LICENSE)
+                                                                       .licenses(department.getLicenses())
+                                                                       .build()));
         }
         if (requisites) {
-           header.setDepartmentRequisites(convert.createString(new TemplateData.Builder()
-                                                                                 .type(DataType.REQUISITES)
-                                                                                 .requisites(department.getRequisites())
-                                                                                 .build()));
+           header.setDepartmentRequisites(factory.create(new TemplateData.Builder()
+                                                                         .type(DataType.REQUISITES)
+                                                                         .requisites(department.getRequisites())
+                                                                         .build()));
         }
     }
 }

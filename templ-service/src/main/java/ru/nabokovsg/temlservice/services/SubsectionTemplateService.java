@@ -4,10 +4,13 @@ import ru.nabokovsg.temlservice.dto.protocol.ProtocolTemplateDto;
 import ru.nabokovsg.temlservice.dto.report.ReportTemplateDto;
 import ru.nabokovsg.temlservice.dto.subsection.NewProtocolSubsectionTemplate;
 import ru.nabokovsg.temlservice.dto.subsection.NewSectionSubsectionTemplate;
+import ru.nabokovsg.temlservice.models.SubsectionTemplate;
 
 public interface SubsectionTemplateService {
 
-    ReportTemplateDto saveToSectionTemplate(NewSectionSubsectionTemplate sectionsDto);
+    ReportTemplateDto addToSectionTemplate(NewSectionSubsectionTemplate sectionsDto);
 
-    ProtocolTemplateDto saveToProtocolTemplate(NewProtocolSubsectionTemplate sectionsDto);
+    ProtocolTemplateDto addToProtocolTemplate(NewProtocolSubsectionTemplate sectionsDto);
+
+    SubsectionTemplate save(SubsectionTemplate subsections);
 }

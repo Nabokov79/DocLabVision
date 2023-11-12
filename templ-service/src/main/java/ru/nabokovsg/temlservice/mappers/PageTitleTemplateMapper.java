@@ -20,7 +20,7 @@ public interface PageTitleTemplateMapper {
             @Mapping(source = "year" , target = "year"),
             @Mapping(source = "documentName" , target = "documentName"),
             @Mapping(source = "documentTitle" , target = "documentTitle"),
-            @Mapping( target = "id", ignore = true)
+            @Mapping(target = "id", ignore = true)
     })
     PageTitleTemplate mapToPageTitleTemplate(@MappingTarget PageTitleTemplate pageTitle
                                                                   , String documentName

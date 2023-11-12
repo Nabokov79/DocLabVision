@@ -11,5 +11,9 @@ public interface ProtocolTemplateService {
 
     ProtocolTemplateDto get(Long objectsTypeId, Long reportingDocumentId);
 
+    ProtocolTemplate getProtocolById(Long id);
+
     ProtocolTemplate getById(Long objectsTypeId, Long reportingDocumentId);
+
+    ProtocolTemplate saveProtocol(ProtocolTemplate protocol);
 }

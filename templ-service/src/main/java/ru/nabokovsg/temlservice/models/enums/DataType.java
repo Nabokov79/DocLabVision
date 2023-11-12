@@ -14,8 +14,9 @@ public enum DataType {
     REGULATORY_DOCUMENT,
     METHODOLOGICAL_DOCUMENT,
     DIVISION_DATA,
-    TEXT,
-    DOCUMENTATION;
+    NO_DATA,
+    DOCUMENTATION,
+    LABORATORY_DATA;
 
     public static Optional<DataType> from(String dataType) {
         for (DataType type : values()) {

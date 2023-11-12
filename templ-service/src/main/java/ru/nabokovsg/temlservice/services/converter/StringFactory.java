@@ -2,7 +2,7 @@ package ru.nabokovsg.temlservice.services.converter;
 
 import ru.nabokovsg.temlservice.models.TemplateData;
 
-public interface ConverterToStringService {
+public interface StringFactory {
 
-    String createString(TemplateData data);
+    String create(TemplateData data);
 }

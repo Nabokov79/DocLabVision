@@ -9,4 +9,6 @@ public interface SectionTemplateService {
     ReportTemplateDto save(NewReportSectionTemplateDto sectionTemplateDto);
 
     SectionTemplate saveSection(SectionTemplate section);
+
+    SectionTemplate get(Long id);
 }

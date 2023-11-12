@@ -12,7 +12,7 @@ import ru.nabokovsg.temlservice.models.ReportTemplate;
 import ru.nabokovsg.temlservice.models.TemplateData;
 import ru.nabokovsg.temlservice.models.enums.DataType;
 import ru.nabokovsg.temlservice.repository.PageTitleTemplateRepository;
-import ru.nabokovsg.temlservice.services.converter.ConverterToStringService;
+import ru.nabokovsg.temlservice.services.converter.StringFactory;
 
 import java.time.LocalDate;
 
@@ -23,7 +23,7 @@ public class PageTitleTemplateServiceImpl implements PageTitleTemplateService {
     private final PageTitleTemplateRepository repository;
     private final PageTitleTemplateMapper mapper;
     private final TemplateClient client;
-    private final ConverterToStringService converter;
+    private final StringFactory converter;
     private final HeaderTemplateService headerService;
     private final ReportTemplateService reportService;
 
@@ -39,7 +39,7 @@ public class PageTitleTemplateServiceImpl implements PageTitleTemplateService {
                                                                 , document.getDocument().toUpperCase()
                                                                 , document.getDocumentTitle()
                                                                 , headerService.getHeader(pageTitleDto.getHeader())
-                                                                , converter.createString(
+                                                                , converter.create(
                                                                         new TemplateData.Builder()
                                                                                 .type(DataType.SIGNATURE)
                                                                                 .employee(employee)
