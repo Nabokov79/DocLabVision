@@ -7,16 +7,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="data-service" />
-        <module name="templ-service" />
+        <module name="input-data" />
+        <module name="templates" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="templates-data" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="DocLabVision" options="" />
-      <module name="data-service" options="-parameters" />
-      <module name="templ-service" options="-parameters" />
+      <module name="input-data" options="-parameters" />
+      <module name="templates" options="-parameters" />
+      <module name="templates-data" options="-parameters" />
     </option>
   </component>
 </project>

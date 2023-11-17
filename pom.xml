@@ -19,8 +19,8 @@
     <name>DocLabVision</name>
 
     <modules>
-        <module>data-service</module>
-        <module>templ-service</module>
+        <module>input-data</module>
+        <module>templates</module>
     </modules>
 
     <description>Project for working with documents</description>
@@ -101,6 +101,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>3.0.5</version>
                 <configuration>
                     <excludes>
                         <exclude>
